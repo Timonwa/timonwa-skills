@@ -1,0 +1,11 @@
+{
+  "name": "field-encryption",
+  "description": "Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryp…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

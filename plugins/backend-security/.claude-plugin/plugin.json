@@ -1,0 +1,11 @@
+{
+  "name": "backend-security",
+  "description": "Use for server-side / API application security when building or reviewing server-side code — endpoints (route handlers, Server Actions, controllers), services,…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "upstash-ratelimit-js",
+  "description": "Lightweight guidance for using the Upstash Redis RateLimit TypeScript/JavaScript SDK, including setup steps, basic usage, and pointers to advanced algorithm, f…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Upstash"
+  },
+  "source": "https://github.com/upstash/skills"
+}

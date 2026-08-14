@@ -1,0 +1,11 @@
+{
+  "name": "docs-audit",
+  "description": "Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

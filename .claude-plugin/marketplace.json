@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "30 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "41 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -16,9 +16,39 @@
       "description": "Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized around POUR — semantic landmarks/headings, keyboard nav and focus managemen…"
     },
     {
+      "name": "api-audit",
+      "source": "./plugins/api-audit",
+      "description": "API-layer architecture audit — thin route handlers over a service layer, Zod validation at every boundary (body/query/params), shared response builders + typed…"
+    },
+    {
+      "name": "api-docs",
+      "source": "./plugins/api-docs",
+      "description": "Use when adding or documenting API routes, updating OpenAPI/Swagger docs, or auditing the API reference for drift against the actual route handlers."
+    },
+    {
       "name": "audit-all",
       "source": "./plugins/audit-all",
       "description": "Orchestrates the full house audit suite — detects what the repo has, runs every applicable domain audit (accessibility, seo, storybook, conventions, dependenci…"
+    },
+    {
+      "name": "backend",
+      "source": "./plugins/backend",
+      "description": "Use for the house backend / API-layer architecture in Next.js apps (data-store-agnostic) — how to structure server endpoints as thin route handlers over a serv…"
+    },
+    {
+      "name": "backend-audits-suite",
+      "source": "./plugins/backend-audits-suite",
+      "description": "The review mirror of the backend suite — API architecture, authorization coverage, application security, environment and secrets, and documentation. `audit-all` detects what applies and aggregates them."
+    },
+    {
+      "name": "backend-security",
+      "source": "./plugins/backend-security",
+      "description": "Use for server-side / API application security when building or reviewing server-side code — endpoints (route handlers, Server Actions, controllers), services,…"
+    },
+    {
+      "name": "backend-suite",
+      "source": "./plugins/backend-suite",
+      "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on."
     },
     {
       "name": "branding",
@@ -54,6 +84,21 @@
       "name": "devops",
       "source": "./plugins/devops",
       "description": "Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardeni…"
+    },
+    {
+      "name": "docs-audit",
+      "source": "./plugins/docs-audit",
+      "description": "Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost…"
+    },
+    {
+      "name": "environment-audit",
+      "source": "./plugins/environment-audit",
+      "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness vs required vars, `NEXT…"
+    },
+    {
+      "name": "field-encryption",
+      "source": "./plugins/field-encryption",
+      "description": "Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryp…"
     },
     {
       "name": "frontend-audit",
@@ -101,6 +146,11 @@
       "description": "Frontend performance audit of a Next.js App Router app (or a diff/PR) — image optimization, server/client boundary + bundle weight, dynamic imports for heavy l…"
     },
     {
+      "name": "rbac-audit",
+      "source": "./plugins/rbac-audit",
+      "description": "RBAC / authorization-coverage audit — unprotected API routes and Server Actions, function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-…"
+    },
+    {
       "name": "react-best-practices",
       "source": "./plugins/react-best-practices",
       "description": "Use when writing or reviewing React components, hooks, or state (React 19)."
@@ -114,6 +164,11 @@
       "name": "scaffold-agents-md",
       "source": "./plugins/scaffold-agents-md",
       "description": "Create or update a project's AGENTS.md — the single file that documents a codebase's conventions for AI agents (tech stack, structure, commands, naming, routin…"
+    },
+    {
+      "name": "security-audit",
+      "source": "./plugins/security-audit",
+      "description": "Red-team application-security review of a web/full-stack app (or a diff/PR), scoped to whatever the app has — frontend, backend, or both — covering broken acce…"
     },
     {
       "name": "seo",
@@ -159,6 +214,16 @@
       "name": "typescript-best-practices",
       "source": "./plugins/typescript-best-practices",
       "description": "Use when writing or reviewing TypeScript — typing code, designing types, configuring tsconfig, or fixing type errors."
+    },
+    {
+      "name": "upstash-ratelimit-js",
+      "source": "./plugins/upstash-ratelimit-js",
+      "description": "Lightweight guidance for using the Upstash Redis RateLimit TypeScript/JavaScript SDK, including setup steps, basic usage, and pointers to advanced algorithm, f…"
+    },
+    {
+      "name": "upstash-redis-js",
+      "source": "./plugins/upstash-redis-js",
+      "description": "Work with the Upstash Redis TypeScript/JavaScript SDK for serverless Redis operations."
     },
     {
       "name": "vanilla-cookieconsent",

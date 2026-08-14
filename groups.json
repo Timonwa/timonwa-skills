@@ -1,7 +1,7 @@
 {
   "frontend-suite": {
     "displayName": "Frontend Suite",
-    "description": "Everything for frontend work in one install \u2014 semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
+    "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
     "skills": [
       "accessibility",
       "branding",
@@ -28,7 +28,7 @@
   },
   "frontend-audits-suite": {
     "displayName": "Frontend Audits",
-    "description": "The review mirror of the frontend suite \u2014 one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them.",
+    "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them.",
     "skills": [
       "accessibility-audit",
       "audit-all",
@@ -40,6 +40,40 @@
       "scaffold-agents-md",
       "seo-audit",
       "storybook-audit"
+    ]
+  },
+  "backend-suite": {
+    "displayName": "Backend Suite",
+    "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on.",
+    "skills": [
+      "api-docs",
+      "backend",
+      "backend-security",
+      "code-structure",
+      "devops",
+      "field-encryption",
+      "naming",
+      "nextjs-best-practices",
+      "scaffold-agents-md",
+      "turborepo-monorepo",
+      "typescript-best-practices",
+      "upstash-ratelimit-js",
+      "upstash-redis-js"
+    ]
+  },
+  "backend-audits-suite": {
+    "displayName": "Backend Audits",
+    "description": "The review mirror of the backend suite — API architecture, authorization coverage, application security, environment and secrets, and documentation. `audit-all` detects what applies and aggregates them.",
+    "skills": [
+      "api-audit",
+      "audit-all",
+      "codebase-audit",
+      "conventions-audit",
+      "docs-audit",
+      "environment-audit",
+      "rbac-audit",
+      "scaffold-agents-md",
+      "security-audit"
     ]
   }
 }

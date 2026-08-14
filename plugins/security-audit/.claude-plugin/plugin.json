@@ -1,0 +1,11 @@
+{
+  "name": "security-audit",
+  "description": "Red-team application-security review of a web/full-stack app (or a diff/PR), scoped to whatever the app has — frontend, backend, or both — covering broken acce…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

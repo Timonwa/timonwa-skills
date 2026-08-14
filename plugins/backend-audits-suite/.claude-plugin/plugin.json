@@ -1,0 +1,10 @@
+{
+  "name": "backend-audits-suite",
+  "description": "The review mirror of the backend suite — API architecture, authorization coverage, application security, environment and secrets, and documentation. `audit-all` detects what applies and aggregates them.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}
