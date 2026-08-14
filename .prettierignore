@@ -28,3 +28,7 @@ _old/
 node_modules/
 .turbo/
 package-lock.json
+
+# Vendored verbatim from upstash/skills — reformatting destroys the upstream diff.
+.claude/skills/upstash-redis-js/
+.claude/skills/upstash-ratelimit-js/
