@@ -103,5 +103,20 @@
       "cloudinary-transformations",
       "scaffold-agents-md"
     ]
+  },
+  "workflow-suite": {
+    "displayName": "Workflow Suite",
+    "description": "The cross-project actions — staged Conventional Commits, a self-contained PR review, scaffolding an app, a monorepo, a feature, or an AGENTS.md, framework migrations, changelogs, and cross-app drift sync.",
+    "skills": [
+      "changelog",
+      "migrate-framework",
+      "pr-review",
+      "scaffold-agents-md",
+      "scaffold-feature",
+      "scaffold-monorepo",
+      "scaffold-next-app",
+      "stage-commit",
+      "sync-apps"
+    ]
   }
 }

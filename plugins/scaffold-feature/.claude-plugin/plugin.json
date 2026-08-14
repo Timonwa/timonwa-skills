@@ -1,0 +1,11 @@
+{
+  "name": "scaffold-feature",
+  "description": "Scaffold a new feature end-to-end following the house standards — schema, service, route handler or Server Action, page + components, and stories, each generat…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

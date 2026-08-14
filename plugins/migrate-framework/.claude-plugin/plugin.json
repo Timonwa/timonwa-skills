@@ -1,0 +1,11 @@
+{
+  "name": "migrate-framework",
+  "description": "Guided framework/library migration and major-version upgrades — analyze the current setup, produce a step-by-step migration plan with checkpoints, then apply c…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "55 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "63 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -54,6 +54,11 @@
       "name": "branding",
       "source": "./plugins/branding",
       "description": "Use for an app's brand identity and its copy — brand foundations (palette/type/logo/voice, with the specifics in AGENTS.md), brand voice & tone, and how to wri…"
+    },
+    {
+      "name": "changelog",
+      "source": "./plugins/changelog",
+      "description": "Generate a changelog entry and community release notes from git history and changesets — detects whether the repo uses changesets or plain conventional-commit…"
     },
     {
       "name": "cloudinary-docs",
@@ -211,6 +216,11 @@
       "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
     },
     {
+      "name": "migrate-framework",
+      "source": "./plugins/migrate-framework",
+      "description": "Guided framework/library migration and major-version upgrades — analyze the current setup, produce a step-by-step migration plan with checkpoints, then apply c…"
+    },
+    {
       "name": "naming",
       "source": "./plugins/naming",
       "description": "Use whenever naming or renaming anything — code (functions, hooks, components, variables, booleans, types, Zod schemas, constants, files), CSS classes, design…"
@@ -224,6 +234,11 @@
       "name": "performance-audit",
       "source": "./plugins/performance-audit",
       "description": "Frontend performance audit of a Next.js App Router app (or a diff/PR) — image optimization, server/client boundary + bundle weight, dynamic imports for heavy l…"
+    },
+    {
+      "name": "pr-review",
+      "source": "./plugins/pr-review",
+      "description": "Self-contained, project-aware review of a pull request or branch diff."
     },
     {
       "name": "rbac-audit",
@@ -246,6 +261,21 @@
       "description": "Create or update a project's AGENTS.md — the single file that documents a codebase's conventions for AI agents (tech stack, structure, commands, naming, routin…"
     },
     {
+      "name": "scaffold-feature",
+      "source": "./plugins/scaffold-feature",
+      "description": "Scaffold a new feature end-to-end following the house standards — schema, service, route handler or Server Action, page + components, and stories, each generat…"
+    },
+    {
+      "name": "scaffold-monorepo",
+      "source": "./plugins/scaffold-monorepo",
+      "description": "Converts what an official scaffolder already produced — a single app from `pnpm create next-app`, or a `create-turbo` starter workspace — into the house pnpm +…"
+    },
+    {
+      "name": "scaffold-next-app",
+      "source": "./plugins/scaffold-next-app",
+      "description": "Adapt an already-created `create-next-app` starter into the house structure for ONE Next.js app — the route groups and their shells, `components/` mirroring th…"
+    },
+    {
       "name": "security-audit",
       "source": "./plugins/security-audit",
       "description": "Red-team application-security review of a web/full-stack app (or a diff/PR), scoped to whatever the app has — frontend, backend, or both — covering broken acce…"
@@ -259,6 +289,11 @@
       "name": "seo-audit",
       "source": "./plugins/seo-audit",
       "description": "Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene,…"
+    },
+    {
+      "name": "stage-commit",
+      "source": "./plugins/stage-commit",
+      "description": "Stage files created or modified in this conversation and commit them as small Conventional Commits, one review-gated commit at a time."
     },
     {
       "name": "storybook-audit",
@@ -279,6 +314,11 @@
       "name": "svg-generation",
       "source": "./plugins/svg-generation",
       "description": "Use when creating SVGs by hand — icons, technical diagrams, flowcharts, pipeline/architecture visualizations, illustrations, or any vector graphic."
+    },
+    {
+      "name": "sync-apps",
+      "source": "./plugins/sync-apps",
+      "description": "Detect drift in files that should stay identical — or share sections — across sibling apps, packages, or starter templates, report every difference against the…"
     },
     {
       "name": "tailwind-css",
@@ -309,6 +349,11 @@
       "name": "vanilla-cookieconsent",
       "source": "./plugins/vanilla-cookieconsent",
       "description": "Use when adding, configuring, or reviewing GDPR-shaped cookie consent with the `vanilla-cookieconsent` v3 library — the consent banner, per-category script gat…"
+    },
+    {
+      "name": "workflow-suite",
+      "source": "./plugins/workflow-suite",
+      "description": "The cross-project actions — staged Conventional Commits, a self-contained PR review, scaffolding an app, a monorepo, a feature, or an AGENTS.md, framework migrations, changelogs, and cross-app drift sync."
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "name": "workflow-suite",
+  "description": "The cross-project actions — staged Conventional Commits, a self-contained PR review, scaffolding an app, a monorepo, a feature, or an AGENTS.md, framework migrations, changelogs, and cross-app drift sync.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}
