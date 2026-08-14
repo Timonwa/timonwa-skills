@@ -1,7 +1,7 @@
 {
   "frontend-suite": {
     "displayName": "Frontend Suite",
-    "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
+    "description": "Everything for frontend work in one install \u2014 semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
     "skills": [
       "accessibility",
       "branding",
@@ -15,6 +15,7 @@
       "nextjs-best-practices",
       "react-best-practices",
       "reusables",
+      "scaffold-agents-md",
       "seo",
       "storybook-setup",
       "storybook-story-writing",
@@ -25,9 +26,9 @@
       "vanilla-cookieconsent"
     ]
   },
-  "audits-suite": {
-    "displayName": "Audits & Reviews Suite",
-    "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained and each writing a scored, prioritised report. `audit-all` runs every applicable one and aggregates them.",
+  "frontend-audits-suite": {
+    "displayName": "Frontend Audits",
+    "description": "The review mirror of the frontend suite \u2014 one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them.",
     "skills": [
       "accessibility-audit",
       "audit-all",
@@ -36,13 +37,9 @@
       "dependency-audit",
       "frontend-audit",
       "performance-audit",
+      "scaffold-agents-md",
       "seo-audit",
       "storybook-audit"
     ]
-  },
-  "frontend-and-audits": {
-    "displayName": "Frontend + Audits",
-    "description": "Both suites in one install — the standards to build against and the audits to review the result.",
-    "includes": ["frontend-suite", "audits-suite"]
   }
 }
