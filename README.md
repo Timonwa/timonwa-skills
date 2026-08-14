@@ -100,6 +100,8 @@ Open an issue for anything factually wrong. Most useful:
 
 Include the item name and what you expected. A doc link or a reproduction makes it quick to confirm.
 
+**Found something exploitable?** Report it privately — see [SECURITY.md](SECURITY.md). Don't open a public issue for it.
+
 ## Working on this repo
 
 `plugins/` and `.claude-plugin/marketplace.json` are generated. Edit `.claude/skills/`, `.claude/commands/`, or `groups.json`, then:
