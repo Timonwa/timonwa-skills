@@ -26,6 +26,8 @@ const COMMANDS_DIR = join(ROOT, '.claude', 'commands')
 const PLUGINS_DIR = join(ROOT, 'plugins')
 const MARKETPLACE_FILE = join(ROOT, '.claude-plugin', 'marketplace.json')
 const GROUPS_FILE = join(ROOT, 'groups.json')
+const ITEMS_FILE = join(ROOT, 'items.json')
+const README_FILE = join(ROOT, 'README.md')
 const CI_MODE = process.argv.includes('--ci')
 
 // --- marketplace identity (edit these if your repo/owner changes) ---
@@ -342,6 +344,48 @@ writeFileSync(
     2
   ) + '\n'
 )
+
+// --- regenerate the README's item table ---
+// The one-line "Owns" summary is hand-written (frontmatter descriptions are far too long
+// for a table), so it lives in items.json and is looked up here. Everything else — the
+// name, the kind, the link — comes from what was just scanned, so adding an item cannot
+// leave the README stale. CI fails on an uncommitted regeneration.
+const ITEM_START = '<!-- BEGIN GENERATED ITEMS -->'
+const ITEM_END = '<!-- END GENERATED ITEMS -->'
+if (existsSync(README_FILE)) {
+  const readme = readFileSync(README_FILE, 'utf8')
+  const a = readme.indexOf(ITEM_START)
+  const b = readme.indexOf(ITEM_END)
+  if (a === -1 || b === -1) {
+    warnings.push(
+      `README.md: missing ${ITEM_START} / ${ITEM_END} markers — item table not regenerated`
+    )
+  } else {
+    const owns = existsSync(ITEMS_FILE) ? JSON.parse(readFileSync(ITEMS_FILE, 'utf8')) : {}
+    const rows = [...skills.values()]
+      .sort((x, y) => x.id.localeCompare(y.id))
+      .map((item) => {
+        if (!owns[item.id]) warnings.push(`items.json: no summary for "${item.id}" — add one`)
+        const path = item.isCommand ? `.claude/commands/${item.id}.md` : `.claude/skills/${item.id}`
+        const kind = item.isCommand ? 'command' : 'skill'
+        return [`[${item.id}](${path})`, kind, owns[item.id] || 'TODO']
+      })
+    // Pad the columns the way Prettier would, so `npm run build` and `npm run format`
+    // don't fight each other over the same table forever.
+    const cells = [['Item', 'Kind', 'Owns'], null, ...rows]
+    const widths = cells
+      .filter(Boolean)
+      .reduce((acc, r) => r.map((c, i) => Math.max(acc[i] || 0, c.length)), [])
+    const line = (r) => `| ${r.map((c, i) => c.padEnd(widths[i])).join(' | ')} |`
+    const table = cells
+      .map((r) => (r ? line(r) : line(widths.map((w) => '-'.repeat(w)))))
+      .join('\n')
+    writeFileSync(
+      README_FILE,
+      readme.slice(0, a) + ITEM_START + '\n\n' + table + '\n\n' + readme.slice(b)
+    )
+  }
+}
 
 console.log(
   `Built ${skills.size} skills + ${Object.keys(groups).length} groups → ${entries.length} installable plugins.`

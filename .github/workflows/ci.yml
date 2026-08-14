@@ -35,6 +35,7 @@ jobs:
         run: npm run build:ci
 
       # The build is deterministic, so a dirty tree means someone hand-edited
-      # generated output or forgot to commit a rebuild.
+      # generated output or forgot to commit a rebuild. README's item table is
+      # generated too, so a new skill with no README row fails here.
       - name: Generated output is committed and current
-        run: git diff --exit-code -- plugins/ .claude-plugin/
+        run: git diff --exit-code -- plugins/ .claude-plugin/ README.md

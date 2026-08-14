@@ -1,8 +1,8 @@
 # timonwa-skills
 
-Claude Code skills and commands for Next.js App Router projects — the ones I use on my own work, published as-is.
+The house standards for our Next.js App Router work, as Claude Code skills, commands, and agents.
 
-These are not neutral tutorials. They encode decisions: where files go, what a component's folder looks like, which Tailwind layer a rule belongs in. Where a choice was mine rather than the framework's, the skill says so. Read them as "here is one team's answer, and why".
+Opinionated by design — where a choice was ours rather than the framework's, the item says so.
 
 ## Install
 
@@ -10,96 +10,105 @@ These are not neutral tutorials. They encode decisions: where files go, what a c
 /plugin marketplace add Timonwa/timonwa-skills
 ```
 
-Then install a bundle:
+Install a bundle, or a single item:
 
 ```bash
-/plugin install frontend-and-audits@timonwa-skills
-```
-
-…or a single skill:
-
-```bash
+/plugin install frontend-suite@timonwa-skills
 /plugin install accessibility@timonwa-skills
 ```
 
 Browse everything with `/plugin` → **Discover**.
 
+## Start with `AGENTS.md`
+
+Everything here holds a **portable standard**. Anything specific to one codebase — the palette values, the project ids, which Next flags are on, the component inventory, the deploy target — belongs in that repo's own `AGENTS.md`.
+
+The split exists because no two projects are the same. Even ours disagree with each other — a different data store, a different auth setup, a different host, different Next config, and so on — so a standard that hardcoded any of that would already be wrong in the next repo of ours, let alone in yours.
+
+So the first thing to run in a new repo is:
+
+```bash
+/scaffold-agents-md
+```
+
+It inspects the repo to fill in what it can detect, asks about the rest, and wires `CLAUDE.md` to import the result. Every standard and every audit reads that file for project facts — an audit with no `AGENTS.md` falls back to generic checks and will flag things that are deliberate in your codebase. It ships in every bundle for that reason.
+
 ## Bundles
 
-Install one of these and get its whole set in one go. A skill can belong to more than one bundle, so every bundle is a complete kit — you never have to add a missing piece by hand.
+Grouped by the job, not by the kind — a bundle carries whichever skills, commands, and agents that job needs. Exact membership lives in [groups.json](groups.json), which is the source of truth as the library grows.
 
-| Bundle                | What you get                                                                              |
-| --------------------- | ----------------------------------------------------------------------------------------- |
-| `frontend-suite`      | The 20 standards below — markup, a11y, React/Next/TS, Tailwind, structure, naming, CI     |
-| `audits-suite`        | The 9 audits below — one per domain, plus `/audit-all` to run every applicable one        |
-| `frontend-and-audits` | Both, for when you want the standards to build against and the audits to check the result |
+| Bundle                  | For                                                    |
+| ----------------------- | ------------------------------------------------------ |
+| `frontend-suite`        | Building UI — the standards to apply while working     |
+| `frontend-audits-suite` | Reviewing it — one audit per domain, plus `/audit-all` |
 
-## Standards
+Each domain gets a pair like this: the standards, and the audits that review against them. Install both halves when you want to build and check.
 
-Skills. Claude loads them on its own when the work matches, so you rarely invoke them by hand.
+## Everything in here
 
-| Skill                                                                 | Owns                                                                          |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [accessibility](.claude/skills/accessibility)                         | WCAG 2.2 AA via POUR, plus how to verify rather than assert it                |
-| [branding](.claude/skills/branding)                                   | Brand voice and the product's own UI copy                                     |
-| [code-structure](.claude/skills/code-structure)                       | Thin route and layout entries, the four `ui/` tiers, a flat kind-first `lib/` |
-| [design-system](.claude/skills/design-system)                         | Governance — when a one-off earns a token                                     |
-| [devops](.claude/skills/devops)                                       | CI/CD, supply-chain hardening, env strategy, pre-commit gates                 |
-| [frontend-design](.claude/skills/frontend-design)                     | Design quality and distinctiveness, not the default component-library look    |
-| [frontend-security](.claude/skills/frontend-security)                 | Client-side OWASP 2025 — XSS, CSP, clickjacking, token storage                |
-| [html-best-practices](.claude/skills/html-best-practices)             | Element choice, headings, `<dl>`, tables, forms, media                        |
-| [naming](.claude/skills/naming)                                       | The `<domain>.<kind>.ts` grammar, casing, assets, tokens                      |
-| [nextjs-best-practices](.claude/skills/nextjs-best-practices)         | Next 16 — Cache Components, `use cache`, Proxy, async `params`                |
-| [react-best-practices](.claude/skills/react-best-practices)           | React 19 — `use()`, Actions, derive-don't-sync, no hand-memoization           |
-| [reusables](.claude/skills/reusables)                                 | Components controllable entirely from the outside                             |
-| [seo](.claude/skills/seo)                                             | Metadata, structured data, robots, sitemaps, AEO/GEO                          |
-| [storybook-setup](.claude/skills/storybook-setup)                     | Init, the Storybook 9/10 addon landscape, colocated stories                   |
-| [storybook-story-writing](.claude/skills/storybook-story-writing)     | CSF3 + `satisfies Meta`, tier titles, `fn()` spies                            |
-| [svg-generation](.claude/skills/svg-generation)                       | Clean, accessible, themeable SVG                                              |
-| [tailwind-css](.claude/skills/tailwind-css)                           | Tailwind v4 CSS-first — the two-layer token system and the six CSS layers     |
-| [turborepo-monorepo](.claude/skills/turborepo-monorepo)               | pnpm workspaces + Turborepo v2 — task graph, caching, `--affected`            |
-| [typescript-best-practices](.claude/skills/typescript-best-practices) | Strict inference-first TS, Zod 4 as the source of truth                       |
-| [vanilla-cookieconsent](.claude/skills/vanilla-cookieconsent)         | GDPR consent as a state machine, separable from the library                   |
+**Skills** load on their own when the work matches, so you rarely type them. **Commands** you invoke deliberately, and they stay unprefixed (`/frontend-audit`). **Agents** run as a delegated subagent with their own context.
 
-## Audits
+This table is generated by `npm run build` — the one-line summaries live in [items.json](items.json).
 
-Commands you invoke deliberately. Each is self-contained, verifies every finding against the real code, and writes a scored report to `_reports/`.
+<!-- BEGIN GENERATED ITEMS -->
 
-| Command                | Reviews                                                       |
-| ---------------------- | ------------------------------------------------------------- |
-| `/accessibility-audit` | WCAG 2.2 AA, keyboard, focus, contrast, ARIA                  |
-| `/audit-all`           | Detects what applies, runs each audit, aggregates one report  |
-| `/codebase-audit`      | Repo-health triage — debt, dead code, strictness, coverage    |
-| `/conventions-audit`   | The repo against the `naming` and `code-structure` standards  |
-| `/dependency-audit`    | Version drift, unused deps, the catalog, lockfile, advisories |
-| `/frontend-audit`      | App Router structure, boundaries, caching, React idioms       |
-| `/performance-audit`   | Images, bundle weight, fonts, streaming, Core Web Vitals      |
-| `/seo-audit`           | Metadata, robots, sitemap, structured data, crawlability      |
-| `/storybook-audit`     | Story coverage against shared UI, and story quality           |
+| Item                                                                  | Kind    | Owns                                                                          |
+| --------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| [accessibility](.claude/skills/accessibility)                         | skill   | WCAG 2.2 AA via POUR, plus how to verify rather than assert it                |
+| [accessibility-audit](.claude/commands/accessibility-audit.md)        | command | WCAG 2.2 AA, keyboard, focus, contrast, ARIA                                  |
+| [audit-all](.claude/commands/audit-all.md)                            | command | Detects what applies, runs each audit, aggregates one report                  |
+| [branding](.claude/skills/branding)                                   | skill   | Brand voice and the product's own UI copy                                     |
+| [code-structure](.claude/skills/code-structure)                       | skill   | Thin route and layout entries, the four `ui/` tiers, a flat kind-first `lib/` |
+| [codebase-audit](.claude/commands/codebase-audit.md)                  | command | Repo-health triage — debt, dead code, strictness, coverage                    |
+| [conventions-audit](.claude/commands/conventions-audit.md)            | command | The repo against the `naming` and `code-structure` standards                  |
+| [dependency-audit](.claude/commands/dependency-audit.md)              | command | Version drift, unused deps, the catalog, lockfile, advisories                 |
+| [design-system](.claude/skills/design-system)                         | skill   | Governance — when a one-off earns a token                                     |
+| [devops](.claude/skills/devops)                                       | skill   | CI/CD, supply-chain hardening, env strategy, pre-commit gates                 |
+| [frontend-audit](.claude/commands/frontend-audit.md)                  | command | App Router structure, boundaries, caching, React idioms                       |
+| [frontend-design](.claude/skills/frontend-design)                     | skill   | Design quality and distinctiveness, not the default component-library look    |
+| [frontend-security](.claude/skills/frontend-security)                 | skill   | Client-side OWASP 2025 — XSS, CSP, clickjacking, token storage                |
+| [html-best-practices](.claude/skills/html-best-practices)             | skill   | Element choice, headings, `<dl>`, tables, forms, media                        |
+| [naming](.claude/skills/naming)                                       | skill   | The `<domain>.<kind>.ts` grammar, casing, assets, tokens                      |
+| [nextjs-best-practices](.claude/skills/nextjs-best-practices)         | skill   | Next 16 — Cache Components, `use cache`, Proxy, async `params`                |
+| [performance-audit](.claude/commands/performance-audit.md)            | command | Images, bundle weight, fonts, streaming, Core Web Vitals                      |
+| [react-best-practices](.claude/skills/react-best-practices)           | skill   | React 19 — `use()`, Actions, derive-don't-sync, no hand-memoization           |
+| [reusables](.claude/skills/reusables)                                 | skill   | Components controllable entirely from the outside                             |
+| [scaffold-agents-md](.claude/skills/scaffold-agents-md)               | skill   | Writes the project's `AGENTS.md` — the facts everything else here reads       |
+| [seo](.claude/skills/seo)                                             | skill   | Metadata, structured data, robots, sitemaps, AEO/GEO                          |
+| [seo-audit](.claude/commands/seo-audit.md)                            | command | Metadata, robots, sitemap, structured data, crawlability                      |
+| [storybook-audit](.claude/commands/storybook-audit.md)                | command | Story coverage against shared UI, and story quality                           |
+| [storybook-setup](.claude/skills/storybook-setup)                     | skill   | Init, the Storybook 9/10 addon landscape, colocated stories                   |
+| [storybook-story-writing](.claude/skills/storybook-story-writing)     | skill   | CSF3 + `satisfies Meta`, tier titles, `fn()` spies                            |
+| [svg-generation](.claude/skills/svg-generation)                       | skill   | Clean, accessible, themeable SVG                                              |
+| [tailwind-css](.claude/skills/tailwind-css)                           | skill   | Tailwind v4 CSS-first — the two-layer token system and the six CSS layers     |
+| [turborepo-monorepo](.claude/skills/turborepo-monorepo)               | skill   | pnpm workspaces + Turborepo v2 — task graph, caching, `--affected`            |
+| [typescript-best-practices](.claude/skills/typescript-best-practices) | skill   | Strict inference-first TS, Zod 4 as the source of truth                       |
+| [vanilla-cookieconsent](.claude/skills/vanilla-cookieconsent)         | skill   | GDPR consent as a state machine, separable from the library                   |
 
-## Skills and commands
+<!-- END GENERATED ITEMS -->
 
-Both forms take the same frontmatter. The difference is how they're invoked and whether they can carry supporting files:
-
-- A **skill** ships in a folder, can hold `references/`, and Claude loads it on its own when the work matches. From a plugin it's namespaced — `/frontend-suite:accessibility`.
-- A **command** is one file, always invoked by you, and stays bare — `/frontend-audit`, never `/audits-suite:frontend-audit`.
-
-That's why every standard here is a skill and every audit is a command.
-
-## Project facts stay in your repo
-
-A skill holds the portable standard. Anything specific to one codebase — the palette values, the project ids, which Next flags are on, the actual component inventory — belongs in that repo's own `AGENTS.md`, not in a skill. The skills say so where it matters, so installing them never assumes your project looks like mine.
+Being added as they're moved over from our internal library: backend, Firebase, Cloudinary, and the audits for each.
 
 ## Reporting a problem
 
 Open an issue for anything factually wrong. Most useful:
 
 - **Stale or wrong** — an API that changed, a flag that was renamed, a version claim that no longer holds.
-- **A security problem** — a snippet that is unsafe, a header or policy that is wrong, advice that would leave an app exposed.
-- **Broken** — a dead link, a skill referencing one that isn't here, frontmatter that fails to load.
-- **Contradictory** — two skills that disagree, so an agent reading both can't act.
+- **A security problem** — an unsafe snippet, a wrong header or policy, advice that would leave an app exposed.
+- **Broken** — a dead link, a reference to something that isn't here, frontmatter that fails to load.
+- **Contradictory** — two items that disagree, so an agent reading both can't act.
 
-Include the skill name and what you expected. A reproduction or a doc link makes it quick to confirm.
+Include the item name and what you expected. A doc link or a reproduction makes it quick to confirm.
+
+## Working on this repo
+
+`plugins/` and `.claude-plugin/marketplace.json` are generated. Edit `.claude/skills/`, `.claude/commands/`, or `groups.json`, then:
+
+```bash
+npm run build
+```
+
+CI runs `npm run build:ci` (warnings are errors) and fails if the generated output isn't committed and current.
 
 ## License
 
