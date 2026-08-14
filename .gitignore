@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
-package-lock.json
+
+# package-lock.json IS committed — `npm ci` needs it to install a reproducible
+# tree, and CI's npm cache keys off it.
 yarn.lock
 
 # Environment
