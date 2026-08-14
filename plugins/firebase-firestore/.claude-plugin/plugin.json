@@ -1,0 +1,9 @@
+{
+  "name": "firebase-firestore",
+  "description": "Sets up, manages, queries, and configures Cloud Firestore databases (Standard/Enterprise edition), including data modeling, security rules, indexes, and SDK in…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}

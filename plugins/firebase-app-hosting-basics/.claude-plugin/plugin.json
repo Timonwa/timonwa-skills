@@ -1,0 +1,9 @@
+{
+  "name": "firebase-app-hosting-basics",
+  "description": "Deploys and manages full-stack web applications (Next.js, Angular) with Server-Side Rendering (SSR) using Firebase App Hosting.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}

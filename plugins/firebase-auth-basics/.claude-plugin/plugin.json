@@ -1,0 +1,9 @@
+{
+  "name": "firebase-auth-basics",
+  "description": "Guide for setting up and using Firebase Authentication.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}

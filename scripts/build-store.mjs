@@ -368,11 +368,19 @@ if (existsSync(README_FILE)) {
         if (!owns[item.id]) warnings.push(`items.json: no summary for "${item.id}" — add one`)
         const path = item.isCommand ? `.claude/commands/${item.id}.md` : `.claude/skills/${item.id}`
         const kind = item.isCommand ? 'command' : 'skill'
-        return [`[${item.id}](${path})`, kind, owns[item.id] || 'TODO']
+        // Blank for our own work; a vendored item credits its author and links upstream,
+        // so the table itself answers "who wrote this?" without opening the file.
+        const by =
+          !item.author || item.author === OWNER.name
+            ? ''
+            : item.source
+              ? `[${item.author}](${item.source})`
+              : item.author
+        return [`[${item.id}](${path})`, kind, owns[item.id] || 'TODO', by]
       })
     // Pad the columns the way Prettier would, so `npm run build` and `npm run format`
     // don't fight each other over the same table forever.
-    const cells = [['Item', 'Kind', 'Owns'], null, ...rows]
+    const cells = [['Item', 'Kind', 'Owns', 'By'], null, ...rows]
     const widths = cells
       .filter(Boolean)
       .reduce((acc, r) => r.map((c, i) => Math.max(acc[i] || 0, c.length)), [])

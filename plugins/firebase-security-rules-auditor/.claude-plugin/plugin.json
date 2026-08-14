@@ -1,0 +1,9 @@
+{
+  "name": "firebase-security-rules-auditor",
+  "description": "Audits Firebase (Firestore, Cloud Storage) security rules for vulnerabilities, privilege escalation, role bypasses, create vs update inconsistencies, resource…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}

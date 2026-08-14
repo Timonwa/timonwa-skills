@@ -1,0 +1,9 @@
+{
+  "name": "cloudinary-next",
+  "description": "Guidance for building, debugging, and reviewing next.js apps that use cloudinary through next-cloudinary and the cloudinary node sdk v2.",
+  "version": "1.0.0",
+  "author": {
+    "name": "cloudinary"
+  },
+  "source": "https://github.com/cloudinary-devs/skills"
+}

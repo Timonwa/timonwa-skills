@@ -1,0 +1,9 @@
+{
+  "name": "cloudinary-transformations",
+  "description": "Create and debug Cloudinary transformation URLs from natural language instructions.",
+  "version": "1.0.4",
+  "author": {
+    "name": "cloudinary"
+  },
+  "source": "https://github.com/cloudinary-devs/skills"
+}

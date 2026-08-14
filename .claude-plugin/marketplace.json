@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "41 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "55 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -56,6 +56,31 @@
       "description": "Use for an app's brand identity and its copy — brand foundations (palette/type/logo/voice, with the specifics in AGENTS.md), brand voice & tone, and how to wri…"
     },
     {
+      "name": "cloudinary-docs",
+      "source": "./plugins/cloudinary-docs",
+      "description": "Looks up implementation details in the latest Cloudinary docs via the relevant llms.txt file."
+    },
+    {
+      "name": "cloudinary-next",
+      "source": "./plugins/cloudinary-next",
+      "description": "Guidance for building, debugging, and reviewing next.js apps that use cloudinary through next-cloudinary and the cloudinary node sdk v2."
+    },
+    {
+      "name": "cloudinary-react",
+      "source": "./plugins/cloudinary-react",
+      "description": "Provides opinionated React SDK patterns for configuration, common integration scenarios, and troubleshooting for frequent errors and TypeScript pitfalls."
+    },
+    {
+      "name": "cloudinary-suite",
+      "source": "./plugins/cloudinary-suite",
+      "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited."
+    },
+    {
+      "name": "cloudinary-transformations",
+      "source": "./plugins/cloudinary-transformations",
+      "description": "Create and debug Cloudinary transformation URLs from natural language instructions."
+    },
+    {
       "name": "code-structure",
       "source": "./plugins/code-structure",
       "description": "Use when creating, editing, or refactoring pages/screens, route entries, components, or lib/ modules — in any framework (Next.js, React, Astro)."
@@ -96,9 +121,64 @@
       "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness vs required vars, `NEXT…"
     },
     {
+      "name": "extension-to-functions-codebase",
+      "source": "./plugins/extension-to-functions-codebase",
+      "description": "Skill for converting an installed Firebase Extension (or extension source) into a standalone Cloud Functions for Firebase codebase or publishable npm package,…"
+    },
+    {
       "name": "field-encryption",
       "source": "./plugins/field-encryption",
       "description": "Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryp…"
+    },
+    {
+      "name": "firebase-ai-logic-basics",
+      "source": "./plugins/firebase-ai-logic-basics",
+      "description": "Official skill for integrating Firebase AI Logic (Gemini API) into web applications. Covers setup, multimodal inference, structured output, and security."
+    },
+    {
+      "name": "firebase-app-hosting-basics",
+      "source": "./plugins/firebase-app-hosting-basics",
+      "description": "Deploys and manages full-stack web applications (Next.js, Angular) with Server-Side Rendering (SSR) using Firebase App Hosting."
+    },
+    {
+      "name": "firebase-auth-basics",
+      "source": "./plugins/firebase-auth-basics",
+      "description": "Guide for setting up and using Firebase Authentication."
+    },
+    {
+      "name": "firebase-basics",
+      "source": "./plugins/firebase-basics",
+      "description": "Provides foundational Firebase CLI setup, CLI installation, version checks (`firebase-tools@latest --version`), CLI login (including --no-localhost), project c…"
+    },
+    {
+      "name": "firebase-data-connect-basics",
+      "source": "./plugins/firebase-data-connect-basics",
+      "description": "Builds and deploys Firebase SQL Connect (aka Firebase Data Connect) backends with PostgreSQL securely."
+    },
+    {
+      "name": "firebase-firestore",
+      "source": "./plugins/firebase-firestore",
+      "description": "Sets up, manages, queries, and configures Cloud Firestore databases (Standard/Enterprise edition), including data modeling, security rules, indexes, and SDK in…"
+    },
+    {
+      "name": "firebase-hosting-basics",
+      "source": "./plugins/firebase-hosting-basics",
+      "description": "Deploys and configures classic Firebase Hosting for static websites, single-page apps (SPAs), and microservices."
+    },
+    {
+      "name": "firebase-remote-config-basics",
+      "source": "./plugins/firebase-remote-config-basics",
+      "description": "Manages Firebase Remote Config templates, feature flags, loading strategies, and SDKs (Android, iOS)."
+    },
+    {
+      "name": "firebase-security-rules-auditor",
+      "source": "./plugins/firebase-security-rules-auditor",
+      "description": "Audits Firebase (Firestore, Cloud Storage) security rules for vulnerabilities, privilege escalation, role bypasses, create vs update inconsistencies, resource…"
+    },
+    {
+      "name": "firebase-suite",
+      "source": "./plugins/firebase-suite",
+      "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited."
     },
     {
       "name": "frontend-audit",

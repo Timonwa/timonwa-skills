@@ -130,6 +130,12 @@ The frame is **broken access control** (OWASP #1): **Broken Object-Level Authori
 - **No privilege gaps or over-grants** — flag a role granted a permission outside its intended domain (over-grant) or a sensitive action reachable by a role that shouldn't have it. Read-only/limited roles must not hold create/update/delete outside their scope.
 - **Allowlist roles received recent permissions** — for every recently added permission, verify each allowlist-based role that should hold it was explicitly granted it. Allowlists never auto-receive new permissions (only top/exclusion-based roles do), and a route shipped without the grant is the most common RBAC bug: the endpoint exists, the intended role is denied.
 
+### Revocation and staleness
+
+- **A token-embedded role is a cached role** — where roles live in a JWT/custom claims, they stay live until the token refreshes (up to an hour). Flag any check that must take effect immediately — a ban, a role downgrade, a plan/entitlement drop, removing someone from a resource — resolved from the token rather than the store.
+- **Revocation actually revokes** — removing a role, banning a user, or deleting an account invalidates the existing session (refresh tokens revoked, and verification checks the revoked flag), rather than relying on natural expiry. Flag a "ban" that leaves a valid session usable.
+- **The store is the source of truth** — cached roles are re-derived from the stored records, never edited independently, and a client-writable role field is immutable at the data layer. Flag any path where a user can set their own role.
+
 ### Object-level (BOLA)
 
 - **Per-resource roles checked on the resolved doc** — for resource-scoped access, the guard resolves the target document and checks the actor's **per-resource role on that doc**, not merely "is authenticated" or "has some global role". Flag any id-addressed handler that skips the object-level check (BOLA/IDOR).

@@ -1,0 +1,9 @@
+{
+  "name": "firebase-basics",
+  "description": "Provides foundational Firebase CLI setup, CLI installation, version checks (`firebase-tools@latest --version`), CLI login (including --no-localhost), project c…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}

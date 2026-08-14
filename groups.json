@@ -75,5 +75,33 @@
       "scaffold-agents-md",
       "security-audit"
     ]
+  },
+  "firebase-suite": {
+    "displayName": "Firebase Suite",
+    "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited.",
+    "skills": [
+      "extension-to-functions-codebase",
+      "firebase-ai-logic-basics",
+      "firebase-app-hosting-basics",
+      "firebase-auth-basics",
+      "firebase-basics",
+      "firebase-data-connect-basics",
+      "firebase-firestore",
+      "firebase-hosting-basics",
+      "firebase-remote-config-basics",
+      "firebase-security-rules-auditor",
+      "scaffold-agents-md"
+    ]
+  },
+  "cloudinary-suite": {
+    "displayName": "Cloudinary Suite",
+    "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited.",
+    "skills": [
+      "cloudinary-docs",
+      "cloudinary-next",
+      "cloudinary-react",
+      "cloudinary-transformations",
+      "scaffold-agents-md"
+    ]
   }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "firebase-hosting-basics",
+  "description": "Deploys and configures classic Firebase Hosting for static websites, single-page apps (SPAs), and microservices.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Firebase"
+  },
+  "source": "https://github.com/firebase/agent-skills"
+}
