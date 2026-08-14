@@ -1,0 +1,11 @@
+{
+  "name": "dependency-audit",
+  "description": "Dependency-health audit of a monorepo — version consistency across workspace members, unused/duplicate/misplaced dependencies, workspace-protocol usage (`works…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

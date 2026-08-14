@@ -1,0 +1,11 @@
+{
+  "name": "branding",
+  "description": "Use for an app's brand identity and its copy — brand foundations (palette/type/logo/voice, with the specifics in AGENTS.md), brand voice & tone, and how to wri…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

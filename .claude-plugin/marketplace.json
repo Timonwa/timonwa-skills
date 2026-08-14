@@ -1,0 +1,169 @@
+{
+  "name": "timonwa-skills",
+  "owner": {
+    "name": "Timonwa"
+  },
+  "description": "29 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "plugins": [
+    {
+      "name": "accessibility",
+      "source": "./plugins/accessibility",
+      "description": "When the user wants to audit, review, test, or fix accessibility (a11y) — WCAG compliance, screen-reader support, keyboard navigation, color contrast, focus ma…"
+    },
+    {
+      "name": "accessibility-audit",
+      "source": "./plugins/accessibility-audit",
+      "description": "Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized around POUR — semantic landmarks/headings, keyboard nav and focus managemen…"
+    },
+    {
+      "name": "audit-all",
+      "source": "./plugins/audit-all",
+      "description": "Orchestrates the full house audit suite — detects what the repo has, runs every applicable domain audit (accessibility, seo, storybook, conventions, dependenci…"
+    },
+    {
+      "name": "audits-suite",
+      "source": "./plugins/audits-suite",
+      "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained and each writing a scored, prioritised report. `audit-all` runs every applicable one and aggregates them."
+    },
+    {
+      "name": "branding",
+      "source": "./plugins/branding",
+      "description": "Use for an app's brand identity and its copy — brand foundations (palette/type/logo/voice, with the specifics in AGENTS.md), brand voice & tone, and how to wri…"
+    },
+    {
+      "name": "code-structure",
+      "source": "./plugins/code-structure",
+      "description": "Use when creating, editing, or refactoring pages/screens, route entries, components, or lib/ modules — in any framework (Next.js, React, Astro)."
+    },
+    {
+      "name": "codebase-audit",
+      "source": "./plugins/codebase-audit",
+      "description": "Broad repo-health triage that routes to the deep audits and covers the code-quality hygiene no other audit owns — tech debt (TODO/FIXME), dead/unused code, Typ…"
+    },
+    {
+      "name": "conventions-audit",
+      "source": "./plugins/conventions-audit",
+      "description": "House-conventions audit of an app or monorepo against the `naming` and `code-structure` standards — hardcoded URLs vs route constants, schema/type/const placem…"
+    },
+    {
+      "name": "dependency-audit",
+      "source": "./plugins/dependency-audit",
+      "description": "Dependency-health audit of a monorepo — version consistency across workspace members, unused/duplicate/misplaced dependencies, workspace-protocol usage (`works…"
+    },
+    {
+      "name": "design-system",
+      "source": "./plugins/design-system",
+      "description": "Use for design-system GOVERNANCE — keeping a product visually one system, deciding whether to add a token/primitive/variant versus a one-off, spotting and cons…"
+    },
+    {
+      "name": "devops",
+      "source": "./plugins/devops",
+      "description": "Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardeni…"
+    },
+    {
+      "name": "frontend-and-audits",
+      "source": "./plugins/frontend-and-audits",
+      "description": "Both suites in one install — the standards to build against and the audits to review the result."
+    },
+    {
+      "name": "frontend-audit",
+      "source": "./plugins/frontend-audit",
+      "description": "Self-contained Next.js App Router frontend audit — Pages Router residue, thin route/entry files and feature-grouped sections, the server/client boundary, serve…"
+    },
+    {
+      "name": "frontend-design",
+      "source": "./plugins/frontend-design",
+      "description": "Use when designing or improving how a web UI looks and feels — building components, pages, sections, or layouts and wanting them polished and production-grade,…"
+    },
+    {
+      "name": "frontend-security",
+      "source": "./plugins/frontend-security",
+      "description": "Use for client-side / browser application security when building or reviewing frontend code (React / Next.js) — XSS and safe rendering (JSX escaping, DOMPurify…"
+    },
+    {
+      "name": "frontend-suite",
+      "source": "./plugins/frontend-suite",
+      "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD."
+    },
+    {
+      "name": "html-best-practices",
+      "source": "./plugins/html-best-practices",
+      "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
+    },
+    {
+      "name": "naming",
+      "source": "./plugins/naming",
+      "description": "Use whenever naming or renaming anything — code (functions, hooks, components, variables, booleans, types, Zod schemas, constants, files), CSS classes, design…"
+    },
+    {
+      "name": "nextjs-best-practices",
+      "source": "./plugins/nextjs-best-practices",
+      "description": "Use when writing or reviewing Next.js App Router code (Next 16) — Server vs Client Components and the `use client` boundary, data fetching, caching (Cache Comp…"
+    },
+    {
+      "name": "performance-audit",
+      "source": "./plugins/performance-audit",
+      "description": "Frontend performance audit of a Next.js App Router app (or a diff/PR) — image optimization, server/client boundary + bundle weight, dynamic imports for heavy l…"
+    },
+    {
+      "name": "react-best-practices",
+      "source": "./plugins/react-best-practices",
+      "description": "Use when writing or reviewing React components, hooks, or state (React 19)."
+    },
+    {
+      "name": "reusables",
+      "source": "./plugins/reusables",
+      "description": "Use when creating, editing, or refactoring any reusable UI component (e.g. components/ui/*, shared widgets in components/_shared/*), a custom hook, or a utilit…"
+    },
+    {
+      "name": "seo",
+      "source": "./plugins/seo",
+      "description": "Use when building SEO into a site — writing page metadata (title/description/OpenGraph/Twitter/canonical/robots), sitemaps, robots rules; structured data / sch…"
+    },
+    {
+      "name": "seo-audit",
+      "source": "./plugins/seo-audit",
+      "description": "Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene,…"
+    },
+    {
+      "name": "storybook-audit",
+      "source": "./plugins/storybook-audit",
+      "description": "Storybook coverage and story-quality audit — cross-references shared UI components against existing stories to find gaps, and checks stories against the house…"
+    },
+    {
+      "name": "storybook-setup",
+      "source": "./plugins/storybook-setup",
+      "description": "Use when adding or configuring Storybook in a project — monorepo or single app."
+    },
+    {
+      "name": "storybook-story-writing",
+      "source": "./plugins/storybook-story-writing",
+      "description": "Use when creating or modifying Storybook stories, in any project that has Storybook (monorepo or single app)."
+    },
+    {
+      "name": "svg-generation",
+      "source": "./plugins/svg-generation",
+      "description": "Use when creating SVGs by hand — icons, technical diagrams, flowcharts, pipeline/architecture visualizations, illustrations, or any vector graphic."
+    },
+    {
+      "name": "tailwind-css",
+      "source": "./plugins/tailwind-css",
+      "description": "Use when setting up Tailwind, organizing CSS into files, defining design tokens/theming, or styling components. Tailwind CSS v4 (CSS-first)."
+    },
+    {
+      "name": "turborepo-monorepo",
+      "source": "./plugins/turborepo-monorepo",
+      "description": "Use when setting up or working in a monorepo — pnpm workspaces + Turborepo (v2)."
+    },
+    {
+      "name": "typescript-best-practices",
+      "source": "./plugins/typescript-best-practices",
+      "description": "Use when writing or reviewing TypeScript — typing code, designing types, configuring tsconfig, or fixing type errors."
+    },
+    {
+      "name": "vanilla-cookieconsent",
+      "source": "./plugins/vanilla-cookieconsent",
+      "description": "Use when adding, configuring, or reviewing GDPR-shaped cookie consent with the `vanilla-cookieconsent` v3 library — the consent banner, per-category script gat…"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "code-structure",
+  "description": "Use when creating, editing, or refactoring pages/screens, route entries, components, or lib/ modules — in any framework (Next.js, React, Astro).",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

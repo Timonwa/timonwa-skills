@@ -1,0 +1,11 @@
+{
+  "name": "frontend-design",
+  "description": "Use when designing or improving how a web UI looks and feels — building components, pages, sections, or layouts and wanting them polished and production-grade,…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

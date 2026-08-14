@@ -1,0 +1,11 @@
+{
+  "name": "tailwind-css",
+  "description": "Use when setting up Tailwind, organizing CSS into files, defining design tokens/theming, or styling components. Tailwind CSS v4 (CSS-first).",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

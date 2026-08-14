@@ -1,0 +1,11 @@
+{
+  "name": "vanilla-cookieconsent",
+  "description": "Use when adding, configuring, or reviewing GDPR-shaped cookie consent with the `vanilla-cookieconsent` v3 library — the consent banner, per-category script gat…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

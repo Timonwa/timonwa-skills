@@ -1,0 +1,18 @@
+{
+  "name": "timonwa-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code skills and commands for Next.js App Router projects.",
+  "license": "MIT",
+  "repository": "github:Timonwa/timonwa-skills",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-store.mjs",
+    "build:ci": "node scripts/build-store.mjs --ci",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.6"
+  }
+}

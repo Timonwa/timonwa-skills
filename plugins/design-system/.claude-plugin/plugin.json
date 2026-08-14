@@ -1,0 +1,11 @@
+{
+  "name": "design-system",
+  "description": "Use for design-system GOVERNANCE — keeping a product visually one system, deciding whether to add a token/primitive/variant versus a one-off, spotting and cons…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

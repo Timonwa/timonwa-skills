@@ -1,0 +1,11 @@
+{
+  "name": "nextjs-best-practices",
+  "description": "Use when writing or reviewing Next.js App Router code (Next 16) — Server vs Client Components and the `use client` boundary, data fetching, caching (Cache Comp…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

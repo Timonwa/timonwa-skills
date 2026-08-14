@@ -1,0 +1,11 @@
+{
+  "name": "storybook-audit",
+  "description": "Storybook coverage and story-quality audit — cross-references shared UI components against existing stories to find gaps, and checks stories against the house…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

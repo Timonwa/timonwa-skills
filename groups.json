@@ -1,0 +1,48 @@
+{
+  "frontend-suite": {
+    "displayName": "Frontend Suite",
+    "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
+    "skills": [
+      "accessibility",
+      "branding",
+      "code-structure",
+      "design-system",
+      "devops",
+      "frontend-design",
+      "frontend-security",
+      "html-best-practices",
+      "naming",
+      "nextjs-best-practices",
+      "react-best-practices",
+      "reusables",
+      "seo",
+      "storybook-setup",
+      "storybook-story-writing",
+      "svg-generation",
+      "tailwind-css",
+      "turborepo-monorepo",
+      "typescript-best-practices",
+      "vanilla-cookieconsent"
+    ]
+  },
+  "audits-suite": {
+    "displayName": "Audits & Reviews Suite",
+    "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained and each writing a scored, prioritised report. `audit-all` runs every applicable one and aggregates them.",
+    "skills": [
+      "accessibility-audit",
+      "audit-all",
+      "codebase-audit",
+      "conventions-audit",
+      "dependency-audit",
+      "frontend-audit",
+      "performance-audit",
+      "seo-audit",
+      "storybook-audit"
+    ]
+  },
+  "frontend-and-audits": {
+    "displayName": "Frontend + Audits",
+    "description": "Both suites in one install — the standards to build against and the audits to review the result.",
+    "includes": ["frontend-suite", "audits-suite"]
+  }
+}
