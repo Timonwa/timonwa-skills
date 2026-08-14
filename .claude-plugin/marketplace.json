@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "29 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "30 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -19,11 +19,6 @@
       "name": "audit-all",
       "source": "./plugins/audit-all",
       "description": "Orchestrates the full house audit suite — detects what the repo has, runs every applicable domain audit (accessibility, seo, storybook, conventions, dependenci…"
-    },
-    {
-      "name": "audits-suite",
-      "source": "./plugins/audits-suite",
-      "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained and each writing a scored, prioritised report. `audit-all` runs every applicable one and aggregates them."
     },
     {
       "name": "branding",
@@ -61,14 +56,14 @@
       "description": "Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardeni…"
     },
     {
-      "name": "frontend-and-audits",
-      "source": "./plugins/frontend-and-audits",
-      "description": "Both suites in one install — the standards to build against and the audits to review the result."
-    },
-    {
       "name": "frontend-audit",
       "source": "./plugins/frontend-audit",
       "description": "Self-contained Next.js App Router frontend audit — Pages Router residue, thin route/entry files and feature-grouped sections, the server/client boundary, serve…"
+    },
+    {
+      "name": "frontend-audits-suite",
+      "source": "./plugins/frontend-audits-suite",
+      "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them."
     },
     {
       "name": "frontend-design",
@@ -114,6 +109,11 @@
       "name": "reusables",
       "source": "./plugins/reusables",
       "description": "Use when creating, editing, or refactoring any reusable UI component (e.g. components/ui/*, shared widgets in components/_shared/*), a custom hook, or a utilit…"
+    },
+    {
+      "name": "scaffold-agents-md",
+      "source": "./plugins/scaffold-agents-md",
+      "description": "Create or update a project's AGENTS.md — the single file that documents a codebase's conventions for AI agents (tech stack, structure, commands, naming, routin…"
     },
     {
       "name": "seo",
