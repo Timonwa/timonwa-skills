@@ -1,11 +1,7 @@
 ---
 name: accessibility-audit
 description: >-
-  Manually invoked. Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized
-  around POUR — semantic landmarks/headings, keyboard nav and focus management, ARIA correctness, forms
-  and errors, images/alt, color contrast, reduced motion, and zoom/reflow. Verifies each finding and
-  writes a prioritized report. Not on by default. Self-contained; the house standards `accessibility` and
-  `html-best-practices` are an optional enhancement. Part of the house audits family (see `audit-all`).
+  Manually invoked. Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized around POUR — semantic landmarks/headings, keyboard nav and focus management, ARIA correctness, forms and errors, images/alt, color contrast, reduced motion, and zoom/reflow. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `accessibility` and `html-best-practices` are an optional enhancement. Part of the house audits family (see `audit-all`).
 metadata:
   version: 1.0.0
   author: Timonwa

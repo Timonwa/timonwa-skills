@@ -1,12 +1,7 @@
 ---
 name: codebase-audit
 description: >-
-  Manually invoked. Broad repo-health triage that routes to the deep audits and covers the code-quality
-  hygiene no other audit owns — tech debt (TODO/FIXME), dead/unused code, TypeScript strictness,
-  error-handling consistency, test coverage of shared/critical paths, and git hygiene. Verifies each
-  finding and writes a prioritized report with an overall health score. Not on by default. Self-contained;
-  the house standards `typescript-best-practices`, `code-structure`, and `devops` are an optional
-  enhancement. Part of the house audits family (see `audit-all`).
+  Manually invoked. Broad repo-health triage that routes to the deep audits and covers the code-quality hygiene no other audit owns — tech debt (TODO/FIXME), dead/unused code, TypeScript strictness, error-handling consistency, test coverage of shared/critical paths, and git hygiene. Verifies each finding and writes a prioritized report with an overall health score. Not on by default. Self-contained; the house standards `typescript-best-practices`, `code-structure`, and `devops` are an optional enhancement. Part of the house audits family (see `audit-all`).
 metadata:
   version: 1.0.0
   author: Timonwa

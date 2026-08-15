@@ -1,13 +1,7 @@
 ---
 name: content-performance
 description: >-
-  Manually invoked. Reads exported analytics from any platform — search consoles, rank trackers, product
-  analytics, CMS reports, a spreadsheet someone assembled by hand — and turns it into a prioritised list of
-  content fixes: titles to rewrite where impressions are high but clicks aren't, pages decaying in rank,
-  queries you rank for with no page, orphaned or thin pages, and internal links worth adding. Works from
-  whatever columns the export actually has rather than a fixed tool's schema. Reports only; never edits a
-  page. Give it the export and the site. The SEO standard itself → `seo`; auditing the implementation in
-  code → `seo-code-audit`.
+  Manually invoked. Reads exported analytics from any platform — search consoles, rank trackers, product analytics, CMS reports, a spreadsheet someone assembled by hand — and turns it into a prioritised list of content fixes: titles to rewrite where impressions are high but clicks aren't, pages decaying in rank, queries you rank for with no page, orphaned or thin pages, and internal links worth adding. Works from whatever columns the export actually has rather than a fixed tool's schema. Reports only; never edits a page. Give it the export and the site. The SEO standard itself → `seo`; auditing the implementation in code → `seo-code-audit`.
 argument-hint: "[path to export(s)] [site URL]"
 metadata:
   version: 1.0.0
