@@ -126,4 +126,4 @@ Note in the summary: where changesets auto-generate `CHANGELOG.md` and GitHub Re
 
 - **Never tags, publishes, or commits** — the release/publish pipeline → `devops`; committing → `stage-commit`.
 - The input data quality is the commit format — Conventional Commits per `stage-commit`.
-- Polishing the prose of the notes → `copy-editing-house`.
+- Polishing the prose of the notes → `prose-editing`.

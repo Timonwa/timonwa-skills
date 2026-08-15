@@ -111,11 +111,6 @@
       "description": "House-conventions audit of an app or monorepo against the `naming` and `code-structure` standards — hardcoded URLs vs route constants, schema/type/const placem…"
     },
     {
-      "name": "copy-editing-house",
-      "source": "./plugins/copy-editing-house",
-      "description": "Use when editing, reviewing, or improving existing copy or prose — marketing pages, landing copy, UI text, docs passages, or an article draft."
-    },
-    {
       "name": "daily-standup",
       "source": "./plugins/daily-standup",
       "description": "Prepare the user's daily standup update from their GitHub activity across the orgs they work in."
@@ -269,6 +264,11 @@
       "name": "pr-review",
       "source": "./plugins/pr-review",
       "description": "Self-contained, project-aware review of a pull request or branch diff."
+    },
+    {
+      "name": "prose-editing",
+      "source": "./plugins/prose-editing",
+      "description": "Use when editing, reviewing, or improving existing copy or prose — marketing pages, landing copy, UI text, docs passages, or an article draft."
     },
     {
       "name": "rbac-audit",

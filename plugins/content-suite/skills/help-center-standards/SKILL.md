@@ -1,7 +1,7 @@
 ---
 name: help-center-standards
 description: >-
-  Use when writing or reviewing help-centre / support-centre guides for a product's end users — FAQ answers, how-tos, concept explainers, policy pages, troubleshooting — or when keeping a whole help centre consistent. Triggers on "help center article", "support guide", "FAQ answer", "user guide", "explain this to users", "help docs". Owns the non-technical reader discipline — answer-first openings, write-for-the-least-experienced, the teach-or-cut vocabulary test, one canonical framing per concept, reassure-on-money, warn-at-the-moment-of-risk — and the five page types (concept / how-to / policy / troubleshooting / FAQ). Applies the same standard every run, wherever the guides live — verifying labels, paths, and limits against the app or the code when there's access, and writing only what it was told when there isn't. The product's name, vocabulary, concept framings, and trusted analogy are asked for up front, never invented. Developer docs sites → `docs-standards`; the shared writing discipline → `writing-standards`; line-level edits → `copy-editing-house`.
+  Use when writing or reviewing help-centre / support-centre guides for a product's end users — FAQ answers, how-tos, concept explainers, policy pages, troubleshooting — or when keeping a whole help centre consistent. Triggers on "help center article", "support guide", "FAQ answer", "user guide", "explain this to users", "help docs". Owns the non-technical reader discipline — answer-first openings, write-for-the-least-experienced, the teach-or-cut vocabulary test, one canonical framing per concept, reassure-on-money, warn-at-the-moment-of-risk — and the five page types (concept / how-to / policy / troubleshooting / FAQ). Applies the same standard every run, wherever the guides live — verifying labels, paths, and limits against the app or the code when there's access, and writing only what it was told when there isn't. The product's name, vocabulary, concept framings, and trusted analogy are asked for up front, never invented. Developer docs sites → `docs-standards`; the shared writing discipline → `writing-standards`; line-level edits → `prose-editing`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -79,5 +79,5 @@ The five page types (concept explainer / how-to / policy / troubleshooting / FAQ
 
 - **Developer-facing docs sites** (API references, MDX pages, technical guides) → `docs-standards` — same consistency aim, different audience and page types.
 - **The shared writing discipline** (audience-first, concrete over vague, prose before code) → `writing-standards`; the voice checklist both share is `writing-standards/references/house-voice.md` — this skill adds the non-technical layer on top, it doesn't replace it.
-- **Tightening an existing draft** → `copy-editing-house`.
+- **Tightening an existing draft** → `prose-editing`.
 - **Product facts** — product name, domain vocabulary, the concept framings, the trusted analogy, support channel — are asked for, never assumed and never invented. They don't live in this skill.

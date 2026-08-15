@@ -16,7 +16,7 @@
   "codebase-audit": "Repo-health triage — debt, dead code, strictness, coverage",
   "community-triage": "Triages inbound issues and discussions into a prioritised, labelled queue",
   "conventions-audit": "The repo against the `naming` and `code-structure` standards",
-  "copy-editing-house": "Focused editing passes over copy that already exists, plus an AI-tell sweep",
+  "prose-editing": "Focused editing passes over copy that already exists, plus an AI-tell sweep",
   "daily-standup": "Turns your GitHub activity into a standup update you can paste",
   "dependency-audit": "Version drift, unused deps, the catalog, lockfile, advisories",
   "design-system": "Governance — when a one-off earns a token",

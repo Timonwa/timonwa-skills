@@ -1,5 +1,5 @@
 ---
-name: copy-editing-house
+name: prose-editing
 description: Use when editing, reviewing, or improving existing copy or prose — marketing pages, landing copy, UI text, docs passages, or an article draft. Triggers on "edit this copy", "review my copy", "proofread", "polish this", "tighten this up", "too wordy", "this reads awkwardly", "copy sweep", "sharpen the messaging", "does this sound AI-written". Runs focused passes — the seven sweeps (clarity, voice, so-what, proof, specificity, emotion, risk) for conversion copy, quick word/sentence-level checks for any prose, and an AI-tell pass (em-dash overuse, overused-word and phrase blacklists). For improving copy that exists, not writing from scratch — write the draft first, then edit here. The docs discipline → `writing-standards`; product/UI copy voice → `branding`.
 metadata:
   version: 1.0.0

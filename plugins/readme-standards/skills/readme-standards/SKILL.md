@@ -47,4 +47,4 @@ Every shape draws from the same skeleton, in this order. Drop a section that doe
 - The general writing discipline (audience, plain language, prose-before-code) → `writing-standards`.
 - Docs-site pages the README links out to → `docs-standards`.
 - AGENTS.md — the agent-facing sibling documenting conventions for AI agents → `scaffold-agents-md`.
-- Tightening the prose after drafting → `copy-editing-house`.
+- Tightening the prose after drafting → `prose-editing`.
