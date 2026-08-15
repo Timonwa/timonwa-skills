@@ -95,6 +95,9 @@ Zod at the boundary; infer types from schemas (→ `typescript-best-practices`).
 
 ## Resource routes & state transitions
 
+- **Every route sits under a version segment** — `app/api/v1/<resource>/route.ts`. A breaking change to a response shape or a required field **adds `v2` beside `v1`**; it never edits `v1` in place, because a deployed client is still calling it. Additive changes (a new optional field, a new endpoint) go straight into the current version.
+- **The client names the version once.** `config/endpoints.ts` builds every path from one `API_BASE` constant, so a migration is one edit there and no endpoint can be missed (`code-structure`). Two versions running at once is a small map, not a second copy of the file.
+- **A retired version is deleted, not left to rot.** Before removing `v1`, confirm nothing calls it — the OpenAPI registry (`api-docs`) is the inventory to check against.
 - File shape: `<resource>/route.ts` (GET list, POST create) + `<resource>/[id]/route.ts` (GET, PATCH, DELETE).
 - **State transitions are their own POST sub-routes**, mirroring `publish`/`unpublish` — `restrict`/`unrestrict`, `archive`/`unarchive`. **`DELETE` only removes a row** — never use it to "turn something off."
 

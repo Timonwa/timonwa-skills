@@ -1,7 +1,7 @@
 ---
 name: environment-audit
 description: >-
-  Manually invoked. Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness vs required vars, `NEXT_PUBLIC` vs server-only correctness, no secrets committed or exposed to the client, cross-app consistency, and `APP_ENV` vs `NODE_ENV` usage. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `devops` (env strategy) and `backend-security` (secret hygiene) are an optional enhancement. Part of the house audits family (see `audit-all`).
+  Manually invoked. Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness, nothing in env that isn't a secret, `NEXT_PUBLIC` vs server-only correctness, no secrets committed or exposed to the client, cross-app consistency, and `APP_ENV` vs `NODE_ENV` usage. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `devops` (env strategy) and `backend-security` (secret hygiene) are an optional enhancement. Part of the house audits family (see `audit-all`).
 argument-hint: "[phase] [path]"
 model: opus
 effort: high
@@ -114,6 +114,7 @@ Audit every app with a `.env.example`, its leaf `config/env.ts`, and the repo `.
 - **An env file is present per app** — an app with a `.env.example` counts as configured if `.env` OR `.env.local` exists (Next.js loads both); never flag an app for lacking `.env.local` specifically.
 - **Example tracks required vars** — every var the schema requires appears in `.env.example`; no schema var is missing from the example (developer won't know to set it) and no example var is dead config (absent from the schema). Names match exactly between schema, example, and use sites (no casing/typo drift).
 - **No local extras** — vars present in local env files but absent from `.env.example`/the schema are deprecated vars or typos; flag them.
+- **Nothing in env that isn't a secret** — apply the one gate from `devops`: would leaking this value hurt? A base URL, cookie domain, CORS origin, allowlist, analytics id, project id, or public key answers no, so it belongs in a committed config module keyed off `APP_ENV`, not in `.env`. Flag each one, and say which tier's value is missing from config.
 - **`.env.example` is placeholder-only and self-documenting** — every entry has a safe placeholder or example value (never a real credential), and non-obvious vars carry a one-line comment on format/where to get them.
 - **Gitignored** — `.env.local`, `.env.*.local`, and other real `.env*` files are gitignored; only `.env.example` is committed. Confirm the `.gitignore` pattern actually covers the files the app uses.
 

@@ -148,7 +148,7 @@
     {
       "name": "environment-audit",
       "source": "./plugins/environment-audit",
-      "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness vs required vars, `NEXT…"
+      "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness, nothing in env that is…"
     },
     {
       "name": "extension-to-functions-codebase",

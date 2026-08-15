@@ -122,6 +122,8 @@ The criteria below are the audit's full working rules — self-contained. For ho
 ### Placement
 
 - **Kind-first barrels** — schemas/types/consts live in the right kind folder and export through its barrel (`@/lib/<kind>` or `@app/<kind>`), not scattered loose.
+- **Barrels list explicit exports** — one named line per file, never `export *` over a directory of files; a wildcard hides what joined the surface. A barrel that composes other barrels (`ui/index.ts` over its tiers) is the documented exception.
+- **A Zod schema and its inferred type live together** in the `schemas` kind — not re-declared in `types/`, which holds only shapes no const or schema produces.
 - **Shared vs app** — a symbol used by more than one app/feature belongs in the shared package (`@app/schemas`/`utils`/`hooks`); a genuinely app-local one (form/UI state, env schema, app config) stays in the app. Domain schemas/entities don't belong inline in component/page files.
 - **Server boundary** — server-only code sits behind `lib/server/` with its own `server-only` barrel; no server code reachable from a client-safe barrel.
 - **Thin route/entry** — `page.tsx`/route files only import a `…PageContent` and render it; no markup, data, or logic inline. Sections are one-per-file named exports; `index.tsx` composes.
@@ -137,6 +139,9 @@ The criteria below are the audit's full working rules — self-contained. For ho
 
 - **URLs/paths** — page paths or full URLs hardcoded where a route/endpoint constant or `site.url`/env value exists. Ignore `routes`/`site.metadata`/config files that _define_ these, `.env.example`, comments/JSDoc, the bare `/` root, and Storybook demo data.
 - **Magic values** — unexplained literals (limits, keys, statuses) that should be named constants.
+- **`routes.ts` / `endpoints.ts` are grouped, not one flat map** — routes group by route group, endpoints by the backend's own resource; a parameterised path is a function inside its group so no caller concatenates. Flag a single object carrying dozens of keys.
+- **The API version is a constant the endpoints build from**, never repeated on every line — a version bump should be one edit no endpoint can be missed by.
+- **Nothing in `.env` that isn't a secret** — apply the gate from `devops`: would leaking it hurt? A base URL, cookie domain, CORS origin, analytics id, or project id answers no, so it belongs in a committed config module keyed off `APP_ENV`.
 
 ## Boundaries
 

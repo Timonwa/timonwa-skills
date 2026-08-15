@@ -25,7 +25,7 @@ Language / framework standards (bucket A — enforced everywhere, detail in the 
 - **UI & design** — every screen built from one design system, no one-offs; tokens/theming via `tailwind-css`, cohesion/governance via `design-system`, design quality/distinctiveness (original, not library-default) via `frontend-design`, semantic markup via `html-best-practices`, a11y via `accessibility`; hand-authored vectors via `svg-generation`.
 - **Brand & copy** — the app's brand identity, voice & tone, and product/UI copy (buttons, empty/error/success/loading, microcopy, logo usage) via `branding`; the project's palette, voice traits, and logo location live in this file (see Brand & Voice below).
 - **Monorepo** (where applicable) — pnpm workspaces + Turborepo (tasks/caching, shared config packages, catalog) via `turborepo-monorepo`.
-- **Firebase** (where used) — house access boundary (only auth/data modules touch Firebase), sign-in→session-cookie auth, Firestore in the service layer, least-privilege rules via `firebase`; product mechanics via the official `firebase-*` skills. Project ids/collections/host → this file.
+- **Firebase** (where used) — the access boundary (only auth/data modules touch Firebase), sign-in→session-cookie auth, Firestore in the service layer, and least-privilege rules are project decisions — record them here; product mechanics via the official `firebase-*` skills. Project ids/collections/host → this file.
 - **Backend / API** (where there's an API or route-handler layer) — thin route handlers over a service layer, build order schema→service→route, RBAC guards, rate limiting, typed errors + shared response builders, cursor pagination via `backend`. Single apps mutate via Server Actions (`nextjs-best-practices`) instead.
 - **Redis** (where used) — the key grammar, per-namespace TTLs, and which primitives fail open versus closed are a project decision; record them here along with instance names and per-env credentials. Upstash client usage → `upstash-redis-js`, rate limiting → `upstash-ratelimit-js`.
 - **DevOps** — CI/CD (GitHub Actions job graph + composite setup action + affected checks + SHA-pinned/least-privilege hardening), testing + perf gates (Playwright E2E + size-limit/Lighthouse budgets against the preview), pre-commit hooks (husky/lint-staged/commitlint), security headers, env strategy (Zod-at-boot, runtime config, secrets), quality gates (CODEOWNERS, deployment environments), deploy per env via `devops`.
@@ -45,7 +45,8 @@ Conventions (full detail in the `code-structure` skill):
 
 - **Pages** are feature-grouped, section-based: the route/entry file is thin (imports a composed `…PageContent`); sections are one-per-file with named exports; `index.tsx` composes them. **`layout.tsx` is thin too** — it renders a shell from `ui/layouts/`; only a guard stays in the route file.
 - **`components/`** holds only `.tsx` and **mirrors the route groups**, one folder per group and one per page. `ui/` = generic primitives **tiered** `base/ blocks/ patterns/ layouts/`, **one folder per component** (component + story + barrel, and a test only where there is behaviour); `_shared/` = cross-feature but app-specific; `errors/` = the framework boundaries. Shared UI/hooks/utils are self-contained and prop-driven (see the `reusables` skill).
-- **`lib/`** is **kind-first and flat inside each kind** — `config/ constants/ data/ hooks/ types/ utils/`; the domain is a filename prefix (`auth.constant.ts`, `nav.type.ts`, `string.utils.ts`), never a subfolder. `config/` keeps bare names. Each kind has a barrel listing **one explicit export per file** (`@/lib/<kind>`); no loose files at the root, and no empty kind.
+- **Route groups** give a shared layout; a group that needs a URL prefix keeps a real segment inside it (`(auth)/auth/`, `(dashboard)/dashboard/`), while a grouping-only one (`(legal)`, `(marketing)`) has none. Record this project's groups below.
+- **`lib/`** is **kind-first and flat inside each kind** — `config/ constants/ data/ hooks/ schemas/ types/ utils/`; the domain is a filename prefix (`auth.constant.ts`, `nav.type.ts`, `string.utils.ts`), never a subfolder. `config/` keeps bare names. Each kind has a barrel listing **one explicit export per file** (`@/lib/<kind>`); no loose files at the root, and no empty kind.
 - **Server-only code** lives behind a single **`lib/server/`** boundary (own barrel, `server-only`) with the same flat kinds — `actions/ cache/ clients/ data/ services/ utils/`. That barrel exports `actions`, `cache`, and `services` only; `clients/`, `data/`, and `utils/` are called by the layers above them. Never shares a barrel with client code.
 - Path alias `@/*`. Monorepo: shared kinds are `packages/*` (`@app/<kind>`); each app/package may have its own AGENTS.md (closest file wins).
 - This structure is applied day-zero on top of the official framework starter by `scaffold-next-app` (one app or package; the workspace shell around it by `scaffold-monorepo`) and extended per feature by `scaffold-feature` — use them rather than hand-placing new folders.
@@ -135,11 +136,11 @@ Import order: React first, then external packages, then internal (path-aliased, 
 
 ## Backend / API
 
-<Only if there's an API / route-handler layer (the `backend` skill holds the how-to). Record: dedicated API app vs Server Actions in one app; the response envelope shape; the rate-limit tiers in use (AUTH / SENSITIVE / WRITE / READ / PUBLIC) **and this project's actual budget per tier** — the skills deliberately hold no default, since a budget that fits one app locks users out of another; where the OpenAPI registry lives; the cron dispatcher route + schedule; where audit-log action types are registered. If Redis is used: the key-builder + TTL-constants module paths, namespaces in use, and any per-namespace TTL or budget overrides. If feature flags are used (`feature-flags`): the flag store/collection, the flag-name union module, cache TTL overrides, and the reconciler cadence. If fields are encrypted (`field-encryption`): which fields, and the key env var name per environment. If a maintenance mode exists (`maintenance-mode`): the flag name, exempt-path list, bypass cookie name, and the bypass-token env var. Or "None" (frontend-only project).>
+<Only if there's an API / route-handler layer (the `backend` skill holds the how-to). Record: dedicated API app vs Server Actions in one app; the response envelope shape; the rate-limit tiers in use (AUTH / SENSITIVE / WRITE / READ / PUBLIC) **and this project's actual budget per tier** — the skills deliberately hold no default, since a budget that fits one app locks users out of another; where the OpenAPI registry lives; the cron dispatcher route + schedule; where audit-log action types are registered. If Redis is used: the key-builder + TTL-constants module paths, namespaces in use, and any per-namespace TTL or budget overrides. If feature flags are used: the flag store/collection, the flag-name union module, cache TTL overrides, and the reconciler cadence. If fields are encrypted (`field-encryption`): which fields, and the key env var name per environment. If a maintenance mode exists: the flag name, exempt-path list, bypass cookie name, and the bypass-token env var. Or "None" (frontend-only project).>
 
 ## Data Store (Firebase / other)
 
-<Only for full-stack apps (the `firebase` skill holds the how-to). Record: project ids per env, collection names (or the collections module path), bucket names + access level, the session-cookie name + root cookie domain, chosen host (App Hosting / Vercel / other), emulator ports, and which TTL/retention constants module applies. If images are handled (`image-handling`): the caps constants module, slot paths, and the worker function name. If Cloudinary is used (`cloudinary`): the cloud name per env, folder scheme, and which shape (delivery-only vs full pipeline). Or "None".>
+<Only for full-stack apps (product mechanics → the official `firebase-*` skills). Record: project ids per env, collection names (or the collections module path), bucket names + access level, the session-cookie name + root cookie domain, chosen host (App Hosting / Vercel / other), emulator ports, and which TTL/retention constants module applies. If images are handled: the caps constants module, slot paths, and the worker function name. If Cloudinary is used: the cloud name per env, folder scheme, and which shape (delivery-only vs full pipeline). Or "None".>
 
 ## Monorepo / Workspace
 
@@ -149,9 +150,15 @@ Import order: React first, then external packages, then internal (path-aliased, 
 
 <The `devops` skill holds the how-to. Record: the workflow files and what each gates, deploy targets/hosts per app + per env, whether auto-rollout is disabled (monorepo default: yes — deploy specific commits), secret names per environment, and the health-check endpoint used post-deploy. Or "None".>
 
-## Env Vars
+## Env Vars & Config
 
-<Naming (e.g. `NEXT_PUBLIC_*` for client). Must be added to `.env.example` for the relevant app(s). Where they're validated (e.g. `src/config/env.ts`). The tier switch (`APP_ENV`) values and the port-per-app table if a monorepo.>
+<Two lists, because they are different things (`devops`).
+
+**Secrets** — the only things in `.env`. Name each one, where it is validated (e.g. `src/lib/config/env.ts`), and where the real values live (a secret manager, not a dashboard note). Every one must appear in `.env.example` with no value.
+
+**Per-tier constants** — base URLs, cookie domain, CORS origins, allowlists, analytics ids, project ids, public keys. These are committed, keyed off `APP_ENV` in a config module (e.g. `src/lib/config/site.ts`) — say which module and list the tiers. Also the port-per-app table if a monorepo.
+
+The gate for anything new: would leaking it hurt? Yes → secret. No → constant, however much it differs per tier.>
 
 ## i18n
 
