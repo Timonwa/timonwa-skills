@@ -111,4 +111,4 @@ UI icon (theme-able, decorative next to a label — inline in JSX/HTML, hence no
 - [ ] Optimized — no unused defs/empty groups/redundant attrs; run through SVGO.
 - [ ] File named per `naming` (kebab-case, descriptive).
 
-> **Related:** diagrams for blog posts follow the article craft in `technical-article`.
+> **Related:** a diagram for a blog post follows that publication's article craft, not this skill's defaults.

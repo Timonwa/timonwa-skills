@@ -1,0 +1,11 @@
+{
+  "name": "docs-standards",
+  "description": "Use when writing or restructuring documentation-site pages — MDX/Markdown pages in any docs framework (Fumadocs, Docusaurus, Starlight, Mintlify, VitePress), a…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

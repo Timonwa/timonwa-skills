@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "63 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "70 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -96,9 +96,29 @@
       "description": "Broad repo-health triage that routes to the deep audits and covers the code-quality hygiene no other audit owns — tech debt (TODO/FIXME), dead/unused code, Typ…"
     },
     {
+      "name": "community-triage",
+      "source": "./plugins/community-triage",
+      "description": "Triage external community contributions and mentions across the GitHub orgs a DevRel monitors."
+    },
+    {
+      "name": "content-suite",
+      "source": "./plugins/content-suite",
+      "description": "The writing standards we apply every time — the shared discipline and house voice, docs-site pages, help-centre guides for non-technical readers, project READMEs, line-level copy editing, and hand-authored diagrams."
+    },
+    {
       "name": "conventions-audit",
       "source": "./plugins/conventions-audit",
       "description": "House-conventions audit of an app or monorepo against the `naming` and `code-structure` standards — hardcoded URLs vs route constants, schema/type/const placem…"
+    },
+    {
+      "name": "copy-editing",
+      "source": "./plugins/copy-editing",
+      "description": "Use when editing, reviewing, or improving existing copy or prose — marketing pages, landing copy, UI text, docs passages, or an article draft."
+    },
+    {
+      "name": "daily-standup",
+      "source": "./plugins/daily-standup",
+      "description": "Prepare the user's daily standup update from their GitHub activity across the orgs they work in."
     },
     {
       "name": "dependency-audit",
@@ -119,6 +139,11 @@
       "name": "docs-audit",
       "source": "./plugins/docs-audit",
       "description": "Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost…"
+    },
+    {
+      "name": "docs-standards",
+      "source": "./plugins/docs-standards",
+      "description": "Use when writing or restructuring documentation-site pages — MDX/Markdown pages in any docs framework (Fumadocs, Docusaurus, Starlight, Mintlify, VitePress), a…"
     },
     {
       "name": "environment-audit",
@@ -211,6 +236,11 @@
       "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD."
     },
     {
+      "name": "help-center-standards",
+      "source": "./plugins/help-center-standards",
+      "description": "Use when writing or reviewing help-centre / support-centre guides for a product's end users — FAQ answers, how-tos, concept explainers, policy pages, troublesh…"
+    },
+    {
       "name": "html-best-practices",
       "source": "./plugins/html-best-practices",
       "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
@@ -249,6 +279,11 @@
       "name": "react-best-practices",
       "source": "./plugins/react-best-practices",
       "description": "Use when writing or reviewing React components, hooks, or state (React 19)."
+    },
+    {
+      "name": "readme-standards",
+      "source": "./plugins/readme-standards",
+      "description": "Use when creating or updating a README for a project, package, or app — writing a new README.md, refreshing a stale one, or deciding what a README should conta…"
     },
     {
       "name": "reusables",
@@ -353,7 +388,12 @@
     {
       "name": "workflow-suite",
       "source": "./plugins/workflow-suite",
-      "description": "The cross-project actions — staged Conventional Commits, a self-contained PR review, scaffolding an app, a monorepo, a feature, or an AGENTS.md, framework migrations, changelogs, and cross-app drift sync."
+      "description": "Cross-project workflow actions — staged Conventional Commits, self-contained PR review, AGENTS.md scaffolding, Next.js app and monorepo scaffolding, feature scaffolding, framework migration, changelog generation, cross-app drift sync, community-issue triage, and daily standups."
+    },
+    {
+      "name": "writing-standards",
+      "source": "./plugins/writing-standards",
+      "description": "Use when writing or structuring developer documentation — guides, API references, explanations, tutorials, or deciding what kind of doc a topic needs."
     }
   ]
 }

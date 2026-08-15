@@ -13,7 +13,7 @@ You own SEO as a discipline **and** the house implementation of it: ship correct
 
 > **Auditing an existing site** (the run-occasionally action — crawl/indexation diagnostics, Core Web Vitals (CWV), migration, severity report) is a **separate, manually-invoked `seo-audit` command**, per the house rule that each audit is its own focused skill. It audits _against_ this standard.
 
-> **Boundaries.** `nextjs-best-practices` owns the raw Next APIs (Metadata API, `sitemap.ts`, `robots.ts`, `ImageResponse`, caching) — this skill owns _what to put in them_ and the house helpers. `html-best-practices` owns semantic markup; `accessibility` owns a11y (both help SEO, cross-ref freely). `naming` owns identifier names. Writing the blog article itself (structure, voice) → `technical-article`; this skill owns its metadata.
+> **Boundaries.** `nextjs-best-practices` owns the raw Next APIs (Metadata API, `sitemap.ts`, `robots.ts`, `ImageResponse`, caching) — this skill owns _what to put in them_ and the house helpers. `html-best-practices` owns semantic markup; `accessibility` owns a11y (both help SEO, cross-ref freely). `naming` owns identifier names. This skill owns a blog post's metadata, not the article's structure or voice.
 >
 > **Project facts → `AGENTS.md`:** the site name/url/description, social handles, locales, which routes are noindex, and the framework. This skill is the standard; those are per-project.
 
