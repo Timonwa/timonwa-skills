@@ -38,7 +38,7 @@
       "frontend-audit",
       "performance-audit",
       "scaffold-agents-md",
-      "seo-audit",
+      "seo-code-audit",
       "storybook-audit"
     ]
   },
@@ -125,7 +125,7 @@
     "displayName": "Content Suite",
     "description": "The writing standards we apply every time — the shared discipline and house voice, docs-site pages, help-centre guides for non-technical readers, project READMEs, line-level copy editing, and hand-authored diagrams.",
     "skills": [
-      "copy-editing",
+      "copy-editing-house",
       "docs-standards",
       "help-center-standards",
       "readme-standards",

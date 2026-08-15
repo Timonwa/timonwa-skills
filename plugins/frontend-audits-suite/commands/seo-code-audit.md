@@ -1,5 +1,5 @@
 ---
-name: seo-audit
+name: seo-code-audit
 description: >-
   Manually invoked. Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene, structured data / JSON-LD rich-result eligibility, crawlability + URL structure + internal linking, content quality / E-E-A-T, Core Web Vitals signals, mobile, social, AEO/GEO readiness, and analytics gating. Verifies each finding and writes a prioritized report. Not on by default. The house standards `seo`, `nextjs-best-practices`, and `html-best-practices` are an optional enhancement. Part of the house audits family (see `audit-all`).
 argument-hint: "[phase] [path]"

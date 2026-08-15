@@ -96,4 +96,4 @@ Query archetypes to test:
 
 ## Boundary
 
-A general "traffic dropped / why am I not ranking" request is **traditional SEO** → the `seo-audit` skill, not AEO patterns.
+A general "traffic dropped / why am I not ranking" request is **traditional SEO** → the `seo-code-audit` skill, not AEO patterns.

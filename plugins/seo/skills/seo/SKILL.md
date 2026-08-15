@@ -1,6 +1,6 @@
 ---
 name: seo
-description: Use when building SEO into a site — writing page metadata (title/description/OpenGraph/Twitter/canonical/robots), sitemaps, robots rules; structured data / schema.org / JSON-LD / rich results; AEO/GEO (ranking in AI answers — ChatGPT, Perplexity, Google AI Overviews); programmatic SEO (templated pages at scale); site architecture / URL structure / internal linking; or improving indexability / Core Web Vitals. Owns the discipline AND the house SEO implementation (siteConfig, buildMetadata, SEO catalogs, JsonLd + schema builders, env-gated robots/sitemap). Running a full SEO audit is the separate, manually-invoked `seo-audit` command. Next API mechanics → `nextjs-best-practices`; semantic markup → `html-best-practices`; a11y → `accessibility`; naming → `naming`.
+description: Use when building SEO into a site — writing page metadata (title/description/OpenGraph/Twitter/canonical/robots), sitemaps, robots rules; structured data / schema.org / JSON-LD / rich results; AEO/GEO (ranking in AI answers — ChatGPT, Perplexity, Google AI Overviews); programmatic SEO (templated pages at scale); site architecture / URL structure / internal linking; or improving indexability / Core Web Vitals. Owns the discipline AND the house SEO implementation (siteConfig, buildMetadata, SEO catalogs, JsonLd + schema builders, env-gated robots/sitemap). Running a full SEO audit is the separate, manually-invoked `seo-code-audit` command. Next API mechanics → `nextjs-best-practices`; semantic markup → `html-best-practices`; a11y → `accessibility`; naming → `naming`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -11,7 +11,7 @@ metadata:
 
 You own SEO as a discipline **and** the house implementation of it: ship correct, discoverable SEO into every page — metadata, structured data, robots, sitemap, architecture — following the standard below, plus the Answer Engine Optimization (AEO)/Generative Engine Optimization (GEO) and programmatic principles. Every indexable page carries a title, description, canonical, OpenGraph/Twitter, and correct robots; key pages carry structured data.
 
-> **Auditing an existing site** (the run-occasionally action — crawl/indexation diagnostics, Core Web Vitals (CWV), migration, severity report) is a **separate, manually-invoked `seo-audit` command**, per the house rule that each audit is its own focused skill. It audits _against_ this standard.
+> **Auditing an existing site** (the run-occasionally action — crawl/indexation diagnostics, Core Web Vitals (CWV), migration, severity report) is a **separate, manually-invoked `seo-code-audit` command**, per the house rule that each audit is its own focused skill. It audits _against_ this standard.
 
 > **Boundaries.** `nextjs-best-practices` owns the raw Next APIs (Metadata API, `sitemap.ts`, `robots.ts`, `ImageResponse`, caching) — this skill owns _what to put in them_ and the house helpers. `html-best-practices` owns semantic markup; `accessibility` owns a11y (both help SEO, cross-ref freely). `naming` owns identifier names. This skill owns a blog post's metadata, not the article's structure or voice.
 >
@@ -229,13 +229,13 @@ alternates: {
 
 ## Technical fundamentals
 
-Build to these; the `seo-audit` command verifies them.
+Build to these; the `seo-code-audit` command verifies them.
 
 - **Core Web Vitals** targets: **LCP < 2.5s · INP < 200ms · CLS < 0.1**.
 - **Crawlable & indexable**: real `<a href>` navigation, a self-referencing canonical on every page, only indexable/canonical URLs in the sitemap, no stray `noindex` on pages that should rank.
 - **One host, one URL shape**: HTTPS, a single www/non-www, one trailing-slash + case policy — enforced with 301s.
 
-The full audit workflow (priority order, crawl/indexation/canonicalization/migration checklists, the JS-rendered-schema caveat, severity report) lives in the separate **`seo-audit`** skill.
+The full audit workflow (priority order, crawl/indexation/canonicalization/migration checklists, the JS-rendered-schema caveat, severity report) lives in the separate **`seo-code-audit`** skill.
 
 ## On-page
 

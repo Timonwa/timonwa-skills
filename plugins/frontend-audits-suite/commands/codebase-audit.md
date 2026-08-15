@@ -128,7 +128,7 @@ This map keeps codebase-audit shallow: when the sweep surfaces a smell in a doma
 | Waterfalls, missing memo/code-split, oversized bundle, unoptimized images, N+1                                                         | `performance-audit`       | Focused performance review       |
 | Generic/library-default UI, inconsistent tokens, unstructured components/sections                                                      | `frontend-audit`          | Focused frontend/UI review       |
 | Naming/structure/routing drift from the project's own documented conventions                                                           | `conventions-audit`       | Focused conventions review       |
-| Missing page metadata, no sitemap/robots, absent structured data                                                                       | `seo-audit`               | Focused SEO review               |
+| Missing page metadata, no sitemap/robots, absent structured data                                                                       | `seo-code-audit`          | Focused SEO review               |
 
 ## Checklist — code-quality hygiene (owned here)
 

@@ -111,8 +111,8 @@
       "description": "House-conventions audit of an app or monorepo against the `naming` and `code-structure` standards — hardcoded URLs vs route constants, schema/type/const placem…"
     },
     {
-      "name": "copy-editing",
-      "source": "./plugins/copy-editing",
+      "name": "copy-editing-house",
+      "source": "./plugins/copy-editing-house",
       "description": "Use when editing, reviewing, or improving existing copy or prose — marketing pages, landing copy, UI text, docs passages, or an article draft."
     },
     {
@@ -321,8 +321,8 @@
       "description": "Use when building SEO into a site — writing page metadata (title/description/OpenGraph/Twitter/canonical/robots), sitemaps, robots rules; structured data / sch…"
     },
     {
-      "name": "seo-audit",
-      "source": "./plugins/seo-audit",
+      "name": "seo-code-audit",
+      "source": "./plugins/seo-code-audit",
       "description": "Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene,…"
     },
     {

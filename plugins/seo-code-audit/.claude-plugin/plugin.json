@@ -1,5 +1,5 @@
 {
-  "name": "seo-audit",
+  "name": "seo-code-audit",
   "description": "Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene,…",
   "version": "1.0.0",
   "author": {

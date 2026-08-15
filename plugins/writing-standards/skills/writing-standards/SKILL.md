@@ -1,6 +1,6 @@
 ---
 name: writing-standards
-description: Use when writing or structuring developer documentation — guides, API references, explanations, tutorials, or deciding what kind of doc a topic needs. Triggers on "write docs", "document this", "API reference", "how-to guide", "explain this concept", "restructure these docs", "is this a tutorial or a guide". Owns the discipline — the Diátaxis quadrants (tutorial / how-to / reference / explanation) and picking the right one, audience-first structure, prose before code, concrete over vague, plain language — and the shared house-voice checklist every writing skill links. Applies the same standard every run, in any project, rather than inheriting the surrounding docs' habits. Docs-site page mechanics (MDX, navigation, links) → `docs-standards`; help centres for non-technical readers → `help-center-standards`; project READMEs → `readme-standards`; polishing existing prose → `copy-editing`.
+description: Use when writing or structuring developer documentation — guides, API references, explanations, tutorials, or deciding what kind of doc a topic needs. Triggers on "write docs", "document this", "API reference", "how-to guide", "explain this concept", "restructure these docs", "is this a tutorial or a guide". Owns the discipline — the Diátaxis quadrants (tutorial / how-to / reference / explanation) and picking the right one, audience-first structure, prose before code, concrete over vague, plain language — and the shared house-voice checklist every writing skill links. Applies the same standard every run, in any project, rather than inheriting the surrounding docs' habits. Docs-site page mechanics (MDX, navigation, links) → `docs-standards`; help centres for non-technical readers → `help-center-standards`; project READMEs → `readme-standards`; polishing existing prose → `copy-editing-house`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -78,5 +78,5 @@ Note what it doesn't do: no history of why API keys exist (explanation), no full
 - Help-centre guides for non-technical end users → `help-center-standards`.
 - Project READMEs → `readme-standards`.
 - Standalone tutorials and blog articles are a different shape from a docs page — narrative, published off-repo, and not this skill's job.
-- Tightening and polishing existing prose, including de-AI-ifying it → `copy-editing`.
+- Tightening and polishing existing prose, including de-AI-ifying it → `copy-editing-house`.
 - Auditing an existing docs site → `docs-audit`.
