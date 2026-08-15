@@ -1,6 +1,6 @@
 {
   "name": "community-triage",
-  "description": "Triage external community contributions and mentions across the GitHub orgs a DevRel monitors.",
+  "description": "Triages external community contributions and mentions across the GitHub orgs a DevRel monitors.",
   "version": "1.0.0",
   "author": {
     "name": "Timonwa"

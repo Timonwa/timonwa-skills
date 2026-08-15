@@ -1,6 +1,6 @@
 {
   "name": "daily-standup",
-  "description": "Prepare the user's daily standup update from their GitHub activity across the orgs they work in.",
+  "description": "Prepares your daily standup update from your GitHub activity across the orgs you work in.",
   "version": "1.0.0",
   "author": {
     "name": "Timonwa"

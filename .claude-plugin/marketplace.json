@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "70 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "71 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -98,7 +98,12 @@
     {
       "name": "community-triage",
       "source": "./plugins/community-triage",
-      "description": "Triage external community contributions and mentions across the GitHub orgs a DevRel monitors."
+      "description": "Triages external community contributions and mentions across the GitHub orgs a DevRel monitors."
+    },
+    {
+      "name": "content-performance",
+      "source": "./plugins/content-performance",
+      "description": "Reads exported analytics from any platform — search consoles, rank trackers, product analytics, CMS reports, a spreadsheet someone assembled by hand — and turn…"
     },
     {
       "name": "content-suite",
@@ -113,7 +118,7 @@
     {
       "name": "daily-standup",
       "source": "./plugins/daily-standup",
-      "description": "Prepare the user's daily standup update from their GitHub activity across the orgs they work in."
+      "description": "Prepares your daily standup update from your GitHub activity across the orgs you work in."
     },
     {
       "name": "dependency-audit",

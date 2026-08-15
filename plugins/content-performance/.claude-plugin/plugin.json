@@ -1,0 +1,11 @@
+{
+  "name": "content-performance",
+  "description": "Reads exported analytics from any platform — search consoles, rank trackers, product analytics, CMS reports, a spreadsheet someone assembled by hand — and turn…",
+  "version": "1.0.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "source": "https://github.com/Timonwa/timonwa-skills",
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

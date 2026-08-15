@@ -1,7 +1,7 @@
 ---
 name: daily-standup
 description: >-
-  Prepare the user's daily standup update from their GitHub activity across the orgs they work in. Use when the user asks to write, prepare, or clean up their daily standup, daily update, or "what did I do yesterday" post. Resolves the previous weekday, fetches authored AND reviewed/commented activity via `involves:`, reconciles it with the user's answers to four questions, then formats a copy-paste-ready update for the configured destination (Discord, Slack, or wherever the team posts). Never posts anywhere and never claims work the user hasn't confirmed.
+  Manually invoked. Prepares your daily standup update from your GitHub activity across the orgs you work in. Use when asked to write, prepare, or clean up a daily standup, a daily update, or a "what did I do yesterday" post. Resolves the previous weekday, fetches authored AND reviewed/commented activity via `involves:`, reconciles it against your answers to four questions, then formats a copy-paste-ready update for wherever the team posts (Discord, Slack, anywhere). Never posts anywhere, and never claims work you haven't confirmed.
 argument-hint: "[date] [orgs]"
 allowed-tools: Bash(gh api:*), Bash(date:*), Read, Grep
 metadata:
@@ -23,7 +23,7 @@ Build the user's daily standup — previous-day recap plus today's plan — from
 
 Resolve these in order; never hardcode any of them:
 
-1. **Arguments** — a date or orgs passed to the skill win.
+1. **Arguments** — a date or orgs passed to the command win.
 2. **The project's `AGENTS.md`** — a **DevRel** section listing the GitHub handle, the orgs to monitor, and the standup destination (Discord, Slack, …).
 3. **Ask once** — for anything still missing, ask the user, then proceed. Suggest adding a DevRel section to `AGENTS.md` so future runs don't ask.
 
@@ -71,7 +71,7 @@ Wait for the response. Build the **Previous Day** section from all four together
 
 ## Step 4 — Format and output
 
-Produce the standup ready to paste into `DEST`. **Output it inside a fenced code block** (triple backticks, no language tag) so it renders with a copy button.
+Produce the standup ready to paste into `DEST`. **Output it inside a fenced `text` code block** so it renders with a copy button and nothing gets syntax-highlighted as code.
 
 Each bullet is **at most 2 lines** — one sentence max; chat platforms have character limits, so don't pad.
 
@@ -99,7 +99,7 @@ Judgement: expand only when the work genuinely has parts. Keep a truly atomic ta
 - Past tense for Previous Day. Future/present for Today — **but if the user wrote a Today item in past tense, that's intentional; keep their tense.**
 - **Most DevRel tasks are multi-step — surface the workflow.** Use the natural sequence for that task type, e.g. guides (research → verify against the codebase → draft → screenshots → cross-links → PR), QA (set up → run the flows → record issues → share → re-test), articles (research → outline → draft → edit → visuals → publish). These archetypes are a **fallback for when you know nothing about the task** — real steps from the conversation always win, and never inject an archetype step (screenshots, visuals, …) the user hasn't actually planned. If you're unsure what the real sub-steps are, **ask the user rather than guess**.
 
-```
+```text
 Good day
 
 **Previous Day (Month DD)**

@@ -119,7 +119,7 @@ Import order: React first, then external packages, then internal (path-aliased, 
 
 ## DevRel
 
-<Only for repos where DevRel work happens (community triage, standups) — the `community-triage` and `daily-standup` skills read these instead of asking each run. Record: the GitHub handle, the GitHub org(s) to monitor, the standup destination (e.g. a Discord channel), the blog/publication name + base URL, and any community link (+ author name/pronouns for third-person posts). Or "None".>
+<Only for repos where DevRel work happens (community triage, standups) — the `community-triage` and `daily-standup` commands read these instead of asking each run. Record: the GitHub handle, the GitHub org(s) to monitor, the standup destination (e.g. a Discord channel), the blog/publication name + base URL, and any community link (+ author name/pronouns for third-person posts). Or "None".>
 
 ## Help centre
 
