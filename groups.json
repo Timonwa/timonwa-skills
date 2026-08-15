@@ -33,6 +33,7 @@
       "accessibility-audit",
       "audit-all",
       "codebase-audit",
+      "content-performance",
       "conventions-audit",
       "dependency-audit",
       "frontend-audit",

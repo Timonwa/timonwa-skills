@@ -1,7 +1,7 @@
 ---
 name: community-triage
 description: >-
-  Triage external community contributions and mentions across the GitHub orgs a DevRel monitors. Use when the user asks to triage contributions, check external PRs/issues, see what the community has opened, or find where they've been tagged/mentioned. Fetches org members dynamically to separate external from internal authors, filters a time window on last-updated date (default last 2 months), collapses bot PRs into a batch-merge list, and reports two sections — External Contributions grouped by repo, and You've Been Tagged. Read-only; never comments on, merges, or closes anything.
+  Manually invoked. Triages external community contributions and mentions across the GitHub orgs a DevRel monitors. Use when the user asks to triage contributions, check external PRs/issues, see what the community has opened, or find where they've been tagged/mentioned. Fetches org members dynamically to separate external from internal authors, filters a time window on last-updated date (default last 2 months), collapses bot PRs into a batch-merge list, and reports two sections — External Contributions grouped by repo, and You've Been Tagged. Read-only; never comments on, merges, or closes anything.
 argument-hint: "[orgs] [window, e.g. last 6 months]"
 allowed-tools: Bash(gh api:*), Bash(gh search:*), Bash(date:*), Read, Grep
 metadata:
@@ -23,7 +23,7 @@ Sweep the configured GitHub orgs for open issues and PRs that need DevRel attent
 
 Resolve the GitHub handle and orgs in this order; never hardcode either:
 
-1. **Arguments** — orgs passed to the skill win.
+1. **Arguments** — orgs passed to the command win.
 2. **The project's `AGENTS.md`** — look for a **DevRel** section listing the GitHub handle and the orgs to monitor.
 3. **Ask once** — if neither source has a value, ask the user for their GitHub handle and the org(s) to triage, then proceed. Suggest they add a DevRel section to `AGENTS.md` so future runs don't ask.
 
@@ -31,7 +31,7 @@ Call the resolved values `HANDLE` and the org list `ORGS` below.
 
 ## Guardrails — read first
 
-- **Read-only.** This skill only searches and reports. It never comments, labels, merges, closes, or edits anything — a "triage" request is not permission to act on the items found.
+- **Read-only.** This command only searches and reports. It never comments, labels, merges, closes, or edits anything — a "triage" request is not permission to act on the items found.
 - **Report exactly what the searches return.** Never invent items, authors, or dates; if a search fails, say so rather than filling the gap.
 - **Renamed orgs 404 in `gh search`** — always use an org's current name. If a search 404s, ask the user whether the org was renamed.
 
