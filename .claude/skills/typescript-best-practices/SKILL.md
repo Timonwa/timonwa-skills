@@ -45,14 +45,23 @@ type User = z.infer<typeof UserSchema>;
 
 (Schema/type naming → `naming`.)
 
-## Shared schema package (monorepo)
+## Where contracts live
 
-In a monorepo, cross-boundary contracts live once in a shared package (e.g. `packages/schemas`) that both API and apps import. Four layers:
+Same four layers whichever shape the repo is — **a single app puts them in `lib/`, a monorepo puts them in a shared package** so the API and every app import one copy. The grammar and the rules below do not change between the two, which is what makes moving an app into a workspace a folder move:
+
+| Layer          | Single app                            | Monorepo                       |
+| -------------- | ------------------------------------- | ------------------------------ |
+| `constants/`   | `src/lib/constants`                   | `packages/schemas/constants`   |
+| `schemas/`     | `src/lib/schemas`                     | `packages/schemas/schemas`     |
+| `types/`       | `src/lib/types`                       | `packages/schemas/types`       |
+| `permissions/` | `src/lib/constants` + `src/lib/utils` | `packages/schemas/permissions` |
+
+What each holds:
 
 - `constants/` — `as const` arrays → derived unions, validation limits, label maps.
 - `schemas/` — Zod schemas + their inferred types. One file per domain (`<domain>.schema.ts`) plus a `shared.schema.ts` for cross-domain primitives (timestamp, pagination, email) that per-endpoint schemas `.extend()`.
 - `types/` — plain TS interfaces with **no Zod**, for runtime-UI state that isn't a wire contract (upload progress, client auth state). The boundary rule: **wire contract → schema; UI-only state → interface.**
-- `permissions/` — permission strings, role → permission maps, `can()` helpers (when the app has RBAC).
+- `permissions/` — permission strings, role → permission maps, `can()` helpers (when the app has RBAC). **Client-safe on purpose:** `can()` is pure with no I/O, so the same function gates a UI affordance and a server guard. A single app therefore splits it across the existing kinds — the strings and maps are constants, `can()` is a util — rather than adding a kind that only a monorepo needs.
 
 Rules that keep it honest:
 
