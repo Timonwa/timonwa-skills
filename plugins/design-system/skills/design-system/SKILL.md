@@ -48,7 +48,7 @@ When a real, recurring need appears: **name it** (→ `naming`) → add the toke
 
 ## Watch for drift
 
-Signs the system is fragmenting: literal values in feature code, two components that do the same thing, off-scale spacing/type, inconsistent radius/shadow, more than one font or icon set, pages that don't match. Consolidate drift back into the system. Audit for it via `frontend-audit` + `conventions-audit` (drift and literals) and `accessibility-audit` (the a11y contract) — see the `audits-suite`.
+Signs the system is fragmenting: literal values in feature code, two components that do the same thing, off-scale spacing/type, inconsistent radius/shadow, more than one font or icon set, pages that don't match. Consolidate drift back into the system. Audit for it via `frontend-audit` + `conventions-audit` (drift and literals) and `accessibility-audit` (the a11y contract) — see the audits bundles.
 
 ## Do / Don't
 

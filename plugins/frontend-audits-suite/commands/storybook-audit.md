@@ -1,12 +1,7 @@
 ---
 name: storybook-audit
 description: >-
-  Manually invoked. Storybook coverage and story-quality audit — cross-references shared UI
-  components against existing stories to find gaps, and checks stories against the house conventions
-  (CSF3 + TS `satisfies Meta`, tier-based titles, `argTypes` for every prop, the fixed taxonomy).
-  Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house
-  standards `storybook-story-writing` and `storybook-setup` are an optional enhancement. Part of the
-  house audits family (see `audit-all`).
+  Manually invoked. Storybook coverage and story-quality audit — cross-references shared UI components against existing stories to find gaps, and checks stories against the house conventions (CSF3 + TS `satisfies Meta`, tier-based titles, `argTypes` for every prop, the fixed taxonomy). Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `storybook-story-writing` and `storybook-setup` are an optional enhancement. Part of the house audits family (see `audit-all`).
 argument-hint: "[phase] [path]"
 model: opus
 effort: high

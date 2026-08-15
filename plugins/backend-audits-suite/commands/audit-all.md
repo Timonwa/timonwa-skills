@@ -15,7 +15,7 @@ metadata:
 
 The **orchestrator** for the house audit family. It figures out what the repo actually contains, runs each **applicable** audit, and rolls everything up into a single consolidated report — so you get one health picture instead of fifteen. Each domain audit still writes its own `_reports/<name>.md`; this adds `_reports/audit-all.md` on top.
 
-> **The family** (each is its own manually-invoked command): `accessibility-audit`, `seo-code-audit`, `storybook-audit`, `conventions-audit`, `dependency-audit`, `environment-audit`, `frontend-audit`, `performance-audit`, `api-audit`, `rbac-audit`, `firestore-audit`, `redis-audit`, `codebase-audit`, `security-audit`, `docs-audit`. Firestore/Storage **rule** internals → `firebase-security-rules-auditor`.
+> **The family** (each is its own manually-invoked command): `accessibility-audit`, `seo-code-audit`, `storybook-audit`, `conventions-audit`, `dependency-audit`, `environment-audit`, `frontend-audit`, `performance-audit`, `api-audit`, `rbac-audit`, `codebase-audit`, `security-audit`, `docs-audit`. Firestore/Storage **rule** internals → `firebase-security-rules-auditor`.
 
 ## Arguments
 
@@ -38,8 +38,6 @@ Detect from the repo, then run only what fits (skip the rest and say so in the r
 | `seo-code-audit`                                               | a public-facing app                                                                                                    |
 | `storybook-audit`                                              | Storybook is configured                                                                                                |
 | `api-audit` · `rbac-audit`                                     | there's an API / route-handler layer                                                                                   |
-| `firestore-audit`                                              | the app uses Firestore                                                                                                 |
-| `redis-audit`                                                  | the app uses Redis                                                                                                     |
 | `docs-audit`                                                   | the repo has documentation (a docs site, `_docs/`/`docs/`, or substantial READMEs)                                     |
 
 ## Method
@@ -59,7 +57,7 @@ Detect from the repo, then run only what fits (skip the rest and say so in the r
 | Audit | Score | Critical | High | Med | Low | Trend | Report |
 | accessibility-audit | 7/10 | 0 | 2 | 3 | 1 | ▲ | _reports/accessibility-audit.md |
 | … | | | | | | | |
-| (skipped: storybook-audit — no Storybook; redis-audit — no Redis) |
+| (skipped: storybook-audit — no Storybook) |
 
 ## Top priorities (cross-cutting, worst-first)
 Consolidated CRITICAL/HIGH items across all audits, each pointing to the owning sub-report + finding ID.

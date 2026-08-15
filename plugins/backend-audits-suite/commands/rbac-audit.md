@@ -1,13 +1,7 @@
 ---
 name: rbac-audit
 description: >-
-  Manually invoked. RBAC / authorization-coverage audit — unprotected API routes and Server Actions,
-  function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-assignment (BOPLA)
-  exposure, the permission registry, the role-to-permission hierarchy, frontend gates that must back
-  onto server checks, and data-layer rules coverage. Verifies each finding and writes a prioritized
-  report. Not on by default. Self-contained; the house standards `backend-security`, `firebase`, and
-  `backend` are an optional enhancement (rule internals hand off to `firebase-security-rules-auditor`).
-  Part of the house audits family (see `audit-all`).
+  Manually invoked. RBAC / authorization-coverage audit — unprotected API routes and Server Actions, function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-assignment (BOPLA) exposure, the permission registry, the role-to-permission hierarchy, frontend gates that must back onto server checks, and data-layer rules coverage. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `backend-security`, `firebase`, and `backend` are an optional enhancement (rule internals hand off to `firebase-security-rules-auditor`). Part of the house audits family (see `audit-all`).
 argument-hint: "[phase] [path]"
 model: opus
 effort: high
