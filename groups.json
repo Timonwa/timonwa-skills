@@ -106,9 +106,11 @@
   },
   "workflow-suite": {
     "displayName": "Workflow Suite",
-    "description": "The cross-project actions — staged Conventional Commits, a self-contained PR review, scaffolding an app, a monorepo, a feature, or an AGENTS.md, framework migrations, changelogs, and cross-app drift sync.",
+    "description": "Cross-project workflow actions — staged Conventional Commits, self-contained PR review, AGENTS.md scaffolding, Next.js app and monorepo scaffolding, feature scaffolding, framework migration, changelog generation, cross-app drift sync, community-issue triage, and daily standups.",
     "skills": [
       "changelog",
+      "community-triage",
+      "daily-standup",
       "migrate-framework",
       "pr-review",
       "scaffold-agents-md",
@@ -117,6 +119,18 @@
       "scaffold-next-app",
       "stage-commit",
       "sync-apps"
+    ]
+  },
+  "content-suite": {
+    "displayName": "Content Suite",
+    "description": "The writing standards we apply every time — the shared discipline and house voice, docs-site pages, help-centre guides for non-technical readers, project READMEs, line-level copy editing, and hand-authored diagrams.",
+    "skills": [
+      "copy-editing",
+      "docs-standards",
+      "help-center-standards",
+      "readme-standards",
+      "svg-generation",
+      "writing-standards"
     ]
   }
 }
