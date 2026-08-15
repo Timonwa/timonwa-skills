@@ -20,7 +20,7 @@ Cookie consent is a legal state machine the **user** owns, not a UI widget you o
 - **A permanent withdrawal path on every page** — a footer link/button that reopens the preferences modal. Withdrawal must be as easy as giving consent; a banner that appears once and can never be re-opened fails this outright.
 - **Revision-keyed persistence.** The stored choice is keyed to an integer revision; bump it whenever the category set or the cookie policy meaningfully changes, which invalidates stored consent and re-prompts existing users. Without the bump, a policy change silently rides on stale consent the user never gave.
 - **Consent is browser-scoped, anonymous, and client-side only.** No account required, and no server-side consent registry — the consent cookie itself (a `consentId`, first/last consent timestamps, accepted categories, and the revision) is the demonstrable record; a server-side registry means collecting per-visitor data to justify collecting data. If counsel mandates a server log anyway, store only the minimal record (consentId, choices, revision, timestamp — never IP) and note that decision in the project's `AGENTS.md`.
-- **Consent is not a feature flag.** A flag is the operator's choice — resolvable server-side, defaultable, flippable centrally. Consent is the user's legal choice — never defaulted on, never resolved for them, never overridden by ops. Don't route it through the flag system → `feature-flags`.
+- **Consent is not a feature flag.** A flag is the operator's choice — resolvable server-side, defaultable, flippable centrally. Consent is the user's legal choice — never defaulted on, never resolved for them, never overridden by ops. Don't route it through the flag system.
 - **Banner, not wall.** The page stays readable and navigable behind the banner; full-page consent walls are legally contested and hostile. Keep `disablePageInteraction` at its default `false`.
 - **Bucket B lives in `AGENTS.md`, not here** — the project's real cookie domain, analytics vendors and ids, category descriptions/copy, and current revision number are project facts, recorded per project.
 
@@ -150,7 +150,7 @@ useEffect(() => {
 - **Overlay a11y verification** (focus trap testing, contrast measurement, screen-reader checks) → `accessibility` (audit via `accessibility-audit`); this file states only the banner-specific requirements.
 - **CSP, SRI, and third-party-script risk** → `frontend-security`; this skill covers only how the consent gate intersects the CSP (nonces on gated tags, allowed origins for injected scripts).
 - **Server/Client boundary, script loading, and layout placement in Next.js** → `nextjs-best-practices`.
-- **Runtime flags** → `feature-flags` — consent is the user's legal choice, never an operator flag; neither system may impersonate the other.
+- **Runtime feature flags are a separate system** — consent is the user's legal choice, never an operator flag, and neither may impersonate the other.
 - **Banner copy voice and tone** → `branding`; the actual category descriptions are Bucket B in each project's `AGENTS.md`.
 - **Building the footer link / consent-gated components as shared, prop-driven pieces** → `reusables`; file placement → `code-structure`.
 - **Crawler concerns** → `seo` — keep `hideFromBots: true` so the modal never leaks into snapshots or indexed content.

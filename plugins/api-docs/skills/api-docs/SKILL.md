@@ -87,4 +87,4 @@ registerRoute({
 - The API architecture — thin handlers, services, guards, response builders, and the schema → service → route → docs build order — → `backend`; scaffolding a new slice with its registry entry → `scaffold-feature`.
 - Schema design and Zod-as-source-of-truth → `typescript-best-practices`.
 - Auditing the API implementation itself (auth, validation, envelopes) → `api-audit`; sweeping docs pages/READMEs for staleness → `docs-audit`.
-- Prose-writing craft for reference docs → `technical-writing`.
+- Prose-writing craft for reference docs → `writing-standards`.

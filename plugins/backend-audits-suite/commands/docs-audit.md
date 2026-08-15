@@ -1,7 +1,7 @@
 ---
 name: docs-audit
 description: >-
-  Manually invoked. Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost entries), duplicated content, missing pages for the public surface, formatting/frontmatter consistency, README accuracy, and doc freshness vs recent code changes. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `docs-site-authoring` and `technical-writing` are an optional enhancement. Part of the house audits family (see `audit-all`).
+  Manually invoked. Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost entries), duplicated content, missing pages for the public surface, formatting/frontmatter consistency, README accuracy, and doc freshness vs recent code changes. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `docs-standards` and `writing-standards` are an optional enhancement. Part of the house audits family (see `audit-all`).
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -15,7 +15,7 @@ effort: high
 
 A **manually-invoked, red-team documentation audit** of an app or a specific diff/PR. It is **self-contained** — every check is spelled out inline, so it runs a full review with zero other skills installed — and each finding is verified against the real code before it lands in a phase-aware, scored report at `_reports/docs-audit.md`.
 
-> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`docs-site-authoring`** and **`technical-writing`** ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
+> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`docs-standards`** and **`writing-standards`** ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
 
 ## Arguments
 
@@ -102,7 +102,7 @@ Every run produces two things:
 
 ## Checklist
 
-The criteria below are the audit's full working rules — self-contained. For house specifics, if installed → `docs-site-authoring` and `technical-writing`. Audit every `.md`/`.mdx` surface: the docs-site content directory, READMEs at every level, and inline doc folders (`_docs/`, `docs/`).
+The criteria below are the audit's full working rules — self-contained. For house specifics, if installed → `docs-standards` and `writing-standards`. Audit every `.md`/`.mdx` surface: the docs-site content directory, READMEs at every level, and inline doc folders (`_docs/`, `docs/`).
 
 ### Stale claims
 

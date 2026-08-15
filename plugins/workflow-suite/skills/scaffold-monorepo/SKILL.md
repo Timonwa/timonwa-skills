@@ -333,7 +333,7 @@ The shell is the whole job here. Finish by delegating, explicitly and by name:
 
 - **Each app in the workspace** → **`scaffold-next-app`**, one at a time, passing the app name, its port, its shared-package deps, and whether it has an API layer. It owns the app's folder tree, component tiers, kind-first `lib/`, styles entry, env validation, and Storybook wiring. Do not create any of that here.
 - **`AGENTS.md`** (+ the `CLAUDE.md → @AGENTS.md` import) → **`scaffold-agents-md`**, handing over the recorded interview answers as project facts: app list and ports, the package scope, catalog usage, the functions tier, deploy target per app.
-- **`README.md`** → **`readme-writer`**. **Committing** → **`stage-commit`**.
+- **`README.md`** → **`readme-standards`**. **Committing** → **`stage-commit`**.
 
 Scaffold no documentation tree — a README and `AGENTS.md` are the entire doc surface a repo gets by default.
 
@@ -346,6 +346,6 @@ In chat only: the detected entry situation, the recorded interview answers, the 
 - **Never generates an app from scratch, never overwrites what a scaffolder produced, never re-pins its dependency versions, never runs `git mv`/installs without approval, and never commits** → `stage-commit`.
 - **The shell only.** Everything inside `apps/<name>/src` — tree, tiers, `lib/`, styles, env, Storybook → **`scaffold-next-app`** (the Step 10 delegation, and the reason none of its templates are duplicated here).
 - **Executes a standard it does not invent** — workspace/turbo/catalog → `turborepo-monorepo`; CI, hooks, CODEOWNERS, deploy → `devops`; shared tsconfig + schemas → `typescript-best-practices`; `tailwind-config` + the `ui:` prefix → `tailwind-css`; the `ui` package's contents → `design-system` + `reusables`; shared-kind packages → `code-structure`; names → `naming`; a separate API app's internals → `backend`.
-- **Project facts belong elsewhere** — real scopes, domains, ports in prose, deploy hosts, owner handles, secret names → `scaffold-agents-md`; README → `readme-writer`.
+- **Project facts belong elsewhere** — real scopes, domains, ports in prose, deploy hosts, owner handles, secret names → `scaffold-agents-md`; README → `readme-standards`.
 - **Adjacent jobs** — realigning apps that have already diverged → `sync-apps`; a framework or major upgrade → `migrate-framework`; a feature inside an app → `scaffold-feature`.
 - Called **into** by `scaffold-next-app` when an app turns out to need a workspace around it first, and by `scaffold-agents-md` when a repo's shape must be settled before its facts are written.

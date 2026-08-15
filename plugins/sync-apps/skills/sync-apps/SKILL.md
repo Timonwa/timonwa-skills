@@ -79,5 +79,5 @@ The report at `_reports/sync-report.md`, the same content in chat, and — in fi
 
 - **Never applies fixes without approval**, and never without `--fix`.
 - The sync manifest and canonical facts live in the project's `AGENTS.md` → maintained via `scaffold-agents-md`.
-- Judging documentation content itself (stale claims, broken links) → `docs-audit`; README structure/content → `readme-writer`.
+- Judging documentation content itself (stale claims, broken links) → `docs-audit`; README structure/content → `readme-standards`.
 - Committing applied fixes → `stage-commit`.

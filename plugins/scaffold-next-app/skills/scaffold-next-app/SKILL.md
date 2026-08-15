@@ -554,7 +554,7 @@ Typical manifest against a fresh `create-next-app` (TypeScript + Tailwind + App 
 - **MOVE** — `app/` → `src/app/` and `app/globals.css` → `src/styles/globals.css` when the starter was created without `--src-dir` (`code-structure` requires `src/`); `app/favicon.ico` stays where it is, because the `favicon` convention only works at the `app/` root.
 - **EDIT** — `package.json` (add `check-types`, `format`, `format:check`, Storybook and test scripts, the `lint-staged` block when standalone), `tsconfig.json` (the strict flags and the `@/*` path), `next.config.ts` (`cacheComponents`, the `cacheLife` tiers, `typedRoutes`, security headers), `src/app/layout.tsx` (import `@/styles/globals.css`, real `metadata`, `lang`), `src/app/page.tsx` (thin entry rendering the composed page), `.gitignore` (env, caches, `storybook-static`), `globals.css` (split into the seven layers).
 - **CREATE** — the seven `src/styles/*.css` layers; the six `src/lib/` kinds with a barrel each; `src/lib/server/` and its six kinds behind the `server-only` barrel when the answers earned a backend; the five route groups with their thin `layout.tsx`/`page.tsx` and the group-level `error.tsx`/`loading.tsx` the tree shows; `src/components/` mirroring those groups plus `errors/`, `_shared/`, and the four `ui/` tiers with one real component per tier; `.env.example`; and `.github/`, `.husky/`, `commitlint.config.ts` **only when standalone**.
-- **DELETE** — the starter's demo page body (replaced, not deleted, since `page.tsx` is EDIT), `public/next.svg`, `public/vercel.svg`, `public/file.svg`, `public/globe.svg`, `public/window.svg`, the boilerplate `README.md` (→ `readme-writer`), and the starter's generated `AGENTS.md` + `CLAUDE.md` (→ `scaffold-agents-md`, which writes the real pair). Confirm each path exists before listing it.
+- **DELETE** — the starter's demo page body (replaced, not deleted, since `page.tsx` is EDIT), `public/next.svg`, `public/vercel.svg`, `public/file.svg`, `public/globe.svg`, `public/window.svg`, the boilerplate `README.md` (→ `readme-standards`), and the starter's generated `AGENTS.md` + `CLAUDE.md` (→ `scaffold-agents-md`, which writes the real pair). Confirm each path exists before listing it.
 
 **Scale the manifest to the answers.** Every conditional line in the tree names what turns it on; a row appears only when its answer did. Nothing conditional is created "just in case" — an unused folder is a wrong guess the next reader has to undo.
 
@@ -638,7 +638,7 @@ Propose the exact commands, wait, then run only the approved ones. After install
 ## Step 11 — Hand off, don't duplicate
 
 - **`AGENTS.md` + `CLAUDE.md`** → **`scaffold-agents-md`**, handed the Step 1 answers as project facts (framework, package manager, backend shape, data store, dark-mode selector, env var meanings, test runners). It replaces the starter's generated pair.
-- **`README.md`** → **`readme-writer`**.
+- **`README.md`** → **`readme-standards`**.
 - **The first real feature** → **`scaffold-feature`**.
 - **Committing the change** → **`stage-commit`**.
 
@@ -652,7 +652,7 @@ In chat only: whether this was a first run or an add-run and which house markers
 
 - **Never generates from an empty directory**, **never overwrites a starter file**, **never pins the starter's versions**, **never installs or runs git without approval, never commits** → `stage-commit`.
 - **One app or package only.** The workspace shell — `pnpm-workspace.yaml`, `turbo.json`, the catalog, shared `packages/*`, root CI and hooks → **`scaffold-monorepo`**, which calls this skill per app in `apps/*`; the workspace mechanics themselves are `turborepo-monorepo`.
-- **Skeleton and integration wiring only.** The first feature slice → `scaffold-feature`. `AGENTS.md` → `scaffold-agents-md`. README → `readme-writer`. Moving an existing app to a new framework or major → `migrate-framework`. Realigning already-diverged sibling apps → `sync-apps`.
+- **Skeleton and integration wiring only.** The first feature slice → `scaffold-feature`. `AGENTS.md` → `scaffold-agents-md`. README → `readme-standards`. Moving an existing app to a new framework or major → `migrate-framework`. Realigning already-diverged sibling apps → `sync-apps`.
 - **An add-run wires an integration in; it does not restructure.** Renaming a kind, re-splitting `styles/`, or moving `app/` into `src/` is first-run-scale work — say so and stop rather than half-applying it.
 - **Executes, never invents the standard** — layout `code-structure`, names `naming`, types/schemas `typescript-best-practices`, styles/tokens `tailwind-css`, tiers `design-system`, primitives `reusables`, stories `storybook-setup` + `storybook-story-writing`, env/CI/hooks `devops`, API layering `backend`, framework flags `nextjs-best-practices`, Firebase `firebase`, markup and a11y `html-best-practices` + `accessibility`.
-- Called **into** by `scaffold-monorepo` (per app) and called back into by `scaffold-agents-md` / `readme-writer` when a repo needs its structure before its docs.
+- Called **into** by `scaffold-monorepo` (per app) and called back into by `scaffold-agents-md` / `readme-standards` when a repo needs its structure before its docs.
