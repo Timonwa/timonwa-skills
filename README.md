@@ -4,7 +4,19 @@ The house standards for our Next.js App Router work, as Claude Code skills, comm
 
 Opinionated by design — where a choice was ours rather than the framework's, the item says so.
 
-**Not all of it is ours.** Where a vendor publishes a good official skill we use theirs rather than writing a worse one, and it is vendored here unedited so the whole toolkit installs from one place. Those items credit their author in the table below and keep a link upstream in their frontmatter; anything with no credit is ours.
+## Not all of it is ours
+
+Where a vendor publishes a good official skill we use theirs rather than writing a worse one. It's vendored here so the whole toolkit installs from one place, and every vendored item credits its author in the item table with a link upstream — anything with no credit is ours.
+
+| Source                                                              | What we take                                                   | Skills | Licence                       |
+| ------------------------------------------------------------------- | -------------------------------------------------------------- | -----: | ----------------------------- |
+| [firebase/agent-skills](https://github.com/firebase/agent-skills)   | The official Firebase skills (auth, Firestore, rules, hosting) |     10 | Apache-2.0, per Google's repo |
+| [cloudinary-devs/skills](https://github.com/cloudinary-devs/skills) | The official Cloudinary SDK and transformation skills          |      4 | MIT, per Cloudinary's repo    |
+| [upstash/skills](https://github.com/upstash/skills)                 | Redis and Ratelimit for JS                                     |      2 | MIT, per Upstash's repo       |
+
+**Unedited means unedited.** The only change is a `metadata.author` + `metadata.source` line, so `git diff` against a fresh upstream clone shows exactly what drifted, and re-vendoring is a copy rather than a merge.
+
+To refresh a vendored set, re-clone upstream over `.claude/skills/<name>/`, re-apply the `author`/`source` lines, and rebuild — the diff tells you what changed.
 
 ## Install
 
@@ -39,6 +51,40 @@ It inspects the repo to fill in what it can detect, asks about the rest, and wir
 
 Grouped by the job, not by the kind — a bundle carries whichever skills, commands, and agents that job needs. Exact membership lives in [groups.json](groups.json), which is the source of truth as the library grows.
 
+Every bundle ships `scaffold-agents-md`, because everything else reads the file it writes:
+
+```text
+                     ┌───────────────────────────────────────┐
+                     │              AGENTS.md                │
+                     │  the project's facts — read first by  │
+                     │  every standard and every audit       │
+                     └───────────────────┬───────────────────┘
+                                         │
+   ┌───────────────┬──────────────┬──────┴───────┬───────────────┐
+   ▼               ▼              ▼              ▼               ▼
+┌──────────┐  ┌──────────┐  ┌────────────┐  ┌──────────────┐  ┌──────────┐
+│ BUILD IT │  │ REVIEW IT│  │  PLATFORM  │  │   WRITE IT   │  │ SHIP IT  │
+├──────────┤  ├──────────┤  ├────────────┤  ├──────────────┤  ├──────────┤
+│ frontend │  │ frontend │  │ firebase   │  │ content      │  │ workflow │
+│  -suite  │  │ -audits  │  │  -suite    │  │  -suite      │  │  -suite  │
+│          │  │          │  │            │  │              │  │          │
+│ backend  │  │ backend  │  │ cloudinary │  │ docs, help   │  │ commit   │
+│  -suite  │  │ -audits  │  │  -suite    │  │ centre,      │  │ PR review│
+│          │  │          │  │            │  │ READMEs,     │  │ scaffold │
+│ markup,  │  │ one audit│  │ the vendor │  │ copy editing,│  │ migrate  │
+│ a11y, TS │  │ per      │  │ skills +   │  │ diagrams     │  │ changelog│
+│ Tailwind │  │ domain,  │  │ our layer  │  │              │  │ standups │
+│ SEO, API │  │ scored   │  │ on top     │  │              │  │          │
+└────┬─────┘  └────┬─────┘  └─────┬──────┘  └──────┬───────┘  └────┬─────┘
+     │             │              │                │               │
+     └─────────────┴──────┬───────┴────────────────┴───────────────┘
+                          │
+      Build, then review the same domain — the audits are the mirror:
+        frontend-suite  ↔  frontend-audits-suite
+        backend-suite   ↔  backend-audits-suite
+             any repo   →  workflow-suite (always useful)
+```
+
 | Bundle                  | For                                                                    |
 | ----------------------- | ---------------------------------------------------------------------- |
 | `frontend-suite`        | Building UI                                                            |
@@ -51,6 +97,8 @@ Grouped by the job, not by the kind — a bundle carries whichever skills, comma
 | `content-suite`         | Writing docs, help-centre guides, READMEs, and editing the prose       |
 
 Frontend and backend each come as a pair: the standards to build against, and the audits that review the result. Install both halves of a domain, or both domains — a skill can belong to several bundles, so each one is a complete kit.
+
+**Which do I install?** Working in a repo: the domain you're touching, plus `workflow-suite`. Reviewing someone's work: the audits half. Writing anything but code: `content-suite`.
 
 ## Everything in here
 
