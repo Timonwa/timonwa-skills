@@ -427,7 +427,7 @@ export type UpdateProfileInput = z.infer<typeof UpdateProfileSchema>;
 ```ts
 // src/lib/server/data/user.data.ts — store access only; no business rules
 import { COLLECTIONS } from "./collections.data";
-import { firestore } from "@/lib/server/clients/firebase/firebase.client";
+import { firestore } from "@/lib/server/clients/firebase";
 
 export async function findUserById(id: string) {
   const snap = await firestore.collection(COLLECTIONS.USERS).doc(id).get();

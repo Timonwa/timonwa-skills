@@ -12,7 +12,7 @@ AGENTS.md TEMPLATE — the single file that documents a project for AI agents. F
 - **Language**: <e.g. TypeScript 5.x strict, React 19>
 - **Rendering**: <e.g. Server Components by default; `"use client"` only for hooks/browser APIs>
 - **Styling**: <e.g. Tailwind CSS v4 — `ui:` prefix in `packages/ui` only, plain classes in apps>
-- **Validation**: <e.g. Zod schemas in `@app/schemas`>
+- **Validation**: <e.g. Zod schemas in `@app/contracts`>
 - **Auth**: <e.g. Firebase Auth / REST token-based / NextAuth>
 - **Data store**: <e.g. Firestore / Postgres / Supabase>
 - **Code quality**: <e.g. Biome (format), ESLint (lint), commitlint>
@@ -104,7 +104,7 @@ Import order: React first, then external packages, then internal (path-aliased, 
 
 ## Mutations
 
-<Server Actions (where they live) vs a mutation hook (e.g. `useMutate` + `invalidateKeys`). Input validation via `@app/schemas`.>
+<Server Actions (where they live) vs a mutation hook (e.g. `useMutate` + `invalidateKeys`). Input validation via `@app/contracts`.>
 
 ## Caching
 
@@ -203,7 +203,7 @@ type(scope): subject
 ### Always
 
 - Run quality checks before committing
-- Validate inputs with Zod schemas from `<@app/schemas>`
+- Validate inputs with Zod schemas from `<@app/contracts>`
 - <project-specific "always" rules>
 
 ## Documentation

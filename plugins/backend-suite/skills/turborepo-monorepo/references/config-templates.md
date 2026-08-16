@@ -86,7 +86,7 @@ Consume in an app: `"next": "catalog:"`, `"react": "catalog:"`.
 ```json
 // package.json
 { "name": "@org/typescript-config", "version": "0.0.0", "private": true,
-  "files": ["base.json", "nextjs.json", "react-library.json"] }
+  "files": ["base.json", "nextjs.json", "node-library.json", "react-library.json"] }
 ```
 
 ```jsonc

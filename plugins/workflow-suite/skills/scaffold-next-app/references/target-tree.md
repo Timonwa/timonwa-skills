@@ -298,29 +298,29 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |    |    |___ user.cache.ts   # `use cache` + cacheLife + cacheTag around the reader
 |    |    |    |    |___ <domain>.cache.ts    # one domain's cached reads
 |    |    |    |___ clients/             # one configured SDK singleton per external service
-|    |    |    |    |___ cloudinary/      # only if image delivery = Cloudinary
-|    |    |    |    |    |___ cloudinary.client.ts  # the configured SDK every caller reuses
-|    |    |    |    |    |___ cloudinary.transform.ts  # thumbnail and preview URL builders
+|    |    |    |    |___ cloudinary/     # only if image delivery = Cloudinary
+|    |    |    |    |    |___ client.ts  # the configured SDK every caller reuses
+|    |    |    |    |    |___ transform.ts # thumbnail and preview URL builders
 |    |    |    |    |    |___ index.ts   # the client barrel
-|    |    |    |    |___ email/           # only if the app sends mail
-|    |    |    |    |    |___ email.client.ts  # one agent per mail type, each with its token
+|    |    |    |    |___ email/          # only if the app sends mail
+|    |    |    |    |    |___ client.ts  # one agent per mail type, each with its token
 |    |    |    |    |    |___ index.ts   # the client barrel
-|    |    |    |    |___ firebase/        # only if store = Firebase
-|    |    |    |    |    |___ firebase.client.ts  # lazy Firestore, Auth, and Storage singletons
-|    |    |    |    |    |___ firebase.rest.ts  # the auth flows the Admin SDK cannot do
+|    |    |    |    |___ firebase/       # only if store = Firebase
+|    |    |    |    |    |___ client.ts  # lazy Firestore, Auth, and Storage singletons
+|    |    |    |    |    |___ rest.ts    # the auth flows the Admin SDK cannot do
 |    |    |    |    |    |___ index.ts   # the client barrel
-|    |    |    |    |___ redis/           # only if the app needs a shared cache
+|    |    |    |    |___ redis/          # only if the app needs a shared cache
 |    |    |    |    |    |___ index.ts   # the client barrel
-|    |    |    |    |    |___ redis.client.ts  # the one connection; never a second `new Redis()`
-|    |    |    |    |    |___ redis.dedup.ts   # SET NX EX so a retry cannot double-charge
-|    |    |    |    |    |___ redis.keys.ts    # every key built here; inline strings are banned
-|    |    |    |    |    |___ redis.locks.ts   # SET NX EX to take, Lua compare-and-delete to free
-|    |    |    |    |    |___ redis.maintenance.ts  # the mirror the proxy reads; fails open
-|    |    |    |    |    |___ redis.rate-limit.ts  # the sliding window every instance shares
-|    |    |    |    |    |___ redis.store.ts   # the read-through wrapper; every write invalidates
-|    |    |    |    |    |___ redis.ttl.ts     # the TTL presets, so none are defined inline
+|    |    |    |    |    |___ client.ts  # the one connection; never a second `new Redis()`
+|    |    |    |    |    |___ dedup.ts   # SET NX EX so a retry cannot double-charge
+|    |    |    |    |    |___ keys.ts    # every key built here; inline strings are banned
+|    |    |    |    |    |___ locks.ts   # SET NX EX to take, Lua compare-and-delete to free
+|    |    |    |    |    |___ maintenance.ts # the mirror the proxy reads; fails open
+|    |    |    |    |    |___ rate-limit.ts # the sliding window every instance shares
+|    |    |    |    |    |___ store.ts   # the read-through wrapper; every write invalidates
+|    |    |    |    |    |___ ttl.ts     # the TTL presets, so none are defined inline
 |    |    |    |    |___ index.ts        # the kind barrel
-|    |    |    |    |___ <service>.client.ts  # a one-file client needs no folder
+|    |    |    |    |___ <service>.client.ts # a one-file client needs no folder
 |    |    |    |___ data/                # store access, the only place queries live
 |    |    |    |    |___ auth.data.ts    # the session record, read and written
 |    |    |    |    |___ batch.data.ts   # spans the write cap by committing each batch as it fills
@@ -348,7 +348,7 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |    |    |___ response.utils.ts  # the shared success and error builders
 |    |    |    |    |___ sanitize.utils.ts  # strips fields no caller should ever receive
 |    |    |    |___ index.ts             # `server-only` barrel, never mixed with client code
-|    |    |___ schemas/                  # Zod schemas; mirrors packages/schemas in a monorepo
+|    |    |___ schemas/                  # Zod schemas; mirrors packages/contracts in a monorepo
 |    |    |    |___ index.ts             # the kind barrel, one explicit export line per file
 |    |    |    |___ shared.schema.ts     # cross-domain primitives - timestamp, pagination, email
 |    |    |    |___ <domain>.schema.ts   # one domain's schemas, each with its inferred type

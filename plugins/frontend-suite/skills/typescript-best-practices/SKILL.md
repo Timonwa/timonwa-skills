@@ -49,12 +49,12 @@ type User = z.infer<typeof UserSchema>;
 
 Same four layers whichever shape the repo is — **a single app puts them in `lib/`, a monorepo puts them in a shared package** so the API and every app import one copy. The grammar and the rules below do not change between the two, which is what makes moving an app into a workspace a folder move:
 
-| Layer          | Single app                            | Monorepo                       |
-| -------------- | ------------------------------------- | ------------------------------ |
-| `constants/`   | `src/lib/constants`                   | `packages/schemas/constants`   |
-| `schemas/`     | `src/lib/schemas`                     | `packages/schemas/schemas`     |
-| `types/`       | `src/lib/types`                       | `packages/schemas/types`       |
-| `permissions/` | `src/lib/constants` + `src/lib/utils` | `packages/schemas/permissions` |
+| Layer          | Single app                            | Monorepo                         |
+| -------------- | ------------------------------------- | -------------------------------- |
+| `constants/`   | `src/lib/constants`                   | `packages/contracts/constants`   |
+| `schemas/`     | `src/lib/schemas`                     | `packages/contracts/schemas`     |
+| `types/`       | `src/lib/types`                       | `packages/contracts/types`       |
+| `permissions/` | `src/lib/constants` + `src/lib/utils` | `packages/contracts/permissions` |
 
 What each holds:
 
@@ -70,7 +70,7 @@ Rules that keep it honest:
 
 ## tsconfig baseline
 
-- `strict: true`; `module: "preserve"` + `moduleResolution: "bundler"` (the current pairing for bundler-built code); an explicit `target` (don't inherit the default).
+- `strict: true` and an explicit `target` (don't inherit the default). **`module`/`moduleResolution` follow who resolves the imports:** `"preserve"` + `"bundler"` for anything a bundler builds — an app, or a package every consumer bundles; `"NodeNext"` + `"NodeNext"` for a package **Node** loads directly. `NodeNext` then requires the `.js` extension on relative imports, which is the ESM spec and what makes plain `tsc` output loadable. Getting this wrong builds clean and fails at import time, so in a workspace it is a separate shared config per consumer, never one setting for every package.
 - **`verbatimModuleSyntax: true`** — forces `import type`, so every import statement is erasable and single-file transpilers stay correct.
 - **`erasableSyntaxOnly: true`** (TS 5.8+) — bans enums, namespaces, and parameter properties; the compiler-level enforcement of this skill's no-`enum` rule.
 - `isolatedModules`, `skipLibCheck: true` (don't re-check `node_modules` types), `noEmit` (the framework builds), `jsx: "react-jsx"`; the framework TS plugin where applicable (`{ "name": "next" }`).

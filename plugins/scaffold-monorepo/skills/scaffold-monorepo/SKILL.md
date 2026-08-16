@@ -39,7 +39,7 @@ It scopes strictly to the **workspace shell**: `pnpm-workspace.yaml` and the cat
 | ----------------------------------------------------------------------- | ---------------------------- |
 | Workspace layout, `turbo.json` tasks/caching/graph, catalog, strict env | `turborepo-monorepo`         |
 | CI job graph, composite setup action, SHA-pinning, hooks, CODEOWNERS    | `devops`                     |
-| The shared `tsconfig` package, the `schemas` package layout             | `typescript-best-practices`  |
+| The shared `typescript-config` package, the `contracts` package layout  | `typescript-best-practices`  |
 | The `tailwind-config` package and the `ui:` prefix mechanism            | `tailwind-css`               |
 | What belongs in the `ui` package (tiers, governance) and each primitive | `design-system`, `reusables` |
 | `@app/<kind>` shared-kind packages as the monorepo form of `lib/`       | `code-structure`             |
@@ -51,143 +51,9 @@ It scopes strictly to the **workspace shell**: `pnpm-workspace.yaml` and the cat
 
 ## The target tree
 
-What the workspace looks like when this command is done — folders first then files, each alphabetical. Each app repeats the single-app tree from `scaffold-next-app`, which is what shapes their insides; the rules behind the shape live in `code-structure`. Every line is annotated, and anything conditional says what turns it on.
+The full annotated workspace tree — every folder and file, each line saying what it is and, where conditional, what turns it on — is [references/target-tree.md](references/target-tree.md). **Read it before planning the manifest**; it is the specification this command executes.
 
-```txt
-.
-|___ _docs/                              # workspace docs - guides, specs, runbooks
-|    |___ README.md                      # the folder map, and which doc a newcomer reads first
-|___ _reports/                           # audit output, committed - the diff shows what got fixed
-|    |___ README.md                      # each report, how to refresh it, how to read severity
-|___ .claude/                            # Claude Code config for the whole workspace
-|    |___ agents/                        # workspace-only subagents, if any
-|    |___ skills/                        # workspace-only skills, if any
-|    |___ README.md                      # what is invocable, what the settings do, how to add
-|    |___ settings.json                  # shared: permissions, hooks
-|    |___ settings.local.json            # personal overrides, gitignored
-|___ .github/                            # everything GitHub itself reads
-|    |___ actions/                       # reusable composite actions
-|    |    |___ setup/                    # the one setup step every job calls
-|    |         |___ action.yml           # checkout + pnpm + node + install
-|    |___ ISSUE_TEMPLATE/                # the forms new issues start from
-|    |    |___ bug_report.md             # repro steps, expected vs actual
-|    |    |___ config.yml                # template chooser + external links
-|    |    |___ documentation.md          # docs-only issues
-|    |    |___ feature_request.md        # problem first, proposal second
-|    |    |___ general.md                # anything the other templates miss
-|    |___ workflows/                     # CI and repo automation
-|    |    |___ auto-assign.yml           # assigns an owner when a PR opens
-|    |    |___ ci.yml                    # one job graph, `turbo --affected`
-|    |    |___ codeql.yml                # SAST scanning on push and PR
-|    |    |___ issue-label.yml           # labels issues from their template
-|    |    |___ label.yml                 # path-based PR labels, driven by labeler.yml
-|    |    |___ pr-title.yml              # PR titles must be Conventional Commits
-|    |    |___ release-notes.yml         # drafts notes from merged PRs
-|    |    |___ stale.yml                 # closes abandoned issues and PRs
-|    |___ CODEOWNERS                     # required reviewers per path
-|    |___ labeler.yml                    # the path -> label map label.yml reads
-|    |___ pull_request_template.md       # the checklist every PR opens with
-|    |___ release-notes.yml              # release-note categories and their labels
-|___ .husky/                             # git hooks, installed by `prepare`
-|    |___ commit-msg                     # runs commitlint
-|    |___ pre-commit                     # runs lint-staged + affected typecheck
-|___ .vscode/                            # editor defaults shared with contributors
-|    |___ extensions.json                # recommends the Biome extension
-|    |___ settings.json                  # format-on-save via Biome
-|___ apps/                               # deployable surfaces, one folder each
-|    |___ admin/                         # same shape as web, its own AGENTS.md + env
-|    |___ api/                           # route -> service layer, if the API is separate
-|    |___ storybook/                     # documents packages/ui
-|    |___ web/                           # every app repeats the `scaffold-next-app` tree
-|         |___ _docs/                    # only docs specific to THIS app
-|         |___ .claude/                  # app-scoped settings; the root's still apply
-|         |___ public/                   # served at this app's domain root
-|         |___ src/                      # the whole `scaffold-next-app` tree, minus what packages/ supply
-|         |___ .env.example              # this app's vars only
-|         |___ .gitignore                # app-local ignores
-|         |___ AGENTS.md                 # app-level facts; closest file wins
-|         |___ next-env.d.ts             # generated on dev/build; gitignored, never committed
-|         |___ next.config.ts            # transpiles the workspace packages it consumes
-|         |___ package.json              # this app's deps, catalog versions
-|         |___ postcss.config.mjs        # loads the Tailwind v4 plugin
-|         |___ README.md                 # what this app is and how to run it
-|         |___ tsconfig.json             # extends @app/tsconfig
-|___ functions/                          # background workers / cloud functions, if used
-|___ packages/                           # shared code, never deployed on its own
-|    |___ hooks/                         # cross-app React hooks
-|    |    |___ src/
-|    |    |    |___ index.ts             # one explicit export line per hook
-|    |    |    |___ use-click-outside.ts # the same `use-<subject>.ts` grammar as an app
-|    |    |    |___ use-media-query.ts   # the only way to branch on a breakpoint in JS
-|    |    |___ package.json              # peer-depends on react, never bundles it
-|    |___ schemas/                       # the contract every app and the API share
-|    |    |___ src/
-|    |    |    |___ constants/           # flat, one file per domain
-|    |    |    |    |___ auth.constant.ts  # the const and its inferred type together
-|    |    |    |    |___ index.ts        # the kind barrel
-|    |    |    |___ permissions/         # the closed verb list and the role map
-|    |    |    |    |___ can.ts          # the one predicate every guard calls
-|    |    |    |    |___ index.ts        # the kind barrel
-|    |    |    |    |___ permission.constant.ts  # every verb, grouped by intent
-|    |    |    |___ schemas/             # Zod schemas; the parse boundary
-|    |    |    |    |___ auth.schema.ts  # the schema and its inferred type together
-|    |    |    |    |___ index.ts        # the kind barrel
-|    |    |    |___ types/               # only shapes no schema or const infers
-|    |    |    |    |___ api.type.ts     # the response envelope every caller unwraps
-|    |    |    |    |___ index.ts        # the kind barrel
-|    |    |    |___ index.ts             # re-exports every kind
-|    |    |___ package.json              # zod is a real dependency here
-|    |___ tailwind-config/               # the shared token and theme source
-|    |    |___ animations.css            # 6th import - @keyframes
-|    |    |___ base.css                  # 3rd import - element defaults
-|    |    |___ components.css            # 5th import - authored classes
-|    |    |___ package.json              # exports the CSS files, no JS
-|    |    |___ shared-styles.css         # the entry each app imports; owns the order
-|    |    |___ theme.css                 # 2nd import - @theme inline
-|    |    |___ tokens.css                # 1st import - raw vars + .dark overrides
-|    |    |___ utilities.css             # 4th import - @utility definitions
-|    |___ tsconfig/                      # base configs every app extends
-|    |___ ui/                            # the design system - same 4 tiers, `ui:` prefix
-|    |    |___ src/
-|    |    |    |___ base/                # atoms: render one thing, no sub-components
-|    |    |    |    |___ Button/         # one folder per component, as in an app
-|    |    |    |    |    |___ Button.stories.tsx  # the variants, states, and sizes
-|    |    |    |    |    |___ Button.test.tsx  # disabled and loading have logic
-|    |    |    |    |    |___ Button.tsx  # plain Tailwind here, never `ui:`
-|    |    |    |    |    |___ index.ts   # the component barrel
-|    |    |    |    |___ index.ts        # the tier barrel, one line per folder
-|    |    |    |___ blocks/              # composed of base, owns its own state
-|    |    |    |___ layouts/             # the page shells apps render
-|    |    |    |___ patterns/            # whole page regions the layouts slot in
-|    |    |    |___ cn.ts                # `extendTailwindMerge({ prefix: "ui" })` here
-|    |    |    |___ index.ts             # re-exports every tier
-|    |    |___ package.json              # exports map + its own Tailwind build
-|    |___ utils/                         # the portable helpers every app reuses
-|    |    |___ src/
-|    |    |    |___ server/              # helpers that must never reach a browser
-|    |    |    |    |___ index.ts        # its own barrel, marked `server-only`
-|    |    |    |___ date.utils.ts        # the same `<domain>.utils.ts` grammar
-|    |    |    |___ index.ts             # one explicit export line per file
-|    |    |    |___ string.utils.ts      # slugify, truncate, initials
-|    |    |___ package.json              # zero runtime deps, so any app can take it
-|___ scripts/                            # workspace maintenance scripts
-|___ .editorconfig                       # whitespace rules every editor honours
-|___ .gitignore                          # includes .env*, build output, .turbo
-|___ .npmrc                              # only host-specific settings, e.g. node-linker
-|___ .nvmrc                              # one Node version for devs, CI, and the host
-|___ .prettierignore                     # md/mdx only - Biome owns JS/TS/JSON
-|___ .prettierrc.json                    # prose formatting, proseWrap preserve
-|___ AGENTS.md                           # workspace-wide conventions for agents
-|___ biome.json                          # the single lint + format owner for JS/TS/JSON
-|___ CLAUDE.md                           # one line: `@AGENTS.md`
-|___ commitlint.config.ts                # Conventional Commits, enforced by commit-msg
-|___ lint-staged.config.mjs              # what pre-commit runs, staged files only
-|___ package.json                        # root scripts only - never app dependencies
-|___ pnpm-workspace.yaml                 # workspace globs, the catalog, the allowBuilds map
-|___ README.md                           # the map: what each app and package is
-|___ renovate.json                       # automated dependency updates
-|___ turbo.json                          # the task graph, cache inputs, strict env
-```
+A monorepo **mirrors the single app as closely as possible**: same kinds, same grammar, same barrel rules. What changes is only how much of each kind stays in an app — **consumer count decides**, two or more → a package, one → that app. A kind is never removed from an app because a package exists; it holds what only that app uses. The rules behind the shape live in `code-structure`.
 
 ## Step 0 — Detect the entry situation
 
@@ -277,7 +143,7 @@ The starter is a demo, not the house standard. Verify its current output shape f
 
 - **Apps** — rename the ones you're keeping to the agreed names (`git mv apps/docs apps/admin`), DELETE the ones you aren't, and set each app's dev port from the interview. Renaming an app means updating its `package.json` name, every `workspace:*` consumer, and any `--filter` that referenced it.
 - **Scope** — rewrite `@repo/*` to the agreed scope across every `package.json`, every `extends`, and every import. Grep for the old scope afterwards; a single leftover reference fails install, not type-check.
-- **Packages** — replace the starter set with the house set: `typescript-config` becomes `packages/tsconfig`; `eslint-config` is DELETEd when the repo lints with Biome; `packages/ui` keeps its folder but is restructured into the design-system package (tiers, subpath exports, its own prefixed Tailwind compilation) and its starter `turbo gen` scaffolding is dropped unless the user asked to keep it. Add `schemas`, `tailwind-config`, and `utils`.
+- **Packages** — replace the starter set with the house set: `typescript-config` and `eslint-config` keep their names (both match the house tree); `packages/ui` keeps its folder but is restructured into the design-system package (tiers, subpath exports, its own prefixed Tailwind compilation) and its starter `turbo gen` scaffolding is dropped unless the user asked to keep it. Add `contracts`, `hooks`, `tailwind-config`, and `utils`.
 - **`turbo.json`** — EDIT it to the house task graph verbatim from `turborepo-monorepo/references/config-templates.md`. The starter typically lacks per-task `env` declarations; under Turborepo 2's strict env mode that means builds read `undefined` for `NEXT_PUBLIC_*` and cache hits restore stale builds after a secret changes.
 - **`pnpm-workspace.yaml`** — add the catalog (the starter doesn't use one) and the build-allowlist key, then convert each app's shared dep specifiers to `"catalog:"`.
 - **Keep the starter's dependency versions.** It generated a coherent set; the catalog records them, it does not re-pick them.
@@ -299,19 +165,27 @@ Written verbatim from `turborepo-monorepo/references/config-templates.md`, scope
 
 ## Step 6 — Shared packages
 
-Create only the agreed ones; each is a real workspace package with a name, `exports`, and a `check-types` script. Contents and layout come from the owning skill, not from here — this step creates the package boundary, its manifest, and its barrel, then stops:
+The full set is in [references/target-tree.md](references/target-tree.md) — **create only the agreed ones**, each a real workspace package with a name, `exports`, a `check-types` script, and **its own `README.md` and `AGENTS.md`** (no exceptions, including the config-only ones). Contents and layout come from the owning skill, not from here — this step creates the package boundary, its manifest, and its barrel, then stops:
 
-- **`packages/ui`** — the shareable design system: the four tiers with per-tier subpath exports, **one folder per component** inside each tier (component + colocated story + barrel, and a test only where there is behaviour — same rule as an app), its own `@import "tailwindcss" prefix(ui)` compilation, a re-declared dark variant, and `extendTailwindMerge({ prefix: "ui" })` so conflict resolution still works. Tiers and governance → `design-system`; each primitive → `reusables`; the prefix mechanism → `tailwind-css`. Its split styles/components build → the per-package `turbo.json` in `turborepo-monorepo`.
-- **`packages/tailwind-config`** — the tokens and layers, once, for every app. Apps import the bundled entry; the prefixed `ui` build imports the layers individually.
-- **`packages/tsconfig`** — `base.json` plus `nextjs.json` / `react-library.json`; every app's `tsconfig.json` extends it and adds only its own `paths`. (`turborepo-monorepo` calls this package `typescript-config`; the house folder name is `tsconfig`.)
-- **`packages/schemas`** — the cross-boundary contract, in the four layers `constants/ permissions/ schemas/ types/`, each flat with the `<domain>.<kind>.ts` grammar and its own explicit-export barrel (`typescript-best-practices`, `naming`). A const or schema keeps its inferred type in the same file, so `types/` holds only shapes nothing else infers.
-- **`packages/utils`** — flat `<domain>.utils.ts` files with an explicit-export barrel, per `code-structure`'s `@app/<kind>` shared-kind form; anything server-only sits behind a `server/` subfolder with its own `server-only` barrel. `packages/hooks` follows the same shape with `use-<subject>.ts`.
+- **`packages/ui`** — the shareable design system: the six tiers (`assets base blocks icons layouts patterns`) with per-tier subpath exports, **one folder per component** inside each tier (component + **story** + barrel, and a test only where there is behaviour — same rule as an app), its own `@import "tailwindcss" prefix(ui)` compilation, a re-declared dark variant, and `extendTailwindMerge({ prefix: "ui" })` so conflict resolution still works. **Every story file sits beside its component here, not in `apps/storybook`** — that app owns only the config, the shared decorators, and a `_Template.stories.tsx`, and reaches these with a glob. The tier comes from the story `title`, so a mirrored `stories/base`, `stories/blocks` tree would be a second copy of the tier structure to keep in sync (`storybook-setup`). Tiers and governance → `design-system`; each primitive → `reusables`; the prefix mechanism → `tailwind-css`. Its split styles/components build → the per-package `turbo.json` in `turborepo-monorepo`.
+- **`packages/contracts`** — everything both sides of the wire must agree on, in the four layers `constants/ permissions/ schemas/ types/`, each flat with the `<domain>.<kind>.ts` grammar and its own explicit-export barrel (`typescript-best-practices`, `naming`). A const or schema keeps its inferred type in the same file, so `types/` holds only shapes nothing else infers. Named for what it holds rather than for one of its four kinds.
+- **`packages/hooks`** — `use-<subject>.ts` under **concern folders** (`auth/ data/ profile/ ui/`), each with its own barrel, because a package serving several apps is past the flat threshold on day one (`code-structure`). A hook that returns JSX is a provider component, and still lives in its concern folder. **Only generic hooks belong here** — the ones any project of this shape needs. A hook naming a product noun (an album, a photo queue, an export format) is that product's and stays in the app that owns it, however many apps end up calling it; promoting it makes every sibling rebuild for a domain none of them share. What is here is mostly required rather than illustrative: the whole `auth/` group once auth is Firebase, `profile/use-permission` once there is RBAC, and the flag, cursor, maintenance, consent, and theme hooks are each the only client half of a server feature. The tree marks which.
+- **`packages/utils`** — flat `<domain>.utils.ts` files with an explicit-export barrel, per `code-structure`'s `@app/<kind>` shared-kind form; anything server-only sits behind a `server/` subfolder with its own `server-only` barrel.
+- **`packages/tailwind-config`** — the tokens and layers, once, for every app, plus the self-hosted font files and the shared `postcss.config.js`. Apps import the bundled entry; the prefixed `ui` build imports the layers individually.
+- **`packages/typescript-config`** — `base.json` (the strict flags, and no `moduleResolution`) plus one config per consumer: `nextjs.json`, `react-library.json`, and `node-library.json`. Every app's `tsconfig.json` extends the matching one and adds only its own `paths`.
+- **`packages/eslint-config`** — `base.js`, `next.js`, `react-internal.js`; the linter itself is a peer dep. Named for the linter it configures: a move to Biome replaces the formatter too, so that is a new package rather than a renamed one.
 
-Shared packages are consumed as `workspace:*`. Consumers see a shared package's **built output**, so build/lint/check-types depend on `^build` — a type change is invisible until that package rebuilds.
+Two traps, both from the tree:
 
-## Step 7 — The `functions/*` tier (only if asked)
+- **`moduleResolution` follows who resolves the imports, and it is per-target, not per-workspace.** A package that **Node** loads (the API importing `contracts`, a script importing `utils`) extends `node-library.json` → `NodeNext`; a package a **bundler** loads (`ui`, `hooks`) extends `react-library.json` → `Bundler`. Under `NodeNext` TypeScript requires the `.js` extension on relative imports and errors without it, so plain `tsc` emits something Node can load and `build` stays one command. **Set `Bundler` on a Node-loaded package and the build passes while the output cannot be imported** — `ERR_MODULE_NOT_FOUND` naming a file that plainly exists. Fix the compiler option; never add a post-build script that rewrites the emitted imports, and delete one if you find it.
+- **Consumers see a shared package's built output**, so build/lint/check-types depend on `^build` — a type change is invisible until that package rebuilds. Shared packages are consumed as `workspace:*`.
 
-Add the `functions/*` glob, one package per deployable function group with its own `package.json`, `tsconfig` extending the shared base, and a `build` task whose `outputs` the root `turbo.json` already covers. Deploy wiring is `devops`; the runtime code is out of scope here.
+## Step 7 — The `functions/*` and `extensions/` tiers (only if asked)
+
+- **`functions/`** — add the glob, then one package per deployable worker, each with its own `package.json` and `tsconfig.json` extending the tier's shared base, plus a tier-level `.gitignore` for the compiled `lib/`. **One codebase per folder is the point:** a cold start loads that worker's dependency tree and nothing else, so a shared `functions/package.json` holding every worker's deps undoes the split. A worker with its own runtime config carries `.env.example` plus one `.env.<project-id>` per tier. The `firebase.json` `codebases` map must name every folder — one that is missing simply never deploys, silently.
+- **`extensions/`** — one `<instance-id>.env` per installed Firebase Extension, committed. These hold settings, not secrets; extension secrets are params stored in Secret Manager.
+
+Deploy wiring is `devops`; the runtime code inside a worker is out of scope here.
 
 ## Step 8 — CI, hooks, CODEOWNERS
 
@@ -331,11 +205,19 @@ Propose the exact commands, wait, then run only the approved ones: `corepack ena
 
 The shell is the whole job here. Finish by delegating, explicitly and by name:
 
-- **Each app in the workspace** → **`scaffold-next-app`**, one at a time, passing the app name, its port, its shared-package deps, and whether it has an API layer. It owns the app's folder tree, component tiers, kind-first `lib/`, styles entry, env validation, and Storybook wiring. Do not create any of that here.
-- **`AGENTS.md`** (+ the `CLAUDE.md → @AGENTS.md` import) → **`scaffold-agents-md`**, handing over the recorded interview answers as project facts: app list and ports, the package scope, catalog usage, the functions tier, deploy target per app.
-- **`README.md`** → **`readme-standards`**. **Committing** → **`stage-commit`**.
+- **Each frontend app** → **`scaffold-next-app`**, one at a time, passing the app name, its port, its shared-package deps, and whether it has an API layer. It owns the app's folder tree, kind-first `lib/`, styles entry, and env validation.
 
-Scaffold no documentation tree — a README and `AGENTS.md` are the entire doc surface a repo gets by default.
+  **Hand it the frontend tree from [references/target-tree.md](references/target-tree.md), not its own.** Two differences are structural: `app/` sits at the app root rather than under `src/`, and `styles/` is two files because the layers are `packages/tailwind-config`. It also drops the workspace-level root config (`biome.json`, `.husky/`, `.github/`, lockfile, `renovate.json`) — those govern every app and live at the root where `turbo` and the hooks can see them.
+
+  **Everything else is the same folder holding less, and "less" is not "none".** `components/ui/`, `lib/hooks/`, `lib/utils/`, `lib/constants/` and the rest all stay, holding whatever only that app uses — a reusable starts app-scoped and gets promoted on its second consumer, not before. Say this explicitly when delegating, in both directions: left to its standalone default the app rebuilds what the packages already own, and over-corrected it hoists app-local code into packages that then rebuild every sibling for a change none of them care about.
+
+- **The backend app** → its tree is in this skill, not `scaffold-next-app`'s: route handlers over a service layer, versioned `v1/`, `server/` at `src/` root, `guards/` as its own kind, and a committed `scripts/` tier for seeds and backfills. Its internals → `backend`.
+
+- **`apps/storybook`** → **`storybook-setup`**, passing the tiers it must mirror. It is a real app: on a team it is hosted **behind auth**, because a public Storybook publishes every unreleased component and its props. Drop the hosting config and it stays a local `dev` surface — the rest of its tree is unchanged either way.
+- **`AGENTS.md`** (+ the `CLAUDE.md → @AGENTS.md` import) → **`scaffold-agents-md`**, handing over the recorded interview answers as project facts: app list and ports, the package scope, catalog usage, the functions tier, deploy target per app.
+- **`README.md`** → **`readme-standards`**, once for the workspace root and once per app and package. **Committing** → **`stage-commit`**.
+
+Scaffold no documentation tree — a README and `AGENTS.md` are the entire doc surface a repo gets by default. **Every app and every package gets both**, config-only packages included: the root pair covers the workspace, the local pair covers what only that folder knows, and the closest file wins.
 
 ## Output
 
@@ -344,8 +226,13 @@ In chat only: the detected entry situation, the recorded interview answers, the 
 ## Boundaries
 
 - **Never generates an app from scratch, never overwrites what a scaffolder produced, never re-pins its dependency versions, never runs `git mv`/installs without approval, and never commits** → `stage-commit`.
-- **The shell only.** Everything inside `apps/<name>/src` — tree, tiers, `lib/`, styles, env, Storybook → **`scaffold-next-app`** (the Step 10 delegation, and the reason none of its templates are duplicated here).
-- **Executes a standard it does not invent** — workspace/turbo/catalog → `turborepo-monorepo`; CI, hooks, CODEOWNERS, deploy → `devops`; shared tsconfig + schemas → `typescript-best-practices`; `tailwind-config` + the `ui:` prefix → `tailwind-css`; the `ui` package's contents → `design-system` + `reusables`; shared-kind packages → `code-structure`; names → `naming`; a separate API app's internals → `backend`.
+- **The shell and the three trees.** This skill owns the shape of the workspace, of a frontend app inside it, and of the backend app — that is what [references/target-tree.md](references/target-tree.md) is. What it does not own is the code inside them: a frontend app's implementation → **`scaffold-next-app`**, the API's → `backend`, Storybook's → `storybook-setup`.
+- **Executes a standard it does not invent** — workspace/turbo/catalog → `turborepo-monorepo`; CI, hooks, CODEOWNERS, deploy → `devops`; shared tsconfig + the contracts layers → `typescript-best-practices`; `tailwind-config` + the `ui:` prefix → `tailwind-css`; the `ui` package's contents → `design-system` + `reusables`; shared-kind packages and the grouping thresholds → `code-structure`; names → `naming`; a separate API app's internals → `backend`.
 - **Project facts belong elsewhere** — real scopes, domains, ports in prose, deploy hosts, owner handles, secret names → `scaffold-agents-md`; README → `readme-standards`.
 - **Adjacent jobs** — realigning apps that have already diverged → `sync-apps`; a framework or major upgrade → `migrate-framework`; a feature inside an app → `scaffold-feature`.
 - Called **into** by `scaffold-next-app` when an app turns out to need a workspace around it first, and by `scaffold-agents-md` when a repo's shape must be settled before its facts are written.
+
+## References
+
+- [references/target-tree.md](references/target-tree.md) — the full annotated workspace tree: every folder and file, what each is, and what turns the conditional ones on. The specification this command executes.
+- [references/templates.md](references/templates.md) — file contents and the exact edits, per step.

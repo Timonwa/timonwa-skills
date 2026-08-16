@@ -16,7 +16,7 @@ House monorepo = **pnpm workspaces + Turborepo v2**. This skill owns the _build 
 ## Workspace layout
 
 - `apps/*` — deployable apps (Next.js, Astro, a Storybook app). `packages/*` — shared libraries. `functions/*` — serverless/workers, **only when present**.
-- Shared packages are **`@org/*`**-scoped and consumed via the **`workspace:*`** protocol: typically `typescript-config`, `eslint-config` (or `biome-config`), `ui`, `utils`, `hooks`, `schemas`, `tailwind-config`. What lives inside each → `code-structure`.
+- Shared packages are **`@org/*`**-scoped and consumed via the **`workspace:*`** protocol: typically `typescript-config`, `eslint-config` (or `biome-config`), `ui`, `utils`, `hooks`, `contracts`, `tailwind-config`. What lives inside each → `code-structure`.
 
 ## pnpm setup
 
@@ -120,7 +120,7 @@ Next.js → `.next/**` (exclude `!.next/cache/**`); Astro → `dist/**`; Storybo
 ## Shared-package gotchas
 
 - **Apps consume built output (`dist/`)** — a type change in a shared package is invisible to consumers until that package rebuilds. Wire `dependsOn: ["^build"]` on build/lint/check-types, run the package's watch task in dev; if types look stale, `pnpm --filter @org/<pkg> build`.
-- **ESM-only package built with `tsc`**: `tsc` doesn't append `.js` extensions to relative ESM imports, so the emitted `dist/` breaks under Node's ESM resolution. Fix with a post-build script that rewrites extensions, build with a bundler (tsup) instead, or accept only `moduleResolution: "bundler"` consumers.
+- **An ESM package that Node loads needs `moduleResolution: "NodeNext"`, not `"bundler"`.** Under `bundler`, `tsc` emits extensionless relative imports, which Node’s ESM resolver rejects — the build passes and `dist/` cannot be imported (`ERR_MODULE_NOT_FOUND` naming a file that exists). `NodeNext` makes TypeScript require the `.js` extension in source and error without it, so plain `tsc` emits loadable output. Split the shared configs by consumer (a `node-library.json` beside `react-library.json`) rather than rewriting emitted imports in a post-build script.
 
 ## CI & versioning
 

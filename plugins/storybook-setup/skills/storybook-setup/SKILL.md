@@ -63,6 +63,8 @@ stories: ["../../../packages/ui/src/**/*.stories.@(ts|tsx)"];
 
 Keep a **`_Template.stories.tsx`** the team duplicates to start a new story — in the Storybook app's own source in a monorepo, or `src/components/` in a single app, since it documents no component. Writing the stories themselves is the `storybook-story-writing` skill.
 
+**In a monorepo, colocation means the UI package needs `@storybook/react` as its own `devDependency`** — its `.stories.tsx` files import `Meta` and `StoryObj`, so without it that package's `check-types` fails on files the Storybook app can resolve perfectly well. It stays a devDependency: story files are excluded from the package's build `include`, so nothing Storybook-related ships to consumers. Same reason the Storybook app depends on the UI package and never the reverse — the harness knows about the components, not the other way round.
+
 ## 5. `preview` — sort, styles, providers, dark mode, a11y
 
 - **Story sort** — without an explicit order the sidebar alphabetizes and scrambles the tier progression. Pin the group order, alphabetical within:

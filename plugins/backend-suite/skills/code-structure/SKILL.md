@@ -55,7 +55,7 @@ The concrete end-to-end trees live with the commands that produce them — the s
 | `utils/`     | `<domain>.utils.ts`    | pure helpers; a single-function file may keep a bare name (`cn.ts`) |
 
 - **`schemas/`, `constants/`, and `types/` each own their inferred type.** A Zod schema keeps `z.infer` beside it in `schemas/`; a const keeps its inferred type beside it in `constants/`; `types/` holds only what neither produces. Re-declaring any of them in `types/` is how the three kinds drift.
-- **`schemas/` mirrors the monorepo's `packages/schemas`** — same `<domain>.schema.ts` grammar, same schema-and-type-together rule — so moving an app into a workspace is a folder move, not a rewrite (`typescript-best-practices`).
+- **`schemas/` mirrors the monorepo's `packages/contracts`** — same `<domain>.schema.ts` grammar, same schema-and-type-together rule — so moving an app into a workspace is a folder move, not a rewrite (`typescript-best-practices`).
 - **A const's inferred type lives in the constant file** — `AUTH_METHODS` → `AuthMethodType` beside it, never re-declared in `types/`.
 - **Every kind has a barrel with one explicit export line per file** (`@/lib/<kind>`) — never `export *` from a directory. The barrel is the kind's public surface, and a wildcard hides what joined it.
 - **Never create an empty kind.** A folder holding only a barrel is noise; add the kind when its first file exists.
@@ -70,7 +70,22 @@ The concrete end-to-end trees live with the commands that produce them — the s
 | `services/` | `<domain>.service.ts` | business logic; the only caller of `data/`                             |
 | `utils/`    | `<domain>.utils.ts`   | server-only helpers: the guard, response builders, logger, errors      |
 
-- **A client is not a util, a config, or a query.** A configured SDK singleton holds a live connection, so it gets its own kind rather than being filed under the values you read at boot or the queries that use it. A client that outgrows one file becomes a folder (`clients/redis/redis.client.ts`, `redis.keys.ts`, `redis.locks.ts`, …).
+- **A client is not a util, a config, or a query.** A configured SDK singleton holds a live connection, so it gets its own kind rather than being filed under the values you read at boot or the queries that use it.
+- **A domain that outgrows one file becomes a folder inside its kind** — every kind, not just clients. **The folder carries the domain, so the files inside carry only the concern** — repeating the domain in each filename is noise the path already states. An `index.ts` re-exports them, so callers import the domain and never its parts:
+
+  ```txt
+  services/
+    user.service.ts              one concern, stays a file
+    event/                       outgrew one file
+      crud.service.ts            not event-crud.service.ts
+      member.service.ts
+      publishing.service.ts
+      index.ts
+  ```
+
+  **Start flat and split when it earns it** — a folder holding one file plus a barrel is ceremony. The trigger is the same as everywhere else: past ~200 lines, or two concerns that change for different reasons. `clients/redis/` (`client.ts`, `keys.ts`, `locks.ts`) is the same rule in the `clients` kind.
+
+- **A kind whose files pile up groups them by whatever they share, and for some kinds that is a concern rather than a domain.** The rule above is the domain case; the axis is always "what would a reader scan for". `hooks/` groups by concern — `auth/ data/ profile/ ui/`, each with its own barrel — because nobody looks for "the event hook", they look for "the hook that closes a menu". **Concerns split where they change for different reasons, not where they sound similar:** `auth/` answers "are you signed in", `profile/` answers "may you do this", and folding the second into the first means a permissions change touches the sign-in group. Same for `utils/` once it passes a couple of dozen files. **The count, not the shape, is the trigger:** flat while a directory listing is still scannable at a glance, grouped past that. A monorepo's `packages/hooks` starts grouped, because a package serving several apps is already past the threshold on day one.
 - **The top-level `server/` barrel exports `actions`, `cache`, and `services` only.** `clients/`, `data/`, and `utils/` are called by the layers above them, not by app code — exporting them invites a page to query the store directly.
 - Mark browser-only entry points `client-only`. **Never share a barrel between server-only and client-safe code** — a client importing a mixed barrel drags server code into the client bundle (or fails the build). Everything _outside_ `server/` is client-safe by default.
 - **Server Actions group by concern in separate files** under `server/actions/` — never one giant `actions.ts`; shared action result types live in their own file.
@@ -81,7 +96,7 @@ The concrete end-to-end trees live with the commands that produce them — the s
 - **No hardcoded paths.** Page paths come from `config/routes.ts`, API paths from `config/endpoints.ts` — never a literal path/URL string in a component or service (see `naming`).
 - **Both are grouped objects, never one flat map.** Fifty keys in a single `const` is unscannable and merge-hostile, and says nothing about where a new path belongs. `routes.ts` groups **by route group**, mirroring the app tree; `endpoints.ts` groups **by the backend's own resource or service** — the API's shape is what changes, so the config follows the API and not the pages that call it. A path taking a parameter is a function inside its group, so no caller concatenates. **The API version is a constant the endpoints are built from**, never repeated on each line — a version bump is then one edit that no endpoint can be missed by, and two versions running side by side is a small map rather than a second copy of the file.
 - **Keep the `use client` boundary small** (React Server Components (RSC)/SSR frameworks): add `"use client"` only to the interactive leaf components, not whole trees — a Server Component composes Client Components and passes server data/children to them as props (client code can't import server code). A smaller boundary ships less JS and prevents accidental server-code leaks.
-- **Monorepo variant:** shared reusable kinds live as workspace packages instead of a `lib/` folder — `packages/ui`, `packages/hooks`, `packages/schemas`, `packages/utils` (imported as `@app/<kind>`). `packages/ui` uses the same 4 tiers and folder-per-component as `components/ui/` above, and the shared kinds keep the same `<domain>.<kind>.ts` grammar. Each app's own `src/lib/` stays kind-first for app-local code.
+- **Monorepo variant:** a kind that two or more apps use is **also** a workspace package — `packages/ui`, `packages/hooks`, `packages/contracts`, `packages/utils` (imported as `@app/<kind>`), each keeping the same tiers, folder-per-component, and `<domain>.<kind>.ts` grammar as the in-app version. **The package sits beside the app's own folder, it does not replace it:** every app keeps its full kind-first `lib/` and its own `components/ui/` for what only it uses. **Consumer count is the only test** — two or more → the package, one → that app. A reusable starts app-scoped (you cannot know it is shared until a second app asks), and promoting it is a file move plus an import swap. Hoisting app-local code early is the more expensive mistake of the two: every sibling app then rebuilds for a change none of them care about.
 
 ## Naming
 
