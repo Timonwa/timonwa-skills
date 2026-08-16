@@ -14,7 +14,7 @@ This is the single biggest source of confusion in Next.js + Cloudinary. **Pick t
 | Embed a video player UI | **`CldVideoPlayer`** (`next-cloudinary`) | Client component (`"use client"`) — required |
 | Let the user upload from the browser | **`CldUploadWidget`** or **`CldUploadButton`** (`next-cloudinary`) | Client component (`"use client"`) — required |
 | Generate an OG/social image | App Router → **`getCldOgImageUrl`** in `generateMetadata`. Pages Router → **`CldOgImage`** in the page | Server (App) / Pages Head |
-| Upload a file **from your server** (e.g. a Server Action receiving a `FormData`) | **`cloudinary.uploader.upload`** / **`upload_stream`** (Node SDK v2, `cloudinary`) | Server only (`"use server"` action or route handler) |
+| Upload a file **from your server** (e.g. a Server Action receiving a `FormData`) | **`cloudinary.uploader.upload`** / **`upload_stream`** (Node SDK v2, `cloudinary-architecture`) | Server only (`"use server"` action or route handler) |
 | Delete an asset | **`cloudinary.uploader.destroy`** (Node SDK v2) | Server only |
 | Sign upload widget params on the server | **`cloudinary.utils.api_sign_request`** (Node SDK v2) | Route handler (`/api/sign-cloudinary-params`) |
 | List / search assets, manage tags, etc. | **Cloudinary Admin API** via Node SDK v2 (`cloudinary.api.*`) | Server only |

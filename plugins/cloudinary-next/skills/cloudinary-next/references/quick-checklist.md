@@ -36,6 +36,6 @@ When something isn't working, check:
 - [ ] **Delete**: `cloudinary.uploader.destroy(publicId, { resource_type, invalidate: true })`; `result === 'ok'` on success
 - [ ] **OG images**: App Router → `getCldOgImageUrl` in `generateMetadata`; Pages Router → `<CldOgImage>` outside `<Head>`
 - [ ] **Overlays**: `publicId` (image) or `text` (text) per overlay; gravity uses underscores (`"south_east"`); blend modes go in `appliedEffects`
-- [ ] **Installing Cloudinary packages**: `npm install <package>` with no version; use caret in `package.json`; valid names are `next-cloudinary` and `cloudinary`
+- [ ] **Installing Cloudinary packages**: `npm install <package>` with no version; use caret in `package.json`; valid names are `next-cloudinary` and `cloudinary-architecture`
 - [ ] **TypeScript**: define an upload-result interface; type env vars in `env.d.ts`; use `unknown` + guards instead of `any`
 - [ ] **Sample assets** (`samples/cloudinary-icon`, `samples/elephants`, etc.) may have been deleted — handle `onError` and provide an upload path

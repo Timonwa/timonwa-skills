@@ -94,7 +94,7 @@
       "scaffold-agents-md"
     ]
   },
-  "media": {
+  "cloudinary": {
     "displayName": "Cloudinary Suite",
     "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited.",
     "skills": [

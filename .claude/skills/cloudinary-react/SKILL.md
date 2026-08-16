@@ -151,7 +151,7 @@ export const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || '';
 
 ## Installing Cloudinary packages
 - ✅ **Install the latest**: When adding Cloudinary packages, use `npm install <package>` **with no version** so npm installs the latest compatible version (e.g. `npm install cloudinary-video-player`). In package.json use a **caret range** (e.g. `"cloudinary-video-player": "^1.0.0"`) so future installs get the latest compatible. Do not pin to an exact version unless you have verified it exists on npm.
-- ✅ **Package names only**: Use **only** these names: `@cloudinary/react`, `@cloudinary/url-gen`, `cloudinary-video-player` (standalone player), `cloudinary` (Node server-side only). Do not invent names (e.g. no `@cloudinary/video-player`).
+- ✅ **Package names only**: Use **only** these names: `@cloudinary/react`, `@cloudinary/url-gen`, `cloudinary-video-player` (standalone player), `cloudinary-architecture` (Node server-side only). Do not invent names (e.g. no `@cloudinary/video-player`).
 - ❌ **WRONG**: `npm install cloudinary-video-player@1.2.3` or `"cloudinary-video-player": "1.2.3"` (exact pin) — versions may not exist and break installs.
 - ✅ **Correct**: `npm install cloudinary-video-player` (no version) or in package.json: `"cloudinary-video-player": "^1.0.0"` (caret = latest compatible).
 

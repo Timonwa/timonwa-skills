@@ -53,7 +53,7 @@ Scope is **one app or one package**. The workspace shell around it — `pnpm-wor
 | Firebase wiring — only when the answers say Firebase                         | `firebase-firestore`, `firebase-auth-basics`, `firebase-architecture` |
 | Semantic markup and a11y of the skeleton it writes                           | `html-best-practices`, `accessibility`                                |
 | Redis primitives — keys, locks, dedup, TTL presets                           | `upstash-redis-js`, `redis-patterns`                                  |
-| Image delivery and the upload pipeline                                       | `cloudinary-next`, `cloudinary`, `image-handling`                     |
+| Image delivery and the upload pipeline                                       | `cloudinary-next`, `cloudinary-architecture`, `image-handling`        |
 | Runtime toggles — flags, kill switch, consent                                | `vanilla-cookieconsent`, `feature-flags`, `maintenance-mode`          |
 
 Where a row lists more than one, the earlier entries are the vendor's own official skills and the later ones are the house layer on top. **An integration this skill can wire is not gated on the owning skill being installed** — it writes the folder and a `// TODO:`, and names the skill to consult. If that skill isn't present, the structure is still right and the note tells you what to read.
@@ -102,7 +102,7 @@ Ask with `AskUserQuestion` in **grouped batches of at most 4**, every option car
 
 **Batch 3 — integrations** (multi-select where noted; every default is off)
 
-1. **Image delivery** — none (default) · Cloudinary · the store's own CDN. Cloudinary turns on `clients/cloudinary/` and `cloudinary.utils.ts` (→ `cloudinary`); either with uploads turns on `upload.utils.ts` and `image.utils.ts` (→ `image-handling`).
+1. **Image delivery** — none (default) · Cloudinary · the store's own CDN. Cloudinary turns on `clients/cloudinary/` and `cloudinary.utils.ts` (→ `cloudinary-architecture`); either with uploads turns on `upload.utils.ts` and `image.utils.ts` (→ `image-handling`).
 2. **Shared cache / rate limiting** — no (default) · yes. Turns on the whole `clients/redis/` folder (→ `redis-patterns`), and is a prerequisite for anything distributed — locks, webhook dedup, rate-limit tiers.
 3. **Runtime toggles** (multi-select) — feature flags (→ `feature-flags`) · a maintenance kill switch (→ `maintenance-mode`, adds `maintenance.utils.ts`) · cookie consent (→ `vanilla-cookieconsent`, adds `cookieconsent.utils.ts`).
 4. **Content and extras** (multi-select) — the app ships prose/MDX (adds `src/content/` + `mdx-loader.utils.ts`) · transactional mail (adds `clients/email/`) · field encryption (adds `encryption.utils.ts`, → `field-encryption`) · SEO helpers beyond the defaults (→ `seo`).

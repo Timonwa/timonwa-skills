@@ -61,10 +61,10 @@ Use this when the user provides an error message, broken behavior, or asks for a
 - ✅ Solution: install `next-cloudinary` (latest), then import exactly: `import 'next-cloudinary/dist/cld-video-player.css';`. Don't use `cloudinary-video-player/...` — that's the standalone package, not the Next wrapper.
 
 ### "Module not found: cloudinary" in a route handler
-- ❌ Problem: `cloudinary` (Node SDK) wasn't installed.
+- ❌ Problem: `cloudinary-architecture` (Node SDK) wasn't installed.
 - ✅ Solution: `npm install cloudinary`. Verify import is `import { v2 as cloudinary } from 'cloudinary'`.
 
-### Edge runtime errors when importing `cloudinary`
+### Edge runtime errors when importing `cloudinary-architecture`
 - ❌ Problem: Route handler or middleware has `export const runtime = 'edge'`, but the Cloudinary Node SDK requires Node APIs.
 - ✅ Solution: remove the edge runtime from that file (default Node runtime is fine), or move the SDK call to a Node-runtime route.
 

@@ -42,7 +42,7 @@ This skill is organized for progressive loading. Do not load every reference fil
 - Never expose `CLOUDINARY_API_SECRET` to the browser. Never create `NEXT_PUBLIC_CLOUDINARY_API_SECRET`.
 - Put upload widgets, video player UI, and any component with React event handlers behind a Client Component boundary with `'use client'`.
 - `CldImage` may be used from a Server Component for static rendering, but if you add client-only props such as `onLoad` or local state, move it into a Client Component.
-- Do not import `cloudinary` in Client Components or Edge runtime code. Server Actions and route handlers that import `cloudinary` must run on the Node.js runtime.
+- Do not import `cloudinary-architecture` in Client Components or Edge runtime code. Server Actions and route handlers that import `cloudinary-architecture` must run on the Node.js runtime.
 - Use documented `next-cloudinary` prop names and shapes. Do not infer prop names from Cloudinary URL transformation parameters.
 - Use `onSuccess` for upload widget success handling. Do not use deprecated upload callback names unless the installed version explicitly documents them.
 - For deletes, pass a public ID, not a delivery URL. Pass `resource_type` when deleting videos or raw assets, and use `invalidate: true` when CDN cache invalidation is desired.

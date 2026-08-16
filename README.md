@@ -68,7 +68,7 @@ Every bundle ships `scaffold-agents-md`, because timonwa else reads the file it 
 │ frontend │  │ frontend │  │ firebase   │  │ content      │  │ workflow │
 │          │  │ -audits  │  │  -stack    │  │              │  │          │
 │          │  │          │  │            │  │              │  │          │
-│ backend   │  │ backend   │  │ media      │  │ docs, help   │  │ commit   │
+│ backend   │  │ backend   │  │ cloudinary │  │ docs, help   │  │ commit   │
 │          │  │ -audits  │  │            │  │ centre,      │  │ PR review│
 │          │  │          │  │            │  │ READMEs,     │  │ scaffold │
 │ markup,  │  │ one audit│  │ the vendor │  │ copy editing,│  │ migrate  │
@@ -92,7 +92,7 @@ Every bundle ships `scaffold-agents-md`, because timonwa else reads the file it 
 | `backend`         | Building the API and backend layer                                     |
 | `backend-audits`  | Reviewing it, plus security, environment, and docs                     |
 | `firebase`        | Firebase work — the official Google skills                             |
-| `media`           | Cloudinary work — the official Cloudinary skills                       |
+| `cloudinary`      | Cloudinary work — the official Cloudinary skills                       |
 | `workflow`        | Committing, reviewing, scaffolding, migrating — the actions you invoke |
 | `content`         | Writing docs, help-centre guides, READMEs, and editing the prose       |
 | `timonwa`         | The whole library in one install — instead of the above, not alongside |

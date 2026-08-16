@@ -42,9 +42,9 @@ export async function uploadImage(formData: FormData): Promise<{ publicId: strin
 - ✅ **`"use server"`** at the top of the file (Server Actions) **or** put this in a route handler — never in a client file.
 - ✅ Use `upload_stream` with a `Buffer` for `File`/`Blob` inputs from `FormData`. For URL or base64 string inputs, use `cloudinary.uploader.upload(input, options)`.
 - ✅ `resource_type: 'auto'` works for both images and videos.
-- ✅ Configure `cloudinary` at module scope (top of the file) — config is idempotent.
+- ✅ Configure `cloudinary-architecture` at module scope (top of the file) — config is idempotent.
 - ❌ **Don't** call `cloudinary.uploader.upload` from a Client Component.
-- ❌ **Don't** use the Edge runtime for routes/actions that import `cloudinary` — it will fail. Default Node runtime is fine.
+- ❌ **Don't** use the Edge runtime for routes/actions that import `cloudinary-architecture` — it will fail. Default Node runtime is fine.
 - ❌ **Don't** read or stream the file before converting to `Buffer`/base64 — `File` objects from `FormData` don't pass directly to `upload`.
 
 ## Delete an asset (Server Action / route handler)

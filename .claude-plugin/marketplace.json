@@ -61,6 +61,11 @@
       "description": "Generate a changelog entry and community release notes from git history and changesets — detects whether the repo uses changesets or plain conventional-commit…"
     },
     {
+      "name": "cloudinary",
+      "source": "./plugins/cloudinary",
+      "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited."
+    },
+    {
       "name": "cloudinary-docs",
       "source": "./plugins/cloudinary-docs",
       "description": "Looks up implementation details in the latest Cloudinary docs via the relevant llms.txt file."
@@ -239,11 +244,6 @@
       "name": "html-best-practices",
       "source": "./plugins/html-best-practices",
       "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
-    },
-    {
-      "name": "media",
-      "source": "./plugins/media",
-      "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited."
     },
     {
       "name": "migrate-framework",
