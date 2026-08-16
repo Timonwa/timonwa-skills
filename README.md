@@ -95,6 +95,11 @@ Every bundle ships `scaffold-agents-md`, because everything else reads the file 
 | `cloudinary-suite`      | Cloudinary work — the official Cloudinary skills                       |
 | `workflow-suite`        | Committing, reviewing, scaffolding, migrating — the actions you invoke |
 | `content-suite`         | Writing docs, help-centre guides, READMEs, and editing the prose       |
+| `everything`            | The whole library in one install — instead of the above, not alongside |
+
+**Install one shape or the other, never both.** A skill can belong to several bundles, which is what makes each bundle a complete kit — but an item reached two ways is _listed_ two ways. Install `everything` next to `workflow-suite` and `/stage-commit` shows up twice: once bare from the standalone plugin, once as `/workflow-suite:stage-commit`. Pick a level and stay there.
+
+Claude Code has no native bundle concept — a plugin must physically contain its own files, and there is no wildcard or "install all" in the spec. So every bundle here is a real generated plugin with its members copied in, and `everything` is a group in [groups.json](groups.json) like any other. Its members are the one exception to hand-listing: `"skills": "*"` expands at build time to every publishable skill and command, so adding a skill never means remembering to add it here too. A curated suite keeps its explicit list, because there the list is the curation.
 
 Frontend and backend each come as a pair: the standards to build against, and the audits that review the result. Install both halves of a domain, or both domains — a skill can belong to several bundles, so each one is a complete kit.
 

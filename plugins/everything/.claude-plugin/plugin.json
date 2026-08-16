@@ -1,0 +1,10 @@
+{
+  "name": "everything",
+  "description": "The whole library in one install — every skill and command, across every domain: frontend, backend, Firebase, Cloudinary, audits, workflow, and writing. Install this INSTEAD of the individual plugins or the per-domain suites; installing it alongside them lists each shared item twice, once bare and once namespaced.",
+  "version": "1.1.0",
+  "author": {
+    "name": "Timonwa"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Timonwa/timonwa-skills"
+}

@@ -276,7 +276,14 @@ for (const skill of skills.values()) {
 }
 
 /** Resolve a group's full member list: its own `skills` plus every skill of the groups it `includes`
- *  (recursively, deduped) — so a composite like fullstack-suite can never drift from its parts. */
+ *  (recursively, deduped) — so a composite like fullstack-suite can never drift from its parts.
+ *
+ *  `"skills": "*"` means every publishable skill and command, resolved at build time. This is a
+ *  LOCAL convention, not part of Claude Code's plugin spec — that spec has no wildcard and no
+ *  bundle concept, so every group here is emitted as a real plugin with its member files copied
+ *  in. Use `"*"` only where the definition genuinely IS "all of them"; a curated suite keeps its
+ *  explicit list, because there the list is the curation. Anything withheld from publishing
+ *  (PRIVATE_COMMANDS) is already absent from `skills`, so `"*"` cannot leak it. */
 function resolveMembers(groupName, seen = new Set()) {
   if (seen.has(groupName)) {
     warnings.push(`group "${groupName}": circular includes — skipped the cycle`)
@@ -287,6 +294,10 @@ function resolveMembers(groupName, seen = new Set()) {
   if (!group) {
     warnings.push(`group includes unknown group "${groupName}" — skipped`)
     return []
+  }
+  if (group.skills === '*') {
+    // Group names are excluded too, so a "*" group can never nest another bundle inside itself.
+    return [...skills.keys()].filter((id) => !groups[id]).sort()
   }
   const members = new Set(group.skills || [])
   for (const inc of group.includes || []) {

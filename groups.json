@@ -133,5 +133,10 @@
       "svg-generation",
       "writing-standards"
     ]
+  },
+  "everything": {
+    "displayName": "Everything",
+    "description": "The whole library in one install — every skill and command, across every domain: frontend, backend, Firebase, Cloudinary, audits, workflow, and writing. Install this INSTEAD of the individual plugins or the per-domain suites; installing it alongside them lists each shared item twice, once bare and once namespaced.",
+    "skills": "*"
   }
 }

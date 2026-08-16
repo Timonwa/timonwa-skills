@@ -151,6 +151,11 @@
       "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness, nothing in env that is…"
     },
     {
+      "name": "everything",
+      "source": "./plugins/everything",
+      "description": "The whole library in one install — every skill and command, across every domain: frontend, backend, Firebase, Cloudinary, audits, workflow, and writing. Install this INSTEAD of the individual plugins or the per-domain suites; installing it alongside them lists each shared item twice, once bare and once namespaced."
+    },
+    {
       "name": "extension-to-functions-codebase",
       "source": "./plugins/extension-to-functions-codebase",
       "description": "Skill for converting an installed Firebase Extension (or extension source) into a standalone Cloud Functions for Firebase codebase or publishable npm package,…"
