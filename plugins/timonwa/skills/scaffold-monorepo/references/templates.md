@@ -93,6 +93,10 @@ deploy-web:
   environment: production # required reviewers live on the environment, not in the workflow
   permissions: { contents: read, id-token: write } # id-token for OIDC cloud auth
   steps:
+    # Checkout must precede a LOCAL composite action — the runner reads it from the
+    # workspace, so it does not exist until this step has run.
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with: { fetch-depth: 0 }
     - uses: ./.github/actions/setup
     - run: pnpm turbo run build --filter web
     # TODO(devops): authenticate via OIDC and deploy apps/web to <target>

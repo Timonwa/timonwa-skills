@@ -680,13 +680,14 @@ In a monorepo these live once at the root and belong to `scaffold-monorepo`. Sta
 
 ```yaml
  # .github/actions/setup/action.yml — one composite setup, reused by every job
+ # NOTE: checkout is NOT here. A local composite action is read from the checked-out
+ # workspace, so the runner cannot find this file until actions/checkout has run.
+ # Each workflow checks out first, then calls this.
 name: Setup
-description: Checkout, pnpm + Node, install
+description: pnpm + Node, install
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with: { fetch-depth: 0 }
     - run: corepack enable
       shell: bash
     - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -709,6 +710,8 @@ jobs:
     timeout-minutes: 15
     permissions: { contents: read }
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { fetch-depth: 0 } # --affected diffs against a base, so it needs history
       - uses: ./.github/actions/setup
       - run: pnpm format:check
       - run: pnpm lint
