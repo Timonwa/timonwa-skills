@@ -1,5 +1,5 @@
 {
-  "name": "backend-audits-suite",
+  "name": "backend-audits",
   "description": "The review mirror of the backend suite — API architecture, authorization coverage, application security, environment and secrets, and documentation. `audit-all` detects what applies and aggregates them.",
   "version": "1.0.0",
   "author": {

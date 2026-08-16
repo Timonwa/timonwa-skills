@@ -27,11 +27,11 @@ To refresh a vendored set, re-clone upstream over `.claude/skills/<name>/`, re-a
 Install a bundle, or a single item:
 
 ```bash
-/plugin install frontend-suite@timonwa-skills
+/plugin install frontend@timonwa-skills
 /plugin install accessibility@timonwa-skills
 ```
 
-Browse everything with `/plugin` → **Discover**.
+Browse timonwa with `/plugin` → **Discover**.
 
 ## Start with `AGENTS.md`
 
@@ -51,7 +51,7 @@ It inspects the repo to fill in what it can detect, asks about the rest, and wir
 
 Grouped by the job, not by the kind — a bundle carries whichever skills, commands, and agents that job needs. Exact membership lives in [groups.json](groups.json), which is the source of truth as the library grows.
 
-Every bundle ships `scaffold-agents-md`, because everything else reads the file it writes:
+Every bundle ships `scaffold-agents-md`, because timonwa else reads the file it writes:
 
 ```text
                      ┌───────────────────────────────────────┐
@@ -66,10 +66,10 @@ Every bundle ships `scaffold-agents-md`, because everything else reads the file 
 │ BUILD IT │  │ REVIEW IT│  │  PLATFORM  │  │   WRITE IT   │  │ SHIP IT  │
 ├──────────┤  ├──────────┤  ├────────────┤  ├──────────────┤  ├──────────┤
 │ frontend │  │ frontend │  │ firebase   │  │ content      │  │ workflow │
-│  -suite  │  │ -audits  │  │  -suite    │  │  -suite      │  │  -suite  │
+│          │  │ -audits  │  │  -stack    │  │              │  │          │
 │          │  │          │  │            │  │              │  │          │
 │ backend  │  │ backend  │  │ cloudinary │  │ docs, help   │  │ commit   │
-│  -suite  │  │ -audits  │  │  -suite    │  │ centre,      │  │ PR review│
+│  -api    │  │ -audits  │  │  -cdn      │  │ centre,      │  │ PR review│
 │          │  │          │  │            │  │ READMEs,     │  │ scaffold │
 │ markup,  │  │ one audit│  │ the vendor │  │ copy editing,│  │ migrate  │
 │ a11y, TS │  │ per      │  │ skills +   │  │ diagrams     │  │ changelog│
@@ -80,30 +80,30 @@ Every bundle ships `scaffold-agents-md`, because everything else reads the file 
      └─────────────┴──────┬───────┴────────────────┴───────────────┘
                           │
       Build, then review the same domain — the audits are the mirror:
-        frontend-suite  ↔  frontend-audits-suite
-        backend-suite   ↔  backend-audits-suite
-             any repo   →  workflow-suite (always useful)
+        frontend  ↔  frontend-audits
+        backend-api   ↔  backend-audits
+             any repo   →  workflow (always useful)
 ```
 
-| Bundle                  | For                                                                    |
-| ----------------------- | ---------------------------------------------------------------------- |
-| `frontend-suite`        | Building UI                                                            |
-| `frontend-audits-suite` | Reviewing UI                                                           |
-| `backend-suite`         | Building the API and server layer                                      |
-| `backend-audits-suite`  | Reviewing it, plus security, environment, and docs                     |
-| `firebase-suite`        | Firebase work — the official Google skills                             |
-| `cloudinary-suite`      | Cloudinary work — the official Cloudinary skills                       |
-| `workflow-suite`        | Committing, reviewing, scaffolding, migrating — the actions you invoke |
-| `content-suite`         | Writing docs, help-centre guides, READMEs, and editing the prose       |
-| `everything`            | The whole library in one install — instead of the above, not alongside |
+| Bundle            | For                                                                    |
+| ----------------- | ---------------------------------------------------------------------- |
+| `frontend`        | Building UI                                                            |
+| `frontend-audits` | Reviewing UI                                                           |
+| `backend-api`     | Building the API and server layer                                      |
+| `backend-audits`  | Reviewing it, plus security, environment, and docs                     |
+| `firebase-stack`  | Firebase work — the official Google skills                             |
+| `cloudinary-cdn`  | Cloudinary work — the official Cloudinary skills                       |
+| `workflow`        | Committing, reviewing, scaffolding, migrating — the actions you invoke |
+| `content`         | Writing docs, help-centre guides, READMEs, and editing the prose       |
+| `timonwa`         | The whole library in one install — instead of the above, not alongside |
 
-**Install one shape or the other, never both.** A skill can belong to several bundles, which is what makes each bundle a complete kit — but an item reached two ways is _listed_ two ways. Install `everything` next to `workflow-suite` and `/stage-commit` shows up twice: once bare from the standalone plugin, once as `/workflow-suite:stage-commit`. Pick a level and stay there.
+**Install one shape or the other, never both.** A skill can belong to several bundles, which is what makes each bundle a complete kit — but an item reached two ways is _listed_ two ways. Install `timonwa` next to `workflow` and `/stage-commit` shows up twice: once bare from the standalone plugin, once as `/workflow:stage-commit`. Pick a level and stay there.
 
-Claude Code has no native bundle concept — a plugin must physically contain its own files, and there is no wildcard or "install all" in the spec. So every bundle here is a real generated plugin with its members copied in, and `everything` is a group in [groups.json](groups.json) like any other. Its members are the one exception to hand-listing: `"skills": "*"` expands at build time to every publishable skill and command, so adding a skill never means remembering to add it here too. A curated suite keeps its explicit list, because there the list is the curation.
+Claude Code has no native bundle concept — a plugin must physically contain its own files, and there is no wildcard or "install all" in the spec. So every bundle here is a real generated plugin with its members copied in, and `timonwa` is a group in [groups.json](groups.json) like any other. Its members are the one exception to hand-listing: `"skills": "*"` expands at build time to every publishable skill and command, so adding a skill never means remembering to add it here too. A curated suite keeps its explicit list, because there the list is the curation.
 
 Frontend and backend each come as a pair: the standards to build against, and the audits that review the result. Install both halves of a domain, or both domains — a skill can belong to several bundles, so each one is a complete kit.
 
-**Which do I install?** Working in a repo: the domain you're touching, plus `workflow-suite`. Reviewing someone's work: the audits half. Writing anything but code: `content-suite`.
+**Which do I install?** Working in a repo: the domain you're touching, plus `workflow`. Reviewing someone's work: the audits half. Writing anything but code: `content`.
 
 ## Everything in here
 
