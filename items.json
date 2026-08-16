@@ -4,7 +4,7 @@
   "api-audit": "Thin handlers, validation at every boundary, pagination, rate-limit coverage",
   "api-docs": "The OpenAPI registry — the handler is the source of truth, the spec its projection",
   "audit-all": "Detects what applies, runs each audit, aggregates one report",
-  "backend": "Route→service→data layering, `.pick()` write schemas, RBAC guards, rate-limit tiers",
+  "api-architecture": "Route→service→data layering, `.pick()` write schemas, RBAC guards, rate-limit tiers",
   "backend-security": "Server-side OWASP 2025 — BOLA/BFLA, injection, SSRF, sessions, resource limits",
   "branding": "Brand voice and the product's own UI copy",
   "changelog": "A CHANGELOG entry and release notes, drafted from changesets or commit history",

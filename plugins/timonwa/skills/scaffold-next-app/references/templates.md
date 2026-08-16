@@ -391,7 +391,7 @@ export function cn(...inputs: ClassValue[]) {
 
 ## Step 6 — The `lib/server` boundary
 
-Only when the answers asked for a backend layer. It sits behind its **own** `server-only` barrel, never shared with client-safe code (`backend`, `code-structure`).
+Only when the answers asked for a backend layer. It sits behind its **own** `server-only` barrel, never shared with client-safe code (`api-architecture`, `code-structure`).
 
 ### The barrel and the vertical slice
 
@@ -408,7 +408,7 @@ export * from "./services";
 
 `clients/`, `data/`, and `utils/` stay **out** of the top barrel — they are called by the layers above them, not by app code. Exporting them invites a page to query the store directly.
 
-One vertical slice, in `backend`'s build order **schema → service → route (or action)**, bodies as `// TODO:`. `data/` is not a step in that order — it is what the service calls:
+One vertical slice, in `api-architecture`'s build order **schema → service → route (or action)**, bodies as `// TODO:`. `data/` is not a step in that order — it is what the service calls:
 
 ```ts
 // src/lib/schemas/user.schema.ts — the validated shape, written first (its own kind)

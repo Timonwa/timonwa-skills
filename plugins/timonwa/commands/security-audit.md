@@ -107,7 +107,7 @@ Run the **BACKEND** blocks for any server/API code, the **FRONTEND** blocks for 
 
 **Authorization — the #1 risk (A01 / API1 Broken Object-Level Authorization (BOLA), API5 Broken Function-Level Authorization (BFLA), API3 Broken Object-Property-Level Authorization (BOPLA))**
 
-- **Object level (BOLA/IDOR)** — can you read/mutate another user's resource by changing an id? Is ownership checked on the **resolved doc**, and is there **tenant/row isolation**? (→ `backend-security`, `firebase`)
+- **Object level (BOLA/IDOR)** — can you read/mutate another user's resource by changing an id? Is ownership checked on the **resolved doc**, and is there **tenant/row isolation**? (→ `backend-security`, `firebase-architecture`)
 - **Function level (BFLA)** — every route/action (esp. admin) asserts the required permission, not just "is logged in"? Enforced server-side, not from a client flag?
 - **Property level (BOPLA)** — writes **allowlist** fields (no mass assignment of role/owner/status via `.omit()`/`.partial()`)? Reads map to a **Data Transfer Object (DTO)**, not raw `{ id, ...doc }` (excessive data exposure)?
 - **The update bypass** — can create-valid-then-update reach a forbidden state? (rules → `firebase-security-rules-auditor`)

@@ -41,7 +41,7 @@ const UserSchema = z.object({ id: z.string(), name: z.string(), email: z.email()
 type User = z.infer<typeof UserSchema>;
 ```
 
-**Compose schemas, don't repeat them** — derive related shapes from a base: `CreateX` (user-writable fields) → `.extend()` into the full `X` (adds `id`/timestamps) → `.omit({…}).partial()` for `UpdateX`. Write schemas are **`.pick()` allowlists** off the full schema — fail-closed: a new field isn't client-writable until you explicitly add it (house `backend` standard). Keep validation limits in `UPPER_SNAKE` constants and reference them in `.min()`/`.max()`, not magic numbers.
+**Compose schemas, don't repeat them** — derive related shapes from a base: `CreateX` (user-writable fields) → `.extend()` into the full `X` (adds `id`/timestamps) → `.omit({…}).partial()` for `UpdateX`. Write schemas are **`.pick()` allowlists** off the full schema — fail-closed: a new field isn't client-writable until you explicitly add it (house `api-architecture` standard). Keep validation limits in `UPPER_SNAKE` constants and reference them in `.min()`/`.max()`, not magic numbers.
 
 (Schema/type naming → `naming`.)
 

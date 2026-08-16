@@ -10,7 +10,7 @@ The best way to get both the agent skills and the MCP server is via the Gemini e
 
 Check if the extension is already installed before proceeding:
 
-1. **Check Existing Extensions**: Run `gemini extensions list`. If the output includes `firebase`, the extension is already installed.
+1. **Check Existing Extensions**: Run `gemini extensions list`. If the output includes `firebase-architecture`, the extension is already installed.
 1. **Install Extension**: If not found, run the following command to install the Firebase agent skills and MCP server:
    ```bash
    gemini extensions install https://github.com/firebase/agent-skills

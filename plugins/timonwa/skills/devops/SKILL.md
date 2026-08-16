@@ -1,7 +1,7 @@
 ---
 name: devops
 description: >-
-  Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardening / supply chain (least-privilege token, SHA-pinned actions, secret/SAST/dependency scanning, lifecycle-script hardening, Renovate, artifact provenance/SBOM when publishing), testing + performance gates in CI (Playwright E2E against preview deploys, size-limit / Lighthouse CI budgets), pre-commit hooks (husky + lint-staged + commitlint), security headers, env-management strategy (secrets in `.env`, per-tier constants in committed config keyed off `APP_ENV`, Zod-at-boot validation), quality gates / branch protection (CODEOWNERS, environments), and deploy orchestration (OIDC cloud auth, preview deploys, health-check + rollback). The build tool (turbo tasks/caching) → `turborepo-monorepo`; deploy target / App Hosting → `firebase` / `firebase-app-hosting-basics`; commit-message format → `stage-commit`; env/secret safety in app code → `nextjs-best-practices` / `firebase`.
+  Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardening / supply chain (least-privilege token, SHA-pinned actions, secret/SAST/dependency scanning, lifecycle-script hardening, Renovate, artifact provenance/SBOM when publishing), testing + performance gates in CI (Playwright E2E against preview deploys, size-limit / Lighthouse CI budgets), pre-commit hooks (husky + lint-staged + commitlint), security headers, env-management strategy (secrets in `.env`, per-tier constants in committed config keyed off `APP_ENV`, Zod-at-boot validation), quality gates / branch protection (CODEOWNERS, environments), and deploy orchestration (OIDC cloud auth, preview deploys, health-check + rollback). The build tool (turbo tasks/caching) → `turborepo-monorepo`; deploy target / App Hosting → `firebase-architecture` / `firebase-app-hosting-basics`; commit-message format → `stage-commit`; env/secret safety in app code → `nextjs-best-practices` / `firebase-architecture`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -12,14 +12,14 @@ metadata:
 
 How the repo **builds, checks, and ships** — the CI/CD pipeline, pre-commit gates, security headers, env strategy, and delivery. This owns the _automation/pipeline_; the specialists own the pieces it drives.
 
-> **Delegations:** turbo tasks/caching/`--affected` + the workspace → `turborepo-monorepo`; deploy mechanics (App Hosting per-env, Blaze, secrets) → `firebase` / `firebase-app-hosting-basics`; Conventional Commits → `stage-commit`; env validation + secret handling in app code → `nextjs-best-practices` / `firebase`; the app-security discipline (OWASP map, Content Security Policy (CSP) policy, client + server hardening) → `frontend-security` / `backend-security`.
+> **Delegations:** turbo tasks/caching/`--affected` + the workspace → `turborepo-monorepo`; deploy mechanics (App Hosting per-env, Blaze, secrets) → `firebase-architecture` / `firebase-app-hosting-basics`; Conventional Commits → `stage-commit`; env validation + secret handling in app code → `nextjs-best-practices` / `firebase-architecture`; the app-security discipline (OWASP map, Content Security Policy (CSP) policy, client + server hardening) → `frontend-security` / `backend-security`.
 >
 > **Project facts → `AGENTS.md`:** exact workflow files, branch names, deploy targets/hosts, and secret names.
 
 ## CI/CD — GitHub Actions
 
 - **One composite setup action** (`.github/actions/setup`): checkout → `corepack enable` → `pnpm` + Node (`cache: pnpm`) → `pnpm install --frozen-lockfile` → turbo remote-cache env. Every job reuses it; never re-paste setup steps.
-- **Job graph:** _changes-detection_ (skip docs-only) → _lint + type-check_ → _format check_ (Biome for JS/TS, Prettier for md) → _build_ → _test_ → _rules-test_ (repos with Firebase only: `@firebase/rules-unit-testing` + emulator integration tests, → `firebase`). Run **affected** (`turbo run … --affected`, needs `fetch-depth: 0`) on PRs; **full** on protected branches. Share the remote cache (`TURBO_TOKEN`/`TURBO_TEAM`) across runs.
+- **Job graph:** _changes-detection_ (skip docs-only) → _lint + type-check_ → _format check_ (Biome for JS/TS, Prettier for md) → _build_ → _test_ → _rules-test_ (repos with Firebase only: `@firebase/rules-unit-testing` + emulator integration tests, → `firebase-architecture`). Run **affected** (`turbo run … --affected`, needs `fetch-depth: 0`) on PRs; **full** on protected branches. Share the remote cache (`TURBO_TOKEN`/`TURBO_TEAM`) across runs.
 - **Tool ownership (lint/format):** Biome owns JS/TS/JSON formatting + linting; Prettier owns md/mdx **only** — no overlap in either direction (no Prettier overrides for code, no Biome on `.md`). House lint rules: `no-console` as **error** with `info`/`warn`/`error`/`debug` allowed (bans `console.log` specifically); `no-unused-vars` as error with `argsIgnorePattern: "^_"` and the paired convention of prefixing intentionally-unused args (`_event`).
 - **Auxiliary workflows, one concern each:** PR-title validation (Conventional Commits), auto-assign, labeler, stale-bot, release notes. Keep them small and separate.
 
@@ -75,7 +75,7 @@ Add **`X-Robots-Tag: noindex, nofollow`** for internal/admin apps. A **Content-S
 - **`process.env` carve-out allowlist** — the only files that read `process.env` directly: the env module (`config/env.ts`), `next.config.ts`, `app/global-error.tsx` (must render even when the env module's Zod parse throws), test setup, and standalone scripts. All app code imports the parsed `env` object.
 - **`.env` is for secrets. Everything else is a constant, even when it varies by tier.** Base URLs, cookie domains, CORS origins, allowlists, analytics ids, project ids, public keys — all of them live in committed code, in a config module keyed off `APP_ENV`. Committing them is the point: every tier's values are reviewable in one diff instead of retyped into three dashboards, and a new deployment needs no new variables. The gate is one question — **would leaking this hurt?** Yes → `.env` and a secret manager. No → config, however much it differs per tier.
 - **Tier is `APP_ENV`, never `NODE_ENV`** — the framework owns `NODE_ENV`, and a staging build _is_ a production build, so the two answer different questions. `NEXT_PUBLIC_*` is rare once constants live in config: a public value that isn't a secret has no reason to be an env var at all.
-- **`.env.example` names every secret the app cannot boot without, with no values**, plus `APP_ENV`; `.env.local` is gitignored. **Secrets via Cloud Secret Manager** (→ `firebase`), never committed or `NEXT_PUBLIC_`-exposed.
+- **`.env.example` names every secret the app cannot boot without, with no values**, plus `APP_ENV`; `.env.local` is gitignored. **Secrets via Cloud Secret Manager** (→ `firebase-architecture`), never committed or `NEXT_PUBLIC_`-exposed.
 
 ## Delivery / deploy
 
@@ -86,7 +86,7 @@ Add **`X-Robots-Tag: noindex, nofollow`** for internal/admin apps. A **Content-S
   2. build the **specific app** being deployed;
   3. every referenced secret **exists** in the target project;
   4. that backend **has access** to each of those secrets.
-- **Cloud auth via OIDC / Workload Identity Federation** — CI authenticates to the cloud with a short-lived OIDC token, **never** a long-lived service-account key stored as a CI secret (pairs with Application Default Credentials (ADC) → `firebase`).
+- **Cloud auth via OIDC / Workload Identity Federation** — CI authenticates to the cloud with a short-lived OIDC token, **never** a long-lived service-account key stored as a CI secret (pairs with Application Default Credentials (ADC) → `firebase-architecture`).
 - **Preview deployments per PR** (App Hosting preview channels / host previews) for review; tear down on merge/close.
 - **Deploy safety** — gate on a post-deploy **health check**, and keep **rollback** one step away (previous release/instance).
 - Host is a per-project choice: **App Hosting** (per-env `apphosting.{env}.yaml`, → `firebase-app-hosting-basics`) for Firebase apps; a lighter host (Vercel) for small/personal ones. `output: "standalone"` keeps Next builds container-ready.
@@ -98,7 +98,7 @@ Add **`X-Robots-Tag: noindex, nofollow`** for internal/admin apps. A **Content-S
 
 ## Observability (Industry Best Practice, IBP)
 
-Wire **error tracking** (e.g. Sentry) with source maps, **uptime/health checks**, and **deploy + budget alerts** (bound attack-driven bills → `firebase`). Ship structured logs; alert on error-rate and failed deploys.
+Wire **error tracking** (e.g. Sentry) with source maps, **uptime/health checks**, and **deploy + budget alerts** (bound attack-driven bills → `firebase-architecture`). Ship structured logs; alert on error-rate and failed deploys.
 
 ## Do / Don't
 

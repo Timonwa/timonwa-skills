@@ -1,7 +1,7 @@
 ---
 name: field-encryption
 description: >-
-  Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryption with Node's built-in crypto (AES-256-GCM), the versioned ciphertext format, and the service-boundary decrypt pattern. Triggers on "encrypt this field", "field-level encryption", "encryption at rest", "AES-256-GCM", "encryption key", "decrypt on read", "hydrate", "key rotation", "ciphertext in the response". Covers the threat model (what it does and does not protect against), which fields to encrypt vs hash vs leave plain, unique-IV + auth-tag mechanics, the hydrate* boundary and the update*() ciphertext-return trap, stripping encrypted fields from list responses, and key provisioning/rotation (printf not echo; key loss = data loss). The broader server-side security surface → `backend-security`; the service layer it lives in → `backend`; the store's field-stripping conventions → `firebase`; secret-manager tooling → `devops`.
+  Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryption with Node's built-in crypto (AES-256-GCM), the versioned ciphertext format, and the service-boundary decrypt pattern. Triggers on "encrypt this field", "field-level encryption", "encryption at rest", "AES-256-GCM", "encryption key", "decrypt on read", "hydrate", "key rotation", "ciphertext in the response". Covers the threat model (what it does and does not protect against), which fields to encrypt vs hash vs leave plain, unique-IV + auth-tag mechanics, the hydrate* boundary and the update*() ciphertext-return trap, stripping encrypted fields from list responses, and key provisioning/rotation (printf not echo; key loss = data loss). The broader server-side security surface → `backend-security`; the service layer it lives in → `api-architecture`; the store's field-stripping conventions → `firebase-architecture`; secret-manager tooling → `devops`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -45,7 +45,7 @@ Field encryption is **defense in depth**, not a silver bullet. State what it buy
 - **Callers always pass and receive plaintext; the service owns the ciphertext.** Encrypt immediately before the store write, decrypt immediately after the read. Routes, schemas, and clients never see `v1:…` — the schema keeps the field as plain `string | null`, agnostic to at-rest encryption.
 - **Centralize decryption in one `hydrate<Resource>()` helper per service and route every read path through it** — the single get, the list mapper, all of them. One helper is one review surface: a new read path that skips it sticks out in review, and plaintext can't leak into logs, caches, or responses from a path nobody audited.
 - **The `update*()` ciphertext-return trap** — a named bug class. Update services typically return `{ ...existing, ...writeUpdates }`; since `writeUpdates.field` is ciphertext bound for the store, the merged return leaks `v1:…` to the caller. Explicitly overwrite the merged field with the plaintext the caller just passed in before returning (example below). Symptom in the wild: a client shows `v1:a3f0…` after an edit but the correct value after a refresh.
-- **Always strip encrypted fields from list and public responses.** Ciphertext still leaks that a value exists and roughly how long it is, and it's dead weight on the wire — project list items through an explicit `.pick()` allowlist mapper that omits the field (the stripping mechanics → `firebase`). Only the owner-facing detail/edit read returns the decrypted value.
+- **Always strip encrypted fields from list and public responses.** Ciphertext still leaks that a value exists and roughly how long it is, and it's dead weight on the wire — project list items through an explicit `.pick()` allowlist mapper that omits the field (the stripping mechanics → `firebase-architecture`). Only the owner-facing detail/edit read returns the decrypted value.
 - **Every encrypted field gets a round-trip test:** encrypt → write → raw read shows `v1:…` → hydrated read returns the original plaintext.
 
 ## Key provisioning & rotation
@@ -123,8 +123,8 @@ export async function updateResource(id: string, updates: UpdateResourceInput): 
 ## Boundaries
 
 - The broader server-side security surface — OWASP mapping, secrets discipline, CSPRNG rules, password hashing, rate-limiting verify endpoints, error hygiene → `backend-security`. This skill is the field-encryption deep-dive it delegates to.
-- The service-layer architecture the boundary lives in (schema → service → route, typed errors, where `hydrate*` sits) → `backend`.
-- The data store and its field-stripping / list-projection conventions (`.pick()` allowlist mappers, `ListItemProps`) → `firebase`.
+- The service-layer architecture the boundary lives in (schema → service → route, typed errors, where `hydrate*` sits) → `api-architecture`.
+- The data store and its field-stripping / list-projection conventions (`.pick()` allowlist mappers, `ListItemProps`) → `firebase-architecture`.
 - Secret-manager tooling, env-validation-at-boot strategy, and CI secret scanning → `devops`; a live-environment key/config review → `environment-audit`.
 - Field types and Zod schema shapes (the encrypted field stays `string | null` on the schema) → `typescript-best-practices`.
 - The full manual review that checks all of this together → `security-audit`.

@@ -25,7 +25,7 @@ Provisioning Remote Config requires both a Firebase project and a Firebase app, 
 If `npx -y firebase-tools@latest` fails due to registry permissions (403 error):
 
 1. **Inform the user**: "I am unable to fetch the latest Firebase tools via npx due to a registry error."
-1. **Fallback**: Attempt to use the local `firebase` command directly if the user confirms it is installed globally (`npm install -g firebase-tools`).
+1. **Fallback**: Attempt to use the local `firebase-architecture` command directly if the user confirms it is installed globally (`npm install -g firebase-tools`).
 
 ### Handling Project Context Issues
 

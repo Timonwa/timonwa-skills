@@ -39,10 +39,10 @@ The MCP server allows GitHub Copilot to interact directly with Firebase projects
    them and initialize the file with `{ "mcp": { "servers": {} } }` before
    proceeding._
 
-1. **Check Existing Configuration**: Open the `mcp.json` file and check the `mcp.servers` object for a `firebase` entry.
+1. **Check Existing Configuration**: Open the `mcp.json` file and check the `mcp.servers` object for a `firebase-architecture` entry.
 
    - It is already configured if the `command` is `"firebase"` OR if the `command` is `"npx"` with `"firebase-tools"` and `"mcp"` in the `args`.
-   - **Important**: If a valid `firebase` entry is found, the MCP server is already configured. **Skip step 3** and proceed directly to step 4.
+   - **Important**: If a valid `firebase-architecture` entry is found, the MCP server is already configured. **Skip step 3** and proceed directly to step 4.
 
    **Example valid configurations**:
 
@@ -64,7 +64,7 @@ The MCP server allows GitHub Copilot to interact directly with Firebase projects
    }
    ```
 
-1. **Add or Update Configuration**: If the `firebase` block is missing or incorrect, add it to the `mcp.servers` object:
+1. **Add or Update Configuration**: If the `firebase-architecture` block is missing or incorrect, add it to the `mcp.servers` object:
 
    ```json
    "firebase": {
@@ -82,7 +82,7 @@ The MCP server allows GitHub Copilot to interact directly with Firebase projects
    the `mcp.servers` object. You MUST preserve any other existing servers inside
    `mcp.servers`._
 
-1. **Verify Configuration**: Save the file and confirm the `firebase` block is present and properly formatted JSON.
+1. **Verify Configuration**: Save the file and confirm the `firebase-architecture` block is present and properly formatted JSON.
 
 ### 3. Restart and Verify Connection
 

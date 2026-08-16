@@ -1,7 +1,7 @@
 ---
 name: api-docs
 description: >-
-  Use when adding or documenting API routes, updating OpenAPI/Swagger docs, or auditing the API reference for drift against the actual route handlers. Triggers on "OpenAPI", "Swagger", "API docs", "register this route", "API reference", "update the registry". Covers the registry pattern (a `registry.ts` of route registrations + an `openapi.ts` spec config), registering method/auth/status/params/response schemas from the handler's real behavior, writing operation summaries and descriptions, file-upload schemas, and the group-by-group drift audit. The API architecture itself — the schema → service → route build order whose docs step this is — lives in `backend`; schema design in `typescript-best-practices`.
+  Use when adding or documenting API routes, updating OpenAPI/Swagger docs, or auditing the API reference for drift against the actual route handlers. Triggers on "OpenAPI", "Swagger", "API docs", "register this route", "API reference", "update the registry". Covers the registry pattern (a `registry.ts` of route registrations + an `openapi.ts` spec config), registering method/auth/status/params/response schemas from the handler's real behavior, writing operation summaries and descriptions, file-upload schemas, and the group-by-group drift audit. The API architecture itself — the schema → service → route build order whose docs step this is — lives in `api-architecture`; schema design in `typescript-best-practices`.
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -10,7 +10,7 @@ metadata:
 
 # API docs (OpenAPI registry)
 
-The API reference is generated from a registry module, never hand-written per endpoint. The registry entry ships in the same change as the route (`backend`'s build order mandates it), and every entry mirrors what the handler _actually_ does — the handler is the source of truth, the registry its faithful projection.
+The API reference is generated from a registry module, never hand-written per endpoint. The registry entry ships in the same change as the route (`api-architecture`'s build order mandates it), and every entry mirrors what the handler _actually_ does — the handler is the source of truth, the registry its faithful projection.
 
 This skill governs the registry → OpenAPI spec layer, not any particular viewer — the resulting spec renders identically in Swagger UI, Scalar, Postman, ReDoc, or Stoplight; swapping the display tool never changes how a route is registered.
 
@@ -84,7 +84,7 @@ registerRoute({
 
 ## Boundaries
 
-- The API architecture — thin handlers, services, guards, response builders, and the schema → service → route → docs build order — → `backend`; scaffolding a new slice with its registry entry → `scaffold-feature`.
+- The API architecture — thin handlers, services, guards, response builders, and the schema → service → route → docs build order — → `api-architecture`; scaffolding a new slice with its registry entry → `scaffold-feature`.
 - Schema design and Zod-as-source-of-truth → `typescript-best-practices`.
 - Auditing the API implementation itself (auth, validation, envelopes) → `api-audit`; sweeping docs pages/READMEs for staleness → `docs-audit`.
 - Prose-writing craft for reference docs → `writing-standards`.

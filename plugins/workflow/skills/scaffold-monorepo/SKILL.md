@@ -44,7 +44,7 @@ It scopes strictly to the **workspace shell**: `pnpm-workspace.yaml` and the cat
 | What belongs in the `ui` package (tiers, governance) and each primitive | `design-system`, `reusables` |
 | `@app/<kind>` shared-kind packages as the monorepo form of `lib/`       | `code-structure`             |
 | Package, folder, and script names                                       | `naming`                     |
-| A separate API app's route/service architecture                         | `backend`                    |
+| A separate API app's route/service architecture                         | `api-architecture`           |
 | Everything inside an app                                                | `scaffold-next-app`          |
 
 `turborepo-monorepo/references/config-templates.md` is the **authority** for the root `turbo.json`, root `package.json`, `pnpm-workspace.yaml`, the per-package `ui` `turbo.json`, and the CI workflow — write those **verbatim from there**, substituting the scope. Only the shell files that skill does not template live in [references/templates.md](references/templates.md).
@@ -83,12 +83,12 @@ Use `AskUserQuestion` in **four batches of at most four questions**, each option
 
 **Batch 2 — Apps**
 
-| Question                                   | Options (default first)                                                      |
-| ------------------------------------------ | ---------------------------------------------------------------------------- |
-| Which apps should exist when this finishes | detected + `web` / `web,admin` / `web,admin,api` / custom                    |
-| Dev port per app                           | `web` 3000, `admin` 3001, `api` 3002, `docs` 3003, `storybook` 6006 / custom |
-| Separate API app                           | no (route handlers inside `web`) / yes (`apps/api`, wiring → `backend`)      |
-| A `functions/*` tier                       | no / yes (serverless/workers)                                                |
+| Question                                   | Options (default first)                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------------------- |
+| Which apps should exist when this finishes | detected + `web` / `web,admin` / `web,admin,api` / custom                        |
+| Dev port per app                           | `web` 3000, `admin` 3001, `api` 3002, `docs` 3003, `storybook` 6006 / custom     |
+| Separate API app                           | no (route handlers inside `web`) / yes (`apps/api`, wiring → `api-architecture`) |
+| A `functions/*` tier                       | no / yes (serverless/workers)                                                    |
 
 **Batch 3 — Shared packages**
 
@@ -211,7 +211,7 @@ The shell is the whole job here. Finish by delegating, explicitly and by name:
 
   **Everything else is the same folder holding less, and "less" is not "none".** `components/ui/`, `lib/hooks/`, `lib/utils/`, `lib/constants/` and the rest all stay, holding whatever only that app uses — a reusable starts app-scoped and gets promoted on its second consumer, not before. Say this explicitly when delegating, in both directions: left to its standalone default the app rebuilds what the packages already own, and over-corrected it hoists app-local code into packages that then rebuild every sibling for a change none of them care about.
 
-- **The backend app** → its tree is in this skill, not `scaffold-next-app`'s: route handlers over a service layer, versioned `v1/`, `server/` at `src/` root, `guards/` as its own kind, and a committed `scripts/` tier for seeds and backfills. Its internals → `backend`.
+- **The backend app** → its tree is in this skill, not `scaffold-next-app`'s: route handlers over a service layer, versioned `v1/`, `server/` at `src/` root, `guards/` as its own kind, and a committed `scripts/` tier for seeds and backfills. Its internals → `api-architecture`.
 
 - **`apps/storybook`** → **`storybook-setup`**, passing the tiers it must mirror. It is a real app: on a team it is hosted **behind auth**, because a public Storybook publishes every unreleased component and its props. Drop the hosting config and it stays a local `dev` surface — the rest of its tree is unchanged either way.
 - **`AGENTS.md`** (+ the `CLAUDE.md → @AGENTS.md` import) → **`scaffold-agents-md`**, handing over the recorded interview answers as project facts: app list and ports, the package scope, catalog usage, the functions tier, deploy target per app.
@@ -226,8 +226,8 @@ In chat only: the detected entry situation, the recorded interview answers, the 
 ## Boundaries
 
 - **Never generates an app from scratch, never overwrites what a scaffolder produced, never re-pins its dependency versions, never runs `git mv`/installs without approval, and never commits** → `stage-commit`.
-- **The shell and the three trees.** This skill owns the shape of the workspace, of a frontend app inside it, and of the backend app — that is what [references/target-tree.md](references/target-tree.md) is. What it does not own is the code inside them: a frontend app's implementation → **`scaffold-next-app`**, the API's → `backend`, Storybook's → `storybook-setup`.
-- **Executes a standard it does not invent** — workspace/turbo/catalog → `turborepo-monorepo`; CI, hooks, CODEOWNERS, deploy → `devops`; shared tsconfig + the contracts layers → `typescript-best-practices`; `tailwind-config` + the `ui:` prefix → `tailwind-css`; the `ui` package's contents → `design-system` + `reusables`; shared-kind packages and the grouping thresholds → `code-structure`; names → `naming`; a separate API app's internals → `backend`.
+- **The shell and the three trees.** This skill owns the shape of the workspace, of a frontend app inside it, and of the backend app — that is what [references/target-tree.md](references/target-tree.md) is. What it does not own is the code inside them: a frontend app's implementation → **`scaffold-next-app`**, the API's → `api-architecture`, Storybook's → `storybook-setup`.
+- **Executes a standard it does not invent** — workspace/turbo/catalog → `turborepo-monorepo`; CI, hooks, CODEOWNERS, deploy → `devops`; shared tsconfig + the contracts layers → `typescript-best-practices`; `tailwind-config` + the `ui:` prefix → `tailwind-css`; the `ui` package's contents → `design-system` + `reusables`; shared-kind packages and the grouping thresholds → `code-structure`; names → `naming`; a separate API app's internals → `api-architecture`.
 - **Project facts belong elsewhere** — real scopes, domains, ports in prose, deploy hosts, owner handles, secret names → `scaffold-agents-md`; README → `readme-standards`.
 - **Adjacent jobs** — realigning apps that have already diverged → `sync-apps`; a framework or major upgrade → `migrate-framework`; a feature inside an app → `scaffold-feature`.
 - Called **into** by `scaffold-next-app` when an app turns out to need a workspace around it first, and by `scaffold-agents-md` when a repo's shape must be settled before its facts are written.

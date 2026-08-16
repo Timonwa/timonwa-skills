@@ -105,8 +105,8 @@ Read the root `package.json`, `pnpm-workspace.yaml` (incl. its `catalog:` block)
 
 ### Version consistency
 
-- Shared runtime/framework deps hold the **same major/minor** across every member — e.g. `next`, `react`/`react-dom`, `typescript`, `tailwindcss`, `zod`, `firebase`/`firebase-admin`. A member one **major** behind is `HIGH`; one **minor** behind is `MEDIUM`.
-- Coupled pairs move together: `react` + `react-dom` share a version; `firebase` + `firebase-admin` stay compatible; a plugin matches its host (`@types/react` ↔ `react` major, `eslint-*` ↔ `eslint`, `@tailwindcss/*` ↔ `tailwindcss`).
+- Shared runtime/framework deps hold the **same major/minor** across every member — e.g. `next`, `react`/`react-dom`, `typescript`, `tailwindcss`, `zod`, `firebase-architecture`/`firebase-admin`. A member one **major** behind is `HIGH`; one **minor** behind is `MEDIUM`.
+- Coupled pairs move together: `react` + `react-dom` share a version; `firebase-architecture` + `firebase-admin` stay compatible; a plugin matches its host (`@types/react` ↔ `react` major, `eslint-*` ↔ `eslint`, `@tailwindcss/*` ↔ `tailwindcss`).
 - Framework/runtime deps shared across apps are **pinned once via the pnpm catalog** — `catalog:` in `pnpm-workspace.yaml`, referenced as `"next": "catalog:"` in each member — not repeated as literal ranges that silently drift. A shared dep with divergent literal ranges that _should_ be a catalog entry is a finding.
 - **Root vs member** versions for the same dep don't disagree; a `pnpm.overrides` / `resolutions` entry doesn't mask a member declaring a conflicting range.
 - Ranges are consistent in style and not dangerously loose — no bare `*` or `latest` on a runtime dep, and no mix of pinned-exact vs `^`/`~` for the same shared package.
@@ -126,7 +126,7 @@ Read the root `package.json`, `pnpm-workspace.yaml` (incl. its `catalog:` block)
 
 ### Duplicates
 
-- No package resolves to **multiple versions** in the lockfile — focus on heavy or singleton-sensitive ones (`react`, `react-dom`, `next`, `firebase`, `zod`, state/context libs) where two copies cause bloat or "two Reacts" runtime bugs. Confirm with `pnpm ls --depth 0` (or `pnpm why <pkg>`) per member and by grepping the lockfile.
+- No package resolves to **multiple versions** in the lockfile — focus on heavy or singleton-sensitive ones (`react`, `react-dom`, `next`, `firebase-architecture`, `zod`, state/context libs) where two copies cause bloat or "two Reacts" runtime bugs. Confirm with `pnpm ls --depth 0` (or `pnpm why <pkg>`) per member and by grepping the lockfile.
 - **Overlapping/redundant** packages that solve the same job in one tree (two date libs, two HTTP clients, two icon sets) — flag for consolidation.
 
 ### Removed-package regressions

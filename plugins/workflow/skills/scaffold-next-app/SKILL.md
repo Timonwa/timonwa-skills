@@ -37,24 +37,24 @@ Scope is **one app or one package**. The workspace shell around it — `pnpm-wor
 
 ## Owning skills — the source of every structural decision
 
-| Part of the app                                                              | Owning skill                                                 |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Folder tree, thin route entries, kind-first `lib/`, the `lib/server` barrier | `code-structure`                                             |
-| Every file and folder name, the casing, the `<domain>.<kind>.ts` suffixes    | `naming`                                                     |
-| `tsconfig` flags, schema layout, inferred types                              | `typescript-best-practices`                                  |
-| CSS entry order, token layers, `@theme inline`, the `ui:` prefix             | `tailwind-css`                                               |
-| The four tiers, folder-per-component, what belongs in each                   | `code-structure` + `design-system`                           |
-| Each example component's prop surface and purity                             | `reusables`                                                  |
-| `.storybook/`, the addon list, the stories glob                              | `storybook-setup`                                            |
-| The story itself                                                             | `storybook-story-writing`                                    |
-| Env-at-boot, `.env.example`, CI workflow, hooks (standalone only)            | `devops`                                                     |
-| Route handler → service layering, guards, response builders                  | `backend`                                                    |
-| Framework flags (`cacheComponents`, `cacheLife`, `typedRoutes`), headers     | `nextjs-best-practices`                                      |
-| Firebase wiring — only when the answers say Firebase                         | `firebase-firestore`, `firebase-auth-basics`, `firebase`     |
-| Semantic markup and a11y of the skeleton it writes                           | `html-best-practices`, `accessibility`                       |
-| Redis primitives — keys, locks, dedup, TTL presets                           | `upstash-redis-js`, `redis-patterns`                         |
-| Image delivery and the upload pipeline                                       | `cloudinary-next`, `cloudinary`, `image-handling`            |
-| Runtime toggles — flags, kill switch, consent                                | `vanilla-cookieconsent`, `feature-flags`, `maintenance-mode` |
+| Part of the app                                                              | Owning skill                                                          |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Folder tree, thin route entries, kind-first `lib/`, the `lib/server` barrier | `code-structure`                                                      |
+| Every file and folder name, the casing, the `<domain>.<kind>.ts` suffixes    | `naming`                                                              |
+| `tsconfig` flags, schema layout, inferred types                              | `typescript-best-practices`                                           |
+| CSS entry order, token layers, `@theme inline`, the `ui:` prefix             | `tailwind-css`                                                        |
+| The four tiers, folder-per-component, what belongs in each                   | `code-structure` + `design-system`                                    |
+| Each example component's prop surface and purity                             | `reusables`                                                           |
+| `.storybook/`, the addon list, the stories glob                              | `storybook-setup`                                                     |
+| The story itself                                                             | `storybook-story-writing`                                             |
+| Env-at-boot, `.env.example`, CI workflow, hooks (standalone only)            | `devops`                                                              |
+| Route handler → service layering, guards, response builders                  | `api-architecture`                                                    |
+| Framework flags (`cacheComponents`, `cacheLife`, `typedRoutes`), headers     | `nextjs-best-practices`                                               |
+| Firebase wiring — only when the answers say Firebase                         | `firebase-firestore`, `firebase-auth-basics`, `firebase-architecture` |
+| Semantic markup and a11y of the skeleton it writes                           | `html-best-practices`, `accessibility`                                |
+| Redis primitives — keys, locks, dedup, TTL presets                           | `upstash-redis-js`, `redis-patterns`                                  |
+| Image delivery and the upload pipeline                                       | `cloudinary-next`, `cloudinary`, `image-handling`                     |
+| Runtime toggles — flags, kill switch, consent                                | `vanilla-cookieconsent`, `feature-flags`, `maintenance-mode`          |
 
 Where a row lists more than one, the earlier entries are the vendor's own official skills and the later ones are the house layer on top. **An integration this skill can wire is not gated on the owning skill being installed** — it writes the folder and a `// TODO:`, and names the skill to consult. If that skill isn't present, the structure is still right and the note tells you what to read.
 
@@ -91,7 +91,7 @@ Ask with `AskUserQuestion` in **grouped batches of at most 4**, every option car
 1. **Package manager** — `pnpm` (house default) · `yarn`. Default = whatever lockfile the starter produced; if that is npm's, propose switching to pnpm and say so.
 2. **Router + layout** — confirm what was detected: App Router, and whether `app/` already sits inside `src/`.
 3. **Backend layer** — none, Server Actions only (default) · route handlers in this app · this app talks to a separate API. Decides whether `app/api/` and `lib/server/data/` exist at all.
-4. **Data store / auth** — none (default) · Firebase · Postgres or Supabase · other. Turns on `clients/firebase/`, `data/collections.data.ts`, and `firebase-date.utils.ts`; cross-refs `firebase`.
+4. **Data store / auth** — none (default) · Firebase · Postgres or Supabase · other. Turns on `clients/firebase/`, `data/collections.data.ts`, and `firebase-date.utils.ts`; cross-refs `firebase-architecture`.
 
 **Batch 2 — tooling and repo**
 
@@ -189,8 +189,8 @@ Seven kinds, each flat, each with a barrel that has **one explicit export line p
 - **Scaffold one vertical stub in the build order schema → service → route or action**, bodies as `// TODO:`, so the layering is demonstrated rather than described.
 - **"None" means no `lib/server/` at all.** "Separate API" means `server/utils/api.utils.ts` plus the clients it needs, and **no `data/`** — the queries live in the API app.
 - **`cache/` presumes Cache Components.** On the legacy model these are `fetch`-cached readers deduped with React `cache()`, not `use cache` files; which model is on is a project fact (`nextjs-best-practices`).
-- **Firebase answers** add `clients/firebase/` and `data/collections.data.ts` per `firebase` — the Admin-SDK boundary, never client Firestore writes.
-- **The guard lives in `utils/`, not its own kind**, and the route file calls it first (`backend`). A layout that guards keeps the check in the route file, because a throwing layout escapes its own `error.tsx`.
+- **Firebase answers** add `clients/firebase/` and `data/collections.data.ts` per `firebase-architecture` — the Admin-SDK boundary, never client Firestore writes.
+- **The guard lives in `utils/`, not its own kind**, and the route file calls it first (`api-architecture`). A layout that guards keeps the check in the route file, because a throwing layout escapes its own `error.tsx`.
 
 ## Step 7 — Design-system proof
 
@@ -234,7 +234,7 @@ In chat only: whether this was a first run or an add-run and which house markers
 - **One app or package only.** The workspace shell — `pnpm-workspace.yaml`, `turbo.json`, the catalog, shared `packages/*`, root CI and hooks → **`scaffold-monorepo`**, which calls this skill per app in `apps/*`; the workspace mechanics themselves are `turborepo-monorepo`.
 - **Skeleton and integration wiring only.** The first feature slice → `scaffold-feature`. `AGENTS.md` → `scaffold-agents-md`. README → `readme-standards`. Moving an existing app to a new framework or major → `migrate-framework`. Realigning already-diverged sibling apps → `sync-apps`.
 - **An add-run wires an integration in; it does not restructure.** Renaming a kind, re-splitting `styles/`, or moving `app/` into `src/` is first-run-scale work — say so and stop rather than half-applying it.
-- **Executes, never invents the standard** — layout `code-structure`, names `naming`, types/schemas `typescript-best-practices`, styles/tokens `tailwind-css`, tiers `design-system`, primitives `reusables`, stories `storybook-setup` + `storybook-story-writing`, env/CI/hooks `devops`, API layering `backend`, framework flags `nextjs-best-practices`, Firebase `firebase`, markup and a11y `html-best-practices` + `accessibility`.
+- **Executes, never invents the standard** — layout `code-structure`, names `naming`, types/schemas `typescript-best-practices`, styles/tokens `tailwind-css`, tiers `design-system`, primitives `reusables`, stories `storybook-setup` + `storybook-story-writing`, env/CI/hooks `devops`, API layering `api-architecture`, framework flags `nextjs-best-practices`, Firebase `firebase-architecture`, markup and a11y `html-best-practices` + `accessibility`.
 - Called **into** by `scaffold-monorepo` (per app) and called back into by `scaffold-agents-md` / `readme-standards` when a repo needs its structure before its docs.
 
 ## References

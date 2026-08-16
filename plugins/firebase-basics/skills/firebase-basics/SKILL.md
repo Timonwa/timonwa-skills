@@ -62,7 +62,7 @@ Complete these setup steps before proceeding:
 
 Adhere to these principles:
 
-1. **Use npx for CLI commands:** To ensure you always use the latest version of the Firebase CLI, always prepend commands with `npx -y firebase-tools@latest` instead of just `firebase`. For example, use `npx -y firebase-tools@latest --version`. NEVER suggest the naked `firebase` command as an alternative.
+1. **Use npx for CLI commands:** To ensure you always use the latest version of the Firebase CLI, always prepend commands with `npx -y firebase-tools@latest` instead of just `firebase-architecture`. For example, use `npx -y firebase-tools@latest --version`. NEVER suggest the naked `firebase-architecture` command as an alternative.
 1. **Prioritize official knowledge:** For any Firebase-related knowledge, consult the `developerknowledge_search_documents` MCP tool before falling back to Google Search or your internal knowledge base. Including "Firebase" in your search query significantly improves relevance.
 1. **Follow Agent Skills for implementation guidance:** Skills provide opinionated workflows (CUJs), security rules, and best practices. Always consult them to understand _how_ to implement Firebase features correctly instead of relying on general knowledge.
 1. **Use Firebase MCP Server tools instead of direct API calls:** Whenever you need to interact with remote Firebase APIs (such as fetching Crashlytics logs or executing Data Connect queries), use the tools provided by the Firebase MCP Server instead of attempting manual API calls.

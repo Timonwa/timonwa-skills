@@ -43,12 +43,12 @@
       "storybook-audit"
     ]
   },
-  "backend-api": {
+  "backend": {
     "displayName": "Backend Suite",
     "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on.",
     "skills": [
       "api-docs",
-      "backend",
+      "api-architecture",
       "backend-security",
       "code-structure",
       "devops",
@@ -77,7 +77,7 @@
       "security-audit"
     ]
   },
-  "firebase-stack": {
+  "firebase": {
     "displayName": "Firebase Suite",
     "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited.",
     "skills": [
@@ -94,7 +94,7 @@
       "scaffold-agents-md"
     ]
   },
-  "cloudinary-cdn": {
+  "media": {
     "displayName": "Cloudinary Suite",
     "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited.",
     "skills": [

@@ -887,7 +887,7 @@ apps/api/
 |___ vitest.setup.ts                     # the one place process.env is touched in tests
 ```
 
-Five rules the shape encodes, each from `backend`:
+Five rules the shape encodes, each from `api-architecture`:
 
 - **A route handler is thin.** It runs the guard, parses with a schema, calls one service, and returns the shared envelope. Business logic in a route is the single most common way an API becomes untestable.
 - **`services/` is the only caller of `data/`.** A route that queries the store directly skips authorization, and the `server-only` barrel exports `services` and `guards` precisely so it cannot.

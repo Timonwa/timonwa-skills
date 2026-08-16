@@ -34,7 +34,7 @@ This skill only sequences the work; every convention lives in its owning skill. 
 | Layer                                                       | Owning skill                |
 | ----------------------------------------------------------- | --------------------------- |
 | Folder placement, thin pages, sections, `lib/` layout       | `code-structure`            |
-| Route handlers, services, Server Actions, guards, responses | `backend`                   |
+| Route handlers, services, Server Actions, guards, responses | `api-architecture`          |
 | Zod schemas + inferred types                                | `typescript-best-practices` |
 | Every identifier and file name                              | `naming`                    |
 | Reusable components and hooks                               | `reusables`                 |
@@ -55,11 +55,11 @@ Per `typescript-best-practices`: the create/document/update schema set with infe
 
 ## Step 3 — Service
 
-Per `backend`: one service file per resource, grouping its functions; typed errors; no route/transport concerns inside.
+Per `api-architecture`: one service file per resource, grouping its functions; typed errors; no route/transport concerns inside.
 
 ## Step 4 — Route handler or Server Action
 
-Which one is a project fact (`AGENTS.md`). Per `backend`:
+Which one is a project fact (`AGENTS.md`). Per `api-architecture`:
 
 - **Route handler** — thin: validate input, resolve the actor, guard permissions, call the service, return via the shared response builders. Register it in the OpenAPI registry in the same change if the project has one (`api-docs`).
 - **Server Action** — `safeParse` the input, re-resolve the actor and re-check permissions server-side (never trust client-supplied identity), call the fetch/service layer, revalidate affected cache tags, return a discriminated success/failure result.
@@ -76,7 +76,7 @@ If the project has Storybook, ship the story for any new reusable component in t
 
 Run the project's type check (repo-wide in a monorepo). Then report every file created/modified plus the follow-up checklist, keeping only the items relevant to what was scaffolded:
 
-- Rate limiting for sensitive operations, audit logging for admin operations, and RBAC/permission registration if the route is gated (→ `backend`).
+- Rate limiting for sensitive operations, audit logging for admin operations, and RBAC/permission registration if the route is gated (→ `api-architecture`).
 - Schema placement double-checked — move to the shared package if a second consumer appears.
 - Route constant added and the page sits in the route group whose layout carries the right guard.
 - SEO/noindex matches the page's audience.
@@ -88,7 +88,7 @@ The approved file plan, the created/modified file list, the type-check result, a
 
 ## Boundaries
 
-- **Sequencing only** — structure → `code-structure`, API layer → `backend`, schemas → `typescript-best-practices`, names → `naming`, reusables → `reusables`, stories → `storybook-story-writing`, registry entries → `api-docs`.
+- **Sequencing only** — structure → `code-structure`, API layer → `api-architecture`, schemas → `typescript-best-practices`, names → `naming`, reusables → `reusables`, stories → `storybook-story-writing`, registry entries → `api-docs`.
 - **Never commits** → `stage-commit`.
 - **Never implements business logic** — it scaffolds the shape and stops.
 - **Features inside an existing project only** — a brand-new repo needs its structure, configs, and tooling first → `scaffold-next-app` (one app) or `scaffold-monorepo` (a workspace).

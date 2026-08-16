@@ -11,7 +11,7 @@ The recommended method is using the plugin marketplace to install both the agent
 Check if the plugins are already installed before proceeding:
 
 1. **Check Existing Skills**: Run `npx skills list --agent claude-code` to check for local skills. Run `npx skills list --global --agent claude-code` to check for global skills. Note whether the output includes `firebase-basics`.
-1. **Check Existing MCP Configuration**: Run `claude mcp list -s user` and `claude mcp list -s project`. Note whether the output of either command includes `firebase`.
+1. **Check Existing MCP Configuration**: Run `claude mcp list -s user` and `claude mcp list -s project`. Note whether the output of either command includes `firebase-architecture`.
 1. **Determine Installation Path**:
    - If **both** skills and MCP configuration are found, the plugin is fully installed. **Stop here and skip all remaining setup steps in this document.**
    - If **neither** are found, proceed to step 4.

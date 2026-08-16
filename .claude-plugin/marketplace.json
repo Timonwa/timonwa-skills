@@ -16,6 +16,11 @@
       "description": "Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized around POUR — semantic landmarks/headings, keyboard nav and focus managemen…"
     },
     {
+      "name": "api-architecture",
+      "source": "./plugins/api-architecture",
+      "description": "Use for the house backend / API-layer architecture in Next.js apps (data-store-agnostic) — how to structure server endpoints as thin route handlers over a serv…"
+    },
+    {
       "name": "api-audit",
       "source": "./plugins/api-audit",
       "description": "API-layer architecture audit — thin route handlers over a service layer, Zod validation at every boundary (body/query/params), shared response builders + typed…"
@@ -33,11 +38,6 @@
     {
       "name": "backend",
       "source": "./plugins/backend",
-      "description": "Use for the house backend / API-layer architecture in Next.js apps (data-store-agnostic) — how to structure server endpoints as thin route handlers over a serv…"
-    },
-    {
-      "name": "backend-api",
-      "source": "./plugins/backend-api",
       "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on."
     },
     {
@@ -59,11 +59,6 @@
       "name": "changelog",
       "source": "./plugins/changelog",
       "description": "Generate a changelog entry and community release notes from git history and changesets — detects whether the repo uses changesets or plain conventional-commit…"
-    },
-    {
-      "name": "cloudinary-cdn",
-      "source": "./plugins/cloudinary-cdn",
-      "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited."
     },
     {
       "name": "cloudinary-docs",
@@ -161,6 +156,11 @@
       "description": "Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryp…"
     },
     {
+      "name": "firebase",
+      "source": "./plugins/firebase",
+      "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited."
+    },
+    {
       "name": "firebase-ai-logic-basics",
       "source": "./plugins/firebase-ai-logic-basics",
       "description": "Official skill for integrating Firebase AI Logic (Gemini API) into web applications. Covers setup, multimodal inference, structured output, and security."
@@ -206,11 +206,6 @@
       "description": "Audits Firebase (Firestore, Cloud Storage) security rules for vulnerabilities, privilege escalation, role bypasses, create vs update inconsistencies, resource…"
     },
     {
-      "name": "firebase-stack",
-      "source": "./plugins/firebase-stack",
-      "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited."
-    },
-    {
       "name": "frontend",
       "source": "./plugins/frontend",
       "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD."
@@ -244,6 +239,11 @@
       "name": "html-best-practices",
       "source": "./plugins/html-best-practices",
       "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
+    },
+    {
+      "name": "media",
+      "source": "./plugins/media",
+      "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited."
     },
     {
       "name": "migrate-framework",

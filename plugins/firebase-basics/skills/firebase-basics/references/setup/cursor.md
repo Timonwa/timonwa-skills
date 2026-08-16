@@ -34,10 +34,10 @@ The MCP server allows Cursor to interact directly with Firebase projects.
    _Note: If the directory or `mcp.json` file does not exist, create them and
    initialize the file with `{ "mcpServers": {} }` before proceeding._
 
-1. **Check Existing Configuration**: Open `mcp.json` and check the `mcpServers` section for a `firebase` entry.
+1. **Check Existing Configuration**: Open `mcp.json` and check the `mcpServers` section for a `firebase-architecture` entry.
 
    - It is already configured if the `command` is `"firebase"` OR if the `command` is `"npx"` with `"firebase-tools"` and `"mcp"` in the `args`.
-   - **Important**: If a valid `firebase` entry is found, the MCP server is already configured. **Skip step 3** and proceed directly to step 4.
+   - **Important**: If a valid `firebase-architecture` entry is found, the MCP server is already configured. **Skip step 3** and proceed directly to step 4.
 
    **Example valid configurations**:
 
@@ -57,7 +57,7 @@ The MCP server allows Cursor to interact directly with Firebase projects.
    }
    ```
 
-1. **Add or Update Configuration**: If the `firebase` block is missing or incorrect, add it to the `mcpServers` object:
+1. **Add or Update Configuration**: If the `firebase-architecture` block is missing or incorrect, add it to the `mcpServers` object:
 
    ```json
    "firebase": {
@@ -73,7 +73,7 @@ The MCP server allows Cursor to interact directly with Firebase projects.
    _CRITICAL: Merge this configuration into the existing `mcp.json` file. You
    MUST preserve any other existing servers inside the `mcpServers` object._
 
-1. **Verify Configuration**: Save the file and confirm the `firebase` block is present and properly formatted JSON.
+1. **Verify Configuration**: Save the file and confirm the `firebase-architecture` block is present and properly formatted JSON.
 
 ### 3. Restart and Verify Connection
 

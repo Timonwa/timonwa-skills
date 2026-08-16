@@ -1,7 +1,7 @@
 ---
 name: rbac-audit
 description: >-
-  Manually invoked. RBAC / authorization-coverage audit — unprotected API routes and Server Actions, function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-assignment (BOPLA) exposure, the permission registry, the role-to-permission hierarchy, frontend gates that must back onto server checks, and data-layer rules coverage. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `backend-security`, `firebase`, and `backend` are an optional enhancement (rule internals hand off to `firebase-security-rules-auditor`). Part of the house audits family (see `audit-all`).
+  Manually invoked. RBAC / authorization-coverage audit — unprotected API routes and Server Actions, function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-assignment (BOPLA) exposure, the permission registry, the role-to-permission hierarchy, frontend gates that must back onto server checks, and data-layer rules coverage. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standards `backend-security`, `firebase-architecture`, and `api-architecture` are an optional enhancement (rule internals hand off to `firebase-security-rules-auditor`). Part of the house audits family (see `audit-all`).
 argument-hint: "[phase] [path]"
 model: opus
 effort: high
@@ -15,7 +15,7 @@ metadata:
 
 A **manually-invoked, red-team RBAC audit** of an app or a specific diff/PR. It is **self-contained** — every check is spelled out inline, so it runs a full review with zero other skills installed — and each finding is verified against the real code before it lands in a phase-aware, scored report at `_reports/rbac-audit.md`.
 
-> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`backend-security`**, **`firebase`**, and **`backend`** (rule internals → **`firebase-security-rules-auditor`**) ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
+> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`backend-security`**, **`firebase-architecture`**, and **`api-architecture`** (rule internals → **`firebase-security-rules-auditor`**) ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
 
 ## Arguments
 
@@ -101,7 +101,7 @@ Every run produces two things:
 
 ## Checklist
 
-Self-contained — the concrete criteria are inline below. Check every API route/Server Action, the permission registry, the role mappings, the object-level checks, the frontend gates, and the data rules. If `backend-security` (authorization), `firebase` (role model), or `backend` (guards) are installed, they deepen each section and give the app's own patterns to match — but the audit runs without them. Only rules-file _internals_ hand off — to `firebase-security-rules-auditor`.
+Self-contained — the concrete criteria are inline below. Check every API route/Server Action, the permission registry, the role mappings, the object-level checks, the frontend gates, and the data rules. If `backend-security` (authorization), `firebase-architecture` (role model), or `api-architecture` (guards) are installed, they deepen each section and give the app's own patterns to match — but the audit runs without them. Only rules-file _internals_ hand off — to `firebase-security-rules-auditor`.
 
 The frame is **broken access control** (OWASP #1): **Broken Object-Level Authorization (BOLA)** (object-level — a forged id reaches another actor's resource), **Broken Function-Level Authorization (BFLA)** (function-level — an operation runs without the permission it requires), and **Broken Object-Property-Level Authorization (BOPLA)** (property-level — a request sets or reads fields the actor may not, e.g. mass assignment of `role`/`ownerId`/`status`). Every section below targets one or more of these.
 
@@ -109,7 +109,7 @@ The frame is **broken access control** (OWASP #1): **Broken Object-Level Authori
 
 - **Every mutating or sensitive endpoint is guarded** — each exported HTTP handler (POST/PUT/PATCH/DELETE and any sensitive GET) and each Server Action asserts **auth + the specific permission that operation requires**, not just "is authenticated". Enforced server-side, never from a client flag. A route reachable without the permission it needs is BFLA (function-level).
 - **No unprotected endpoints** — categorize each route as public (explicitly, e.g. auth/webhook), auth-only (authenticated, no role), or permission-guarded; flag any non-public route with none of these. Webhooks/cron verify a signature / OpenID Connect (OIDC) instead of a user permission — flag those that verify nothing.
-- **Guard sits in the right place** — at the thin route/action boundary before the service runs (→ `backend`), not buried mid-service or after a side effect.
+- **Guard sits in the right place** — at the thin route/action boundary before the service runs (→ `api-architecture`), not buried mid-service or after a side effect.
 
 ### Permission registry
 

@@ -1,6 +1,6 @@
 # Server hardening — concrete patterns
 
-Companion to the `backend-security` skill. Copy-adaptable server-side snippets. The API _architecture_ these plug into (guards, response builders, rate-limit tiers) lives in `backend`; the Firebase specifics in `firebase`.
+Companion to the `backend-security` skill. Copy-adaptable server-side snippets. The API _architecture_ these plug into (guards, response builders, rate-limit tiers) lives in `api-architecture`; the Firebase specifics in `firebase-architecture`.
 
 ## Object-level authorization (Broken Object-Level Authorization, BOLA) — check ownership on the resolved doc
 

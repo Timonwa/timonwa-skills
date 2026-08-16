@@ -1,7 +1,7 @@
 ---
 name: api-audit
 description: >-
-  Manually invoked. API-layer architecture audit — thin route handlers over a service layer, Zod validation at every boundary (body/query/params), shared response builders + typed errors, cursor pagination, rate-limit presence per tier, state-transition sub-routes, audit logging on privileged mutations, and cron/webhook auth. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standard `backend` (and `backend-security` / `firebase`) is an optional enhancement. Part of the house audits family (see `audit-all`).
+  Manually invoked. API-layer architecture audit — thin route handlers over a service layer, Zod validation at every boundary (body/query/params), shared response builders + typed errors, cursor pagination, rate-limit presence per tier, state-transition sub-routes, audit logging on privileged mutations, and cron/webhook auth. Verifies each finding and writes a prioritized report. Not on by default. Self-contained; the house standard `api-architecture` (and `backend-security` / `firebase-architecture`) is an optional enhancement. Part of the house audits family (see `audit-all`).
 metadata:
   version: 1.0.0
   author: Timonwa
@@ -15,7 +15,7 @@ effort: high
 
 A **manually-invoked, red-team API audit** of an app or a specific diff/PR. It is **self-contained** — every check is spelled out inline, so it runs a full review with zero other skills installed — and each finding is verified against the real code before it lands in a phase-aware, scored report at `_reports/api-audit.md`.
 
-> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`backend`** (plus **`backend-security`** and **`firebase`**) ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
+> **Self-contained** — this checklist is comprehensive on its own and needs no other skill installed. Where the house standard(s) **`api-architecture`** (plus **`backend-security`** and **`firebase-architecture`**) ARE present, also apply their house-specific rules as an enhancement. Run the whole house audits family in one pass via **`audit-all`**.
 
 ## Arguments
 
