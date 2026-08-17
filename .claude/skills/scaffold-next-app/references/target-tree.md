@@ -30,15 +30,15 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |___ codeql.yml                # SAST scanning on push and PR
 |    |    |___ issue-label.yml           # labels issues from their template
 |    |    |___ label.yml                 # path-based PR labels, driven by labeler.yml
-|    |    |___ pr-title.yml              # PR titles must be Conventional Commits
+|    |    |___ pr-title.yml              # PR titles must be Conventional Commits; only if team-maintained
 |    |    |___ release-notes.yml         # drafts notes from merged PRs
 |    |    |___ stale.yml                 # closes abandoned issues and PRs
-|    |___ CODEOWNERS                     # required reviewers per path
+|    |___ CODEOWNERS                     # required reviewers per path; only if team-maintained
 |    |___ labeler.yml                    # the path -> label map label.yml reads
 |    |___ pull_request_template.md       # the checklist every PR opens with
 |    |___ release-notes.yml              # release-note categories and their labels
 |___ .husky/                             # git hooks, installed by `prepare`
-|    |___ commit-msg                     # runs commitlint
+|    |___ commit-msg                     # runs commitlint; only if team-maintained
 |    |___ pre-commit                     # runs lint-staged + affected typecheck
 |___ .storybook/                         # only if Storybook = yes
 |    |___ main.ts                        # stories glob, addons, framework
@@ -402,7 +402,7 @@ What the app looks like when this command is done — listed the way a repo rend
 |___ AGENTS.md                           # conventions for agents
 |___ biome.json                          # the single lint + format owner for JS/TS/JSON
 |___ CLAUDE.md                           # one line: `@AGENTS.md`
-|___ commitlint.config.ts                # Conventional Commits, enforced by commit-msg
+|___ commitlint.config.ts                # Conventional Commits via commit-msg; only if team-maintained
 |___ CONTRIBUTING.md                     # only if the repo takes outside contributions
 |___ instrumentation.ts                  # OpenTelemetry hooks; only if you wire tracing
 |___ LICENSE                             # required the moment the repo goes public

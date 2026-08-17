@@ -51,15 +51,15 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |___ codeql.yml                # SAST scanning on push and PR
 |    |    |___ issue-label.yml           # labels issues from their template
 |    |    |___ label.yml                 # path-based PR labels, driven by labeler.yml
-|    |    |___ pr-title.yml              # PR titles must be Conventional Commits
+|    |    |___ pr-title.yml              # PR titles must be Conventional Commits; only if team-maintained
 |    |    |___ release-notes.yml         # drafts notes from merged PRs
 |    |    |___ stale.yml                 # closes abandoned issues and PRs
-|    |___ CODEOWNERS                     # required reviewers per path
+|    |___ CODEOWNERS                     # required reviewers per path; only if team-maintained
 |    |___ labeler.yml                    # the path -> label map label.yml reads
 |    |___ pull_request_template.md       # the checklist every PR opens with
 |    |___ release-notes.yml              # release-note categories and their labels
 |___ .husky/                             # git hooks, installed by `prepare`
-|    |___ commit-msg                     # runs commitlint
+|    |___ commit-msg                     # runs commitlint; only if team-maintained
 |    |___ pre-commit                     # runs lint-staged + affected typecheck
 |___ .vscode/                            # editor defaults shared with contributors
 |    |___ extensions.json                # recommends the Biome extension
@@ -435,7 +435,7 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |___ AGENTS.md                           # workspace-wide conventions for agents
 |___ biome.json                          # the single lint + format owner for JS/TS/JSON
 |___ CLAUDE.md                           # one line: `@AGENTS.md`
-|___ commitlint.config.ts                # Conventional Commits, enforced by commit-msg
+|___ commitlint.config.ts                # Conventional Commits via commit-msg; only if team-maintained
 |___ firebase.json                       # only when the backend is Firebase: which codebase
 |                                        # each functions/ folder is, the rules and index files
 |                                        # below, emulator ports, and the hosting targets
