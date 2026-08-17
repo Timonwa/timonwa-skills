@@ -34,6 +34,7 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |___ release-notes.yml         # drafts notes from merged PRs
 |    |    |___ stale.yml                 # closes abandoned issues and PRs
 |    |___ CODEOWNERS                     # required reviewers per path; only if team-maintained
+|    |___ dependabot.yml                 # grouped version updates; only if updates = Dependabot (default)
 |    |___ labeler.yml                    # the path -> label map label.yml reads
 |    |___ pull_request_template.md       # the checklist every PR opens with
 |    |___ release-notes.yml              # release-note categories and their labels
@@ -415,7 +416,7 @@ What the app looks like when this command is done — listed the way a repo rend
 |___ pnpm-workspace.yaml                 # even standalone: the allowBuilds allowlist + overrides
 |___ postcss.config.mjs                  # loads the Tailwind v4 plugin
 |___ README.md                           # what this is and how to run it
-|___ renovate.json                       # automated dependency updates
+|___ renovate.json                       # dependency updates; only if updates = Renovate
 |___ SECURITY.md                         # public repos - how to report a hole privately
 |___ tsconfig.json                       # strict, `@/*` -> src/*
 |___ vitest.config.ts                    # only if unit tests = yes

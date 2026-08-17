@@ -55,6 +55,7 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |___ release-notes.yml         # drafts notes from merged PRs
 |    |    |___ stale.yml                 # closes abandoned issues and PRs
 |    |___ CODEOWNERS                     # required reviewers per path; only if team-maintained
+|    |___ dependabot.yml                 # grouped version updates; only if updates = Dependabot (default)
 |    |___ labeler.yml                    # the path -> label map label.yml reads
 |    |___ pull_request_template.md       # the checklist every PR opens with
 |    |___ release-notes.yml              # release-note categories and their labels
@@ -455,7 +456,7 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |                                        # single-version guarantee gone
 |___ pnpm-workspace.yaml                 # workspace globs, the catalog, the allowBuilds map
 |___ README.md                           # the map: what each app and package is
-|___ renovate.json                       # automated dependency updates
+|___ renovate.json                       # dependency updates; only if updates = Renovate
 |___ turbo.json                          # the task graph, cache inputs, strict env
 ```
 
