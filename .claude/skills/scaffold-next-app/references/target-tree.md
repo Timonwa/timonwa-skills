@@ -142,7 +142,10 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |___ fonts/                    # only self-hosted faces; a Google font needs no files
 |    |    |___ images/                   # every UI image - imported, so dimensions are inferred
 |    |___ components/                    # .tsx only (+ colocated stories and tests)
-|    |    |___ _shared/                  # widgets several features use, specific to this app
+|    |    |___ _shared/                  # widgets several features use, specific to this app;
+|    |    |    |                         # grouped by concern, each group with a barrel of its
+|    |    |    |                         # client-safe exports (server-coupled components are
+|    |    |    |                         # imported by path); no root _shared barrel
 |    |    |    |___ FlagProvider.tsx     # takes the server-resolved flags; only if flags = yes
 |    |    |    |___ ThemeProvider.tsx    # a provider returns JSX, so it is a component, not a hook
 |    |    |___ admin/                    # the operator screens
@@ -207,40 +210,33 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |    |___ base/                # atoms: render one thing, no sub-components
 |    |    |    |    |___ Badge/           # one folder per component
 |    |    |    |    |    |___ Badge.stories.tsx  # one per tone
-|    |    |    |    |    |___ Badge.tsx   # renders a label, so no test to write
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component - renders a label, so no test to write
 |    |    |    |    |___ Button/
 |    |    |    |    |    |___ Button.stories.tsx  # the variants, states, and sizes
 |    |    |    |    |    |___ Button.test.tsx  # the disabled and loading states have logic
-|    |    |    |    |    |___ Button.tsx  # the component
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component
 |    |    |    |    |___ index.ts        # the tier barrel
 |    |    |    |___ blocks/              # composed of base, owns its own state
 |    |    |    |    |___ Accordion/       # one folder per component
 |    |    |    |    |    |___ Accordion.stories.tsx  # single-open and multi-open
 |    |    |    |    |    |___ Accordion.test.tsx  # it owns open/closed state, so assert it
-|    |    |    |    |    |___ Accordion.tsx  # ships with AccordionItem as a named export
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component; ships AccordionItem as a named export
 |    |    |    |    |___ Card/
 |    |    |    |    |    |___ Card.stories.tsx  # surface, padding, and the content slots
-|    |    |    |    |    |___ Card.tsx    # renders children, so no test to write
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component - renders children, so no test to write
 |    |    |    |    |___ PageHeading/     # the title + description pair every page repeats
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component
 |    |    |    |    |    |___ PageHeading.stories.tsx  # with and without the description
-|    |    |    |    |    |___ PageHeading.tsx  # the component
 |    |    |    |    |___ index.ts        # the tier barrel
 |    |    |    |___ layouts/             # the page shells, taking regions as slot props
 |    |    |    |    |___ AdminLayout/     # denser than the dashboard, tables over cards
 |    |    |    |    |___ AuthLayout/      # centred card, no nav - nothing to click away to
 |    |    |    |    |    |___ AuthLayout.stories.tsx  # a form slotted in, at both breakpoints
-|    |    |    |    |    |___ AuthLayout.tsx  # pure composition, so no test to write
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component - pure composition, so no test to write
 |    |    |    |    |___ DashboardLayout/  # takes the sidebar as a slot, never imports it
 |    |    |    |    |    |___ DashboardLayout.stories.tsx  # sidebar open and collapsed
 |    |    |    |    |    |___ DashboardLayout.test.tsx  # it remembers the collapsed state
-|    |    |    |    |    |___ DashboardLayout.tsx  # the component
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component
 |    |    |    |    |___ ErrorLayout/     # the shared shell for error, 404, and unauthorized
 |    |    |    |    |___ LegalLayout/     # minimal chrome and a reading measure, not marketing
 |    |    |    |    |___ MarketingLayout/  # full navbar + footer; home, about, pricing
@@ -248,14 +244,12 @@ What the app looks like when this command is done — listed the way a repo rend
 |    |    |    |___ patterns/            # whole page regions the layouts slot in
 |    |    |    |    |___ Footer/          # the app passes its links from constants/
 |    |    |    |    |    |___ Footer.stories.tsx  # every column group, and the narrow layout
-|    |    |    |    |    |___ Footer.tsx  # renders the links it is given, so no test
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component - renders the links it is given, so no test
 |    |    |    |    |___ MinimalFooter/   # the legal and auth variant - legal links only
 |    |    |    |    |___ Navbar/          # the app passes its nav items from constants/
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component
 |    |    |    |    |    |___ Navbar.stories.tsx  # signed in, signed out, and the mobile menu
 |    |    |    |    |    |___ Navbar.test.tsx  # the mobile menu traps focus, so assert it
-|    |    |    |    |    |___ Navbar.tsx  # the component
 |    |    |    |    |___ Sidebar/         # the app passes the signed-in nav items
 |    |    |    |    |___ index.ts        # the tier barrel
 |    |    |    |___ index.ts             # re-exports every tier

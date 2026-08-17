@@ -194,7 +194,7 @@ Seven kinds, each flat, each with a barrel that has **one explicit export line p
 
 ## Step 7 — Design-system proof
 
-Per `reusables` + `naming` + `storybook-setup`: **one folder per component**, holding the component, its story, its barrel, and a test only when there is logic to assert.
+Per `reusables` + `naming` + `storybook-setup`: **one folder per component**, whose `index.tsx` IS the component, plus its story and a test only when there is logic to assert. No per-component barrel — importing the folder resolves to the component, and stories/tests are discovered by glob, never exported.
 
 - **One real component per tier** — a `base/` primitive (props-only, variant/size class maps, `cn()`-merged `className` last, `focus-visible` styles), and the shells the chosen route groups need in `layouts/`. A group's `layout.tsx` imports a shell, so the shell cannot be a stub.
 - **Every component ships a story; a test only where there is behaviour.** State, keyboard handling, or conditional rendering earns a `*.test.tsx`; a component that renders its children does not.
