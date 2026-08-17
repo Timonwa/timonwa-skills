@@ -98,7 +98,7 @@ Ask with `AskUserQuestion` in **grouped batches of at most 4**, every option car
 1. **Storybook** — yes (default) · no.
 2. **Testing** — none (default) · Vitest unit · Playwright E2E · both. Decides `vitest.config.ts`, `playwright.config.ts`, and whether any `*.test.tsx` is written.
 3. **CI + git hooks** — **ask only when standalone**; in a monorepo the root owns them, so state that instead of asking. Default when standalone = yes to both.
-4. **Repo visibility + maintainership** — private (default) · public, and solo-maintained (default) · team. Public adds `LICENSE`, `SECURITY.md`, and `CONTRIBUTING.md`, and makes the README audience external. **Contribution enforcement follows maintainership, never visibility**: a team gets `CODEOWNERS`, the commitlint `commit-msg` hook, and `pr-title.yml`; a solo-maintained repo gets **none of them** — a hook or failing title check only frustrates outside contributors, and the maintainer fixes the message at squash-merge.
+4. **Repo visibility + maintainership** — private (default) · public, and solo-maintained (default) · team. Public adds `LICENSE`, `SECURITY.md`, and `CONTRIBUTING.md`, and makes the README audience external. **Contribution enforcement follows maintainership, never visibility.** Solo-maintained → none of it, without asking — a hook or failing title check only frustrates outside contributors, and the maintainer fixes the message at squash-merge. Team → ask which to enable (multi-select, all default on): `CODEOWNERS` (required reviewers per path — useful for open source too when a team maintains it) · the commitlint `commit-msg` hook · `pr-title.yml`.
 
 **Batch 3 — integrations** (multi-select where noted; every default is off)
 
