@@ -3,7 +3,7 @@
   "owner": {
     "name": "Timonwa"
   },
-  "description": "71 Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
+  "description": "Claude Code skills by Timonwa — https://github.com/Timonwa/timonwa-skills",
   "plugins": [
     {
       "name": "accessibility",
@@ -244,6 +244,11 @@
       "name": "html-best-practices",
       "source": "./plugins/html-best-practices",
       "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\"."
+    },
+    {
+      "name": "logo-generation",
+      "source": "./plugins/logo-generation",
+      "description": "Use when creating or regenerating a brand's logo and icon assets — any of the seven logo types (wordmark, lettermark, pictorial, abstract, mascot, combination,…"
     },
     {
       "name": "migrate-framework",
