@@ -51,15 +51,16 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |___ codeql.yml                # SAST scanning on push and PR
 |    |    |___ issue-label.yml           # labels issues from their template
 |    |    |___ label.yml                 # path-based PR labels, driven by labeler.yml
-|    |    |___ pr-title.yml              # PR titles must be Conventional Commits
+|    |    |___ pr-title.yml              # PR titles must be Conventional Commits; only if team-maintained
 |    |    |___ release-notes.yml         # drafts notes from merged PRs
 |    |    |___ stale.yml                 # closes abandoned issues and PRs
-|    |___ CODEOWNERS                     # required reviewers per path
+|    |___ CODEOWNERS                     # required reviewers per path; only if team-maintained
+|    |___ dependabot.yml                 # grouped version updates; only if updates = Dependabot (default)
 |    |___ labeler.yml                    # the path -> label map label.yml reads
 |    |___ pull_request_template.md       # the checklist every PR opens with
 |    |___ release-notes.yml              # release-note categories and their labels
 |___ .husky/                             # git hooks, installed by `prepare`
-|    |___ commit-msg                     # runs commitlint
+|    |___ commit-msg                     # runs commitlint; only if team-maintained
 |    |___ pre-commit                     # runs lint-staged + affected typecheck
 |___ .vscode/                            # editor defaults shared with contributors
 |    |___ extensions.json                # recommends the Biome extension
@@ -341,21 +342,20 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |    |    |___ Logo.tsx        # every variant as a prop, not four files
 |    |    |    |___ base/                # atoms: render one thing, no sub-components
 |    |    |    |    |___ Button/         # one folder per component, exactly as in an app:
-|    |    |    |    |    |                # the component, its STORY, its barrel, and a test
+|    |    |    |    |    |                # index.tsx IS the component, its STORY beside it,
+|    |    |    |    |    |                # and a test
 |    |    |    |    |    |                # only where there is behaviour
 |    |    |    |    |    |___ Button.stories.tsx  # beside the component, never in the
 |    |    |    |    |    |                # Storybook app. `title: "Base/Button"` is what
 |    |    |    |    |    |                # puts it in the sidebar tier
 |    |    |    |    |    |___ Button.test.tsx  # disabled and loading have logic
-|    |    |    |    |    |___ Button.tsx  # plain Tailwind here, never `ui:`
-|    |    |    |    |    |___ index.ts   # the component barrel
+|    |    |    |    |    |___ index.tsx  # the component - plain Tailwind here, never `ui:`
 |    |    |    |    |___ ThemeScript/     # REQUIRED for dark mode, and it is a component
 |    |    |    |    |    |                # rather than a hook because it must run as an
 |    |    |    |    |    |                # inline <script> in <head>, before hydration -
 |    |    |    |    |    |                # the ThemeProvider in packages/hooks cannot do
 |    |    |    |    |    |                # that, so the two ship as a pair
-|    |    |    |    |    |___ index.ts   # the component barrel
-|    |    |    |    |    |___ ThemeScript.tsx  # sets the class from localStorage + the OS
+|    |    |    |    |    |___ index.tsx  # the component - sets the class from localStorage + the OS
 |    |    |    |    |                    # preference, so the first paint matches SSR. No
 |    |    |    |    |                    # story - an inline script renders nothing to show
 |    |    |    |    |___ index.ts        # the tier barrel, one line per folder
@@ -436,7 +436,7 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |___ AGENTS.md                           # workspace-wide conventions for agents
 |___ biome.json                          # the single lint + format owner for JS/TS/JSON
 |___ CLAUDE.md                           # one line: `@AGENTS.md`
-|___ commitlint.config.ts                # Conventional Commits, enforced by commit-msg
+|___ commitlint.config.ts                # Conventional Commits via commit-msg; only if team-maintained
 |___ firebase.json                       # only when the backend is Firebase: which codebase
 |                                        # each functions/ folder is, the rules and index files
 |                                        # below, emulator ports, and the hosting targets
@@ -456,7 +456,7 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |                                        # single-version guarantee gone
 |___ pnpm-workspace.yaml                 # workspace globs, the catalog, the allowBuilds map
 |___ README.md                           # the map: what each app and package is
-|___ renovate.json                       # automated dependency updates
+|___ renovate.json                       # dependency updates; only if updates = Renovate
 |___ turbo.json                          # the task graph, cache inputs, strict env
 ```
 
@@ -555,7 +555,9 @@ apps/web/
 |    |___ components/                    # .tsx only (+ colocated tests). Same folders as a
 |    |                                   # standalone app: _shared/, one per feature, and a
 |    |                                   # `ui/` tier for this app's OWN reusables
-|    |    |___ _shared/                  # widgets several of THIS app's features use
+|    |    |___ _shared/                  # widgets several of THIS app's features use;
+|    |    |    |                         # grouped by concern, each group with a barrel of its
+|    |    |    |                         # client-safe exports; no root _shared barrel
 |    |    |    |___ PageHeader.tsx       # the title + description pair every page repeats,
 |    |    |    |                         # if it is app-specific; if two apps want it, it is
 |    |    |    |                         # a packages/ui block instead

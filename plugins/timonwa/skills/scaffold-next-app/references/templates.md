@@ -559,10 +559,10 @@ export function Hero() {
 
 ### Example component, folder-per-component (`reusables`, `naming`)
 
-Each component owns a folder: the component, its story, its barrel, and a test **only when there is behaviour to assert**.
+Each component owns a folder: `index.tsx` is the component, with its story and a test **only when there is behaviour to assert** beside it — no per-component barrel.
 
 ```tsx
-// src/components/ui/base/Button/Button.tsx
+// src/components/ui/base/Button/index.tsx
 /**
  * @description Base button primitive. Renders a native <button>; use Link for navigation.
  */
@@ -600,12 +600,8 @@ export function Button({ variant = "primary", size = "md", className, ...rest }:
 ```
 
 ```ts
-// src/components/ui/base/Button/index.ts — the component barrel
-export { Button, type ButtonProps } from "./Button";
-```
-
-```ts
 // src/components/ui/base/index.ts — the tier barrel, one line per component folder
+// ("./Button" resolves to the folder's index.tsx)
 export { Badge, type BadgeProps } from "./Badge";
 export { Button, type ButtonProps } from "./Button";
 ```

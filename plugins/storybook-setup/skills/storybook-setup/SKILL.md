@@ -49,7 +49,7 @@ export default config;
 
 ## 4. Story structure — colocated, tiered by title
 
-A story file sits **in its component's folder**, next to the component, its barrel, and its test. The **tier comes from the `title`** (`Base/Button`, `Blocks/Accordion`, `Patterns/Navbar`, `Layouts/DashboardLayout`), which is what groups the sidebar — so the tiers stay visible without a mirrored folder tree to keep in sync.
+A story file sits **in its component's folder**, next to the component (the folder's `index.tsx`) and its test. The **tier comes from the `title`** (`Base/Button`, `Blocks/Accordion`, `Patterns/Navbar`, `Layouts/DashboardLayout`), which is what groups the sidebar — so the tiers stay visible without a mirrored folder tree to keep in sync.
 
 The glob differs only by where the components are:
 
