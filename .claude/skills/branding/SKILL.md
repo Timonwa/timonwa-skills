@@ -11,7 +11,7 @@ metadata:
 
 A brand is how the product **looks and sounds** — applied consistently everywhere. This skill owns brand _identity_ (as a concept), _voice & tone_, and the _product/UI copy_ that expresses it. It does not re-document palettes.
 
-> **This owns the verbal brand + identity; specialists own the visual mechanics.** Design tokens/theming → `tailwind-css`; visual cohesion/governance → `design-system`; design quality/distinctiveness → `frontend-design`; brand assets/SVGs → `svg-generation`. **Persuasive marketing copy** (ads, landing pages, email) is a different job and out of scope — this covers the app's _own_ product copy. (A dedicated marketing suite is planned; until it ships, treat conversion copy as a separate task.)
+> **This owns the verbal brand + identity; specialists own the visual mechanics.** Design tokens/theming → `tailwind-css`; visual cohesion/governance → `design-system`; design quality/distinctiveness → `frontend-design`; producing the logo/icon/favicon set → `logo-generation`; other brand SVGs → `svg-generation`. **Persuasive marketing copy** (ads, landing pages, email) is a different job and out of scope — this covers the app's _own_ product copy. (A dedicated marketing suite is planned; until it ships, treat conversion copy as a separate task.)
 >
 > **Project facts → `AGENTS.md`:** the actual palette/fonts, the logo asset location, and the project's specific voice traits/vocabulary. This skill is the discipline; those are the brand's materials.
 
@@ -51,7 +51,7 @@ The core. Write copy for every surface, not just the happy path:
 
 ## Logo usage
 
-Import the logo from the shared assets (location → `AGENTS.md`); maintain clear space around it; never distort, recolor, stretch, or crop it; use the correct light/dark variant for the background.
+Import the logo from the shared assets (location → `AGENTS.md`; producing or regenerating them → `logo-generation`); maintain clear space around it; never distort, recolor, stretch, or crop it; use the correct light/dark variant for the background.
 
 A complete logo kit ships: the primary mark, a monochrome variant, light/dark variants, and a square icon for favicons/app icons/social avatars. Practical specs: clear space ≥ the height of the logo's smallest element on all sides; a minimum render size below which the icon variant replaces the full logo; and a square PNG/SVG ≥112×112 for the Organization `logo` that structured data references (→ `seo`).
 

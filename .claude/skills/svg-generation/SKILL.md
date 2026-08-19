@@ -111,4 +111,4 @@ UI icon (theme-able, decorative next to a label — inline in JSX/HTML, hence no
 - [ ] Optimized — no unused defs/empty groups/redundant attrs; run through SVGO.
 - [ ] File named per `naming` (kebab-case, descriptive).
 
-> **Related:** a diagram for a blog post follows that publication's article craft, not this skill's defaults.
+> **Related:** a logo, brand icon or favicon set is a different job — the type has to be outlined and the assets have to survive export → `logo-generation`. A diagram for a blog post follows that publication's article craft, not this skill's defaults.
