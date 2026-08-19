@@ -2,7 +2,7 @@
 name: logo-generation
 description: Use when creating or regenerating a brand's logo and icon assets — any of the seven logo types (wordmark, lettermark, pictorial, abstract, mascot, combination, emblem), the standalone brand icon, favicons, PWA/maskable icons, and apple-touch icons. Owns the production standards; outlined type, platform safe zones (maskable 40%-radius circle, Android adaptive 66/72/108dp, Apple's no-alpha and no-pre-rounding rules), the minimal modern favicon set, and the WCAG logotype exemption. Usage rules (clear space, minimum size, don't distort) → `branding`; diagrams and UI icons → `svg-generation`; file names → `naming`.
 metadata:
-  version: 1.0.0
+  version: 2.9.0
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---
@@ -11,7 +11,13 @@ metadata:
 
 Producing the brand's own marks. This is a different job from drawing an icon or a diagram: a logo is an **exportable asset** that has to survive leaving the codebase — into Figma, a press kit, a social template, someone else's slide deck — and an **installable asset** that has to survive every platform's mask, crop, and theme.
 
-> **This skill produces the assets; `branding` governs how they're used** (clear space, minimum render size, which variant on which background, never distort or recolour). Drawing UI icons, diagrams and illustrations → `svg-generation`. Palette and type come from the project (`tailwind-css`, `frontend-design`). File naming → `naming`.
+> **Scope: media files only, written to one output folder.** This skill produces image assets — SVGs and rasters — and nothing else. It does **not** edit stylesheets, manifests, components, config, or add scripts to a project.
+>
+> **It runs anywhere.** A codebase, an empty directory, a web session — it makes no difference. Never assume a framework, a `public/` folder, or a repo. Write everything to **`media/`** in the working directory (creating it if needed), tell the owner what each file is for, and let them decide where it belongs. Only move files into a project's own directories if the owner explicitly asks.
+>
+> **Ask which slots are actually needed.** Generating a full platform matrix for a brand that only needs a favicon leaves the owner deleting files. A plain website needs a logo, an icon and a favicon — nothing more. PWA maskable icons, Android adaptive layers and App Store masters exist only if the brand ships an installable app.
+>
+> **Clean up after yourself.** Scratch directories, downloaded fonts, ad-hoc `npm install`s, preview harnesses and temp screenshots are all removed before finishing. The owner ends up with the assets and nothing else — no tooling on their system, no stray files, no half-wired config.
 
 ## First: which of the seven logo types is this?
 
@@ -99,20 +105,31 @@ const w = (font, text) => font.getAdvanceWidth(text, size);
 
 `opentype.loadSync()` is deprecated — use `parse(readFileSync(path).buffer)`.
 
-Delete the scratch dir afterwards. Keep the generator script with the assets if the logo will be regenerated (a colour change, a new variant); otherwise discard it and note the font and sizes in a comment.
+Delete the scratch dir afterwards, and **do not commit the generator**. A logo is a one-time artifact, not a build step: it is finished when the owner is satisfied, and brands are redesigned in years, not sprints. A committed script implies a pipeline that doesn't exist, and dropping a non-standard file into a linted repo tends to break tooling that never expected it.
+
+Instead, record the recipe **in a comment inside the generated SVG** — font, weights, sizes, and the source URL — so a future regeneration is reproducible without carrying code:
+
+```svg
+<!-- Wordmark: Geist 700 @34px + Geist 400 @19px, outlined via opentype.js.
+     Source: fonts.gstatic.com/s/geist/v5/…ttf -->
+```
 
 ## Brand colour must not be a themeable token
 
 If the project themes `--primary` per route, per tenant, or per product area, the brand mark **cannot** use it — the logo would change colour depending on where it appears, which is the one thing a logo may never do.
 
-Give the brand its own token, set once and never overridden:
+Check before assuming: grep the stylesheets for `--primary` and look for scoped redefinitions.
+
+The asset's own colour is therefore **a literal**, taken from the brand guide and baked into the SVG — never `currentColor` or a themeable var, so the exported file is correct everywhere.
+
+If the project renders the mark from live markup rather than the asset, it needs a dedicated non-overridable token — but **that is a hand-off, not this skill's edit**:
 
 ```css
---primary: oklch(0.555 0.18 265); /* themeable — sections may override */
+/* For the owner to add, if the header renders the mark inline: */
 --brand: oklch(0.555 0.18 265); /* the logo's colour — never overridden */
 ```
 
-Check for existing overrides before assuming: grep the stylesheets for `--primary` and look for scoped redefinitions.
+Prefer pointing the header at the exported asset instead; then no token is needed at all.
 
 ## Derive every number — never invent one
 
@@ -174,6 +191,8 @@ If the header renders the logo as live text for responsive reasons, accept it as
 
 ## Icon geometry: square canvas, circular safe zone
 
+**Only relevant if the brand ships an installable or native app.** For a plain website, skip to the asset set — a favicon and a square icon are the whole job. Ask before generating any of the slots below.
+
 Every icon slot takes a **square file**, but the artwork must never fill it: platforms crop icons to circles, squircles, and rounded squares you don't control, and every one of those masks eats the corners. The universal rule is **square canvas, content inside the inscribed circle** — the mark is centred with padding, whatever its own shape, and never stretched to fit.
 
 The exact safe zones, from the platform specs:
@@ -187,7 +206,7 @@ The exact safe zones, from the platform specs:
 | **watchOS** | square | circle | circular mask, full stop |
 | **macOS** | 1024×1024px | none — **the one exception** | macOS keeps the shape you ship: transparency allowed, and you bake in your own corner radius |
 
-Manifest discipline that follows from this:
+Manifest discipline that follows from this — **report these as notes for the owner; do not edit their manifest**:
 
 - **Never combine `purpose: "any maskable"` on one entry.** A maskable icon carries 10% padding per side; reused as a plain `any` icon it renders visibly smaller than its neighbours. Ship separate files — plain `icon-192/512.png` with `purpose: "any"`, padded `icon-maskable-192/512.png` with `purpose: "maskable"`.
 - Add a `purpose: "monochrome"` entry if the brand has a mono variant — it feeds themed-icon surfaces the same way Android's monochrome layer does.
@@ -197,17 +216,28 @@ Manifest discipline that follows from this:
 
 ## The asset set
 
-The modern set is small — a handful of files, not the thirty a legacy generator emits. Generate rasters **from the SVG**, at the sizes each platform actually asks for:
+Everything lands in **`media/`**. The modern set is small — a handful of files, not the thirty a legacy generator emits. Generate rasters **from the SVG**.
+
+**Default set — every brand, website or not:**
 
 | File | Size | Notes |
 | --- | --- | --- |
 | `logo.svg` / `logo-dark.svg` | vector | primary logo, per background |
 | `brand-icon.svg` | vector | the mark alone — single source for every raster below |
-| `icon.svg` | vector | favicon; can self-theme (below) |
-| `favicon.ico` | 32×32 | **at the site root** — RSS readers and crawlers probe `/favicon.ico` without reading HTML; multi-size only if the 16px downscale is poor |
-| `apple-icon.png` | 180×180 | full-bleed, opaque, un-rounded (rules above) |
-| `icon-192.png`, `icon-512.png` | 192 / 512 | manifest, `purpose: "any"` |
-| `icon-maskable-192.png`, `icon-maskable-512.png` | 192 / 512 | manifest, `purpose: "maskable"`, content in the 80% circle, opaque padding |
+| `favicon.ico` | 32×32 | multi-size only if the 16px downscale is poor. Belongs at the **site root** once the owner places it — crawlers probe `/favicon.ico` without reading HTML |
+| `icon-512.png` | 512 | general-purpose square raster: avatars, social profiles, structured data |
+
+**Only if the owner confirms they need them:**
+
+| File | Size | Needed when |
+| --- | --- | --- |
+| `icon.svg` | vector | they want a self-theming favicon (below) |
+| `apple-icon.png` | 180×180 | iOS home-screen bookmarks — full-bleed, opaque, un-rounded |
+| `icon-192.png` | 192 | a web app manifest exists |
+| `icon-maskable-192.png`, `icon-maskable-512.png` | 192 / 512 | **the app is installable** — padded for the platform's crop |
+| `icon-mono.svg` | vector | Android themed icons, embroidery, single-colour print |
+
+A brand with an ordinary website needs the default set and nothing else. Generating maskable icons for a site nobody installs just hands the owner files to delete.
 
 The SVG favicon can adapt to the browser theme — the one trick no raster can do:
 
@@ -246,12 +276,14 @@ In a Next App Router project, `src/app/icon.png`, `apple-icon.png` and `favicon.
 - [ ] Secondary line is 0.5–0.6× the wordmark and passes 4.5:1 as a design floor.
 - [ ] Mark height derived from the measured text block; radius and inner scale expressed as ratios.
 - [ ] Wordmark type is outlined; no `font-family` anywhere in the asset. Font licence permits outlining, and is recorded.
-- [ ] Brand colour is its own token, unaffected by any theme override.
+- [ ] The asset's colour is a literal from the brand guide — never `currentColor` or a themeable var.
 - [ ] Mark renders legibly at 16px, verified by screenshot, on light and dark.
 - [ ] Lockup and standalone icon share identical mark geometry.
-- [ ] Maskable icons keep content inside the **40%-radius circle** with opaque padding, shipped as separate manifest entries — never `"any maskable"` combined.
-- [ ] `apple-icon.png` is full-bleed, opaque, alpha-free, and **not** pre-rounded; no dead formats (`browserconfig.xml`, `mstile-*`, `mask-icon`) generated.
-- [ ] Every raster regenerated from the SVG — including `favicon.ico`, which needs separate tooling and lives at the site root.
+- [ ] Only the slots the owner confirmed were generated — no speculative platform matrix.
+- [ ] If installable-app icons were asked for: maskable content sits inside the **40%-radius circle** with opaque padding, as separate entries — never `"any maskable"` combined; `apple-icon.png` is full-bleed, opaque, alpha-free and **not** pre-rounded; no dead formats (`browserconfig.xml`, `mstile-*`, `mask-icon`).
+- [ ] Every raster generated from the SVG — including `favicon.ico`, which needs separate tooling.
+- [ ] Everything written to `media/`; no project file edited, no script committed, no manifest touched.
+- [ ] Wiring reported as a hand-off list, not applied.
+- [ ] Scratch dirs, downloaded fonts, ad-hoc installs, preview harnesses and temp screenshots all deleted.
 - [ ] Standalone logos have `role="img"` + a name; linked logos are named by the link and the SVG hidden.
-- [ ] Outlining tool installed outside the project; scratch files removed.
 - [ ] Files named per `naming`; optimised per `svg-generation`.
