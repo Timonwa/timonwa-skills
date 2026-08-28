@@ -27,8 +27,10 @@ Beyond the essentials in `turborepo-monorepo`, the root also carries the hook wi
 ```jsonc
 {
   "scripts": {
-    // dev is orchestrated by pnpm filters, not turbo — turbo's dev task is persistent
-    "dev": "pnpm -r --parallel --filter web --filter admin dev",
+    // dev is orchestrated by pnpm filters, not turbo — turbo's dev task is persistent.
+    // The dist-built packages (contracts, utils) are in the list so their tsc --watch
+    // runs alongside the apps; without it a schema edit is invisible until a rebuild.
+    "dev": "pnpm -r --parallel --filter web --filter admin --filter @app/contracts --filter @app/utils dev",
     "format": "biome check --write .",
     "format:check": "biome check .",
     "prepare": "husky",
@@ -140,7 +142,19 @@ deploy-web:
 | -------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------ |
 | `nextjs.json`        | `module: "preserve"`, `moduleResolution: "bundler"`, `jsx`, `lib`, `plugins` | an app the framework bundles                     |
 | `react-library.json` | `module: "preserve"`, `moduleResolution: "bundler"`, `jsx`, `lib`            | a package every consumer bundles (`ui`, `hooks`) |
-| `node-library.json`  | `module: "NodeNext"`, `moduleResolution: "NodeNext"`, `outDir`, `rootDir`    | a package **Node** loads (`contracts`, `utils`)  |
+| `node-library.json`  | `module: "NodeNext"`, `moduleResolution: "NodeNext"`                         | a package **Node** loads (`contracts`, `utils`)  |
+
+**`outDir`/`rootDir` never go in a shared config.** Relative paths in an extended tsconfig resolve relative to the file that DECLARES them, so a shared `rootDir: "src"` points at `packages/typescript-config/src` and every consumer fails with TS6059 ("not under rootDir"). Each consuming package sets its own:
+
+```jsonc
+// packages/contracts/tsconfig.json — same shape for utils
+{
+  "extends": "@app/typescript-config/node-library.json",
+  "compilerOptions": { "outDir": "dist", "rootDir": "src" },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+}
+```
 
 Under `node-library.json` TypeScript requires the `.js` extension on relative imports and errors without one, so `"build": "tsc"` emits output Node can load with no post-processing. Set `bundler` on one of those packages instead and the build passes while `dist/` cannot be imported — `ERR_MODULE_NOT_FOUND` naming a file that exists. That is a compiler-option bug; do not paper over it with a script that rewrites the emitted imports.
 
@@ -184,7 +198,10 @@ An app's own `tsconfig.json` becomes:
     "@app/tailwind-config": "workspace:*",
     // the colocated *.stories.tsx import Meta and StoryObj, so this package's own
     // check-types needs them. Story files are excluded from the build include,
-    // so nothing Storybook-related reaches a consumer.
+    // so nothing Storybook-related reaches a consumer. Every "catalog:" spec needs
+    // a matching catalog entry (add storybook + @storybook/react + @storybook/react-vite
+    // to pnpm-workspace.yaml) — a missing one fails install with
+    // ERR_PNPM_CATALOG_ENTRY_NOT_FOUND_FOR_SPEC.
     "@storybook/react": "catalog:",
   },
 }
@@ -304,8 +321,10 @@ packages/contracts/src/
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
   "files": ["dist"],
   // plain tsc — node-library.json makes TypeScript emit the .js extensions Node needs,
-  // so there is nothing to post-process
-  "scripts": { "build": "tsc", "check-types": "tsc --noEmit" },
+  // so there is nothing to post-process. dev is tsc --watch: consumers import dist/,
+  // so without a watcher a schema edit is invisible during `pnpm dev` until someone
+  // rebuilds the package by hand — add this package to the root dev filter list.
+  "scripts": { "build": "tsc", "check-types": "tsc --noEmit", "dev": "tsc --watch" },
   "dependencies": { "zod": "catalog:" },
   "devDependencies": { "@app/typescript-config": "workspace:*" },
 }
@@ -313,7 +332,9 @@ packages/contracts/src/
 
 ### `packages/utils` (`code-structure` — the `@app/<kind>` shared-kind form)
 
-Flat `<domain>.utils.ts` files with a single `src/index.ts` public surface, plus a `server/` subfolder with its own `server-only` barrel for anything that must never reach a browser. Same `package.json` shape as `contracts` minus the zod dependency — including the `dist` exports and the plain `tsc` build, because the API and the workspace scripts load this package from Node too.
+Flat `<domain>.utils.ts` files with a single `src/index.ts` public surface, plus a `server/` subfolder with its own `server-only` barrel for anything that must never reach a browser. Same `package.json` shape as `contracts` minus the zod dependency — including the `dist` exports, the plain `tsc` build, and the `tsc --watch` dev script, because the API and the workspace scripts load this package from Node too.
+
+**`server-only` caveat:** the marker package throws under Node's _default_ export condition — it is inert only under `react-server`. So the `server/` barrel is safe in Next.js server code, but a plain `node scripts/foo.mjs` importing it crashes by design. A workspace script that needs one of those helpers imports the underlying file's compiled output directly, or the helper moves to the script's own `lib/` — never weaken the barrel to accommodate the script.
 
 Only genuinely cross-app helpers belong here — app-local helpers stay in that app's `src/lib/utils/` (`scaffold-next-app`).
 

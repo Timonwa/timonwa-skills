@@ -107,7 +107,10 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |___ apphosting.yaml           # only if hosted: serves the static build, and puts
 |    |    |                              # it behind auth. A public Storybook publishes every
 |    |    |                              # unreleased component and its props
-|    |    |___ eslint.config.mjs         # extends @app/eslint-config
+|    |    |___ eslint.config.mjs         # extends @app/eslint-config, and adds
+|    |    |                              # ignores: ["storybook-static/**"] - the shared
+|    |    |                              # config only ignores dist/, so lint otherwise
+|    |    |                              # scans this app's own build output
 |    |    |___ package.json              # depends on every package it documents, and never
 |    |    |                              # the reverse - the harness knows the components,
 |    |    |                              # not the other way round
@@ -178,7 +181,8 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |                              # source of its own has one - a package that opts
 |    |    |                              # out is a package CI does not lint
 |    |    |___ package.json              # zod is a real dependency. `build` is plain `tsc`;
-|    |    |                              # nothing post-processes the output
+|    |    |                              # nothing post-processes the output; `dev` is
+|    |    |                              # `tsc --watch` so consumers see edits during pnpm dev
 |    |    |___ README.md                 # what belongs here and what does not
 |    |    |___ tsconfig.json             # extends @app/typescript-config/node-library,
 |    |                                   # because the API loads this package from Node
@@ -349,7 +353,13 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |    |    |    |                # Storybook app. `title: "Base/Button"` is what
 |    |    |    |    |    |                # puts it in the sidebar tier
 |    |    |    |    |    |___ Button.test.tsx  # disabled and loading have logic
-|    |    |    |    |    |___ index.tsx  # the component - plain Tailwind here, never `ui:`
+|    |    |    |    |    |___ index.tsx  # the component - utilities are WRITTEN `ui:`-prefixed
+|    |    |    |    |    |                # (`ui:flex`), per tailwind-css: the prefix is this
+|    |    |    |    |    |                # library's namespace, so its classes cannot clash
+|    |    |    |    |    |                # with an app's bare utilities or another library's
+|    |    |    |    |    |                # prefix. Only hand-authored class names
+|    |    |    |    |    |                # (`btn-primary`) stay bare. `ui:` never appears in
+|    |    |    |    |    |                # app code - there it fails silently
 |    |    |    |    |___ ThemeScript/     # REQUIRED for dark mode, and it is a component
 |    |    |    |    |    |                # rather than a hook because it must run as an
 |    |    |    |    |    |                # inline <script> in <head>, before hydration -
@@ -401,7 +411,10 @@ Four consequences worth stating, because they are where a monorepo actually diff
 |    |    |    |___ server/              # utils that must never reach a browser
 |    |    |    |    |___ api.ts          # the typed fetch wrapper, session attached
 |    |    |    |    |___ crypto.ts       # hashing and constant-time compare
-|    |    |    |    |___ index.ts        # its own barrel, marked `server-only`
+|    |    |    |    |___ index.ts        # its own barrel, marked `server-only`. That marker
+|    |    |    |                         # THROWS under plain Node (it is inert only under the
+|    |    |    |                         # react-server condition) - a workspace script needs
+|    |    |    |                         # the compiled file directly, never this barrel
 |    |    |    |___ date.utils.ts        # the same `<domain>.utils.ts` grammar
 |    |    |    |___ index.ts             # one explicit export line per file, each with `.js`
 |    |    |    |___ string.utils.ts      # slugify, truncate, initials

@@ -5,7 +5,7 @@ description: >-
 argument-hint: "[scope] [--apps web,admin] — e.g. `@app`, `--apps web,admin,api`"
 allowed-tools: Read, Grep, Glob, Write, Edit, AskUserQuestion, Bash(ls:*), Bash(mkdir:*), Bash(cat:*), Bash(git status:*), Bash(git rev-parse:*), Bash(git ls-files:*), Bash(git mv:*), Bash(npm view:*), Bash(pnpm:*), Bash(corepack enable), Bash(pnpm dlx syncpack:*)
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---

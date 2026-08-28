@@ -2,7 +2,7 @@
 name: logo-generation
 description: Use when creating or regenerating a brand's logo and icon assets — any of the seven logo types (wordmark, lettermark, pictorial, abstract, mascot, combination, emblem), the standalone brand icon, favicons, PWA/maskable icons, and apple-touch icons. Owns the production standards; outlined type, platform safe zones (maskable 40%-radius circle, Android adaptive 66/72/108dp, Apple's no-alpha and no-pre-rounding rules), the minimal modern favicon set, and the WCAG logotype exemption. Usage rules (clear space, minimum size, don't distort) → `branding`; diagrams and UI icons → `svg-generation`; file names → `naming`.
 metadata:
-  version: 2.9.0
+  version: 1.1.0
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---

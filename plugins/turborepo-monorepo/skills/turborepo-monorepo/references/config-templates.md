@@ -65,6 +65,8 @@ allowBuilds:
 
 Consume in an app: `"next": "catalog:"`, `"react": "catalog:"`.
 
+Every spec written as `"catalog:"` anywhere in the workspace must have a matching entry here — a missing one fails install immediately with `ERR_PNPM_CATALOG_ENTRY_NOT_FOUND_FOR_SPEC` (typical stragglers: `@types/*`, `eslint`, `typescript`, `storybook` + `@storybook/react` + `@storybook/react-vite`).
+
 ## Per-package `turbo.json` — a `ui` package with a split build
 
 ```json
