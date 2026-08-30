@@ -23,15 +23,15 @@ Producing the brand's own marks. This is a different job from drawing an icon or
 
 "Logo" is not one shape of asset. The industry taxonomy is seven types — two built from text, three from imagery, two blended — and **the type decides which assets exist at all**, so settle it before drawing anything.
 
-| Type | Built from | Examples | Survives 16px? |
-| --- | --- | --- | --- |
-| **Wordmark** (logotype) | the full name, as type | Google, FedEx | No — needs a derived mark for icon slots |
-| **Lettermark** (monogram) | initials, as drawn letterforms | IBM, HP, Netflix "N" | Yes — it *is* the icon |
-| **Pictorial mark** | a literal, nameable image | Apple, Target | Yes, if simple |
-| **Abstract mark** | non-literal geometry | Nike, Mastercard | Yes, if simple |
-| **Mascot** | a character | Michelin Man | Rarely — derive a simplified head/silhouette |
-| **Combination mark** | mark + wordmark in a lockup | most startups | The mark detaches and serves alone |
-| **Emblem** | name locked inside a shape/badge | Starbucks, crests | No — least scalable type; draw a separate simplified icon |
+| Type                      | Built from                       | Examples             | Survives 16px?                                            |
+| ------------------------- | -------------------------------- | -------------------- | --------------------------------------------------------- |
+| **Wordmark** (logotype)   | the full name, as type           | Google, FedEx        | No — needs a derived mark for icon slots                  |
+| **Lettermark** (monogram) | initials, as drawn letterforms   | IBM, HP, Netflix "N" | Yes — it _is_ the icon                                    |
+| **Pictorial mark**        | a literal, nameable image        | Apple, Target        | Yes, if simple                                            |
+| **Abstract mark**         | non-literal geometry             | Nike, Mastercard     | Yes, if simple                                            |
+| **Mascot**                | a character                      | Michelin Man         | Rarely — derive a simplified head/silhouette              |
+| **Combination mark**      | mark + wordmark in a lockup      | most startups        | The mark detaches and serves alone                        |
+| **Emblem**                | name locked inside a shape/badge | Starbucks, crests    | No — least scalable type; draw a separate simplified icon |
 
 Choosing, when the owner hasn't: short distinctive name → wordmark; long name → lettermark; established brand → pictorial or abstract; personality → mascot; heritage/institutional → emblem; new brand or unsure → **combination mark**, because the mark detaches cleanly for every icon slot and the name rides along everywhere else.
 
@@ -56,12 +56,12 @@ Offer options and let the owner choose; a logo is a subjective call and the owne
 
 ## The deliverables, and don't conflate them
 
-| Artifact | Contains | Used for |
-| --- | --- | --- |
-| **Primary logo** | whichever of the seven types the brand is | site header, README, press, decks |
-| **Lockup variants** | combination brands: horizontal and, if needed, stacked | wide headers vs. square-ish placements |
-| **Brand icon** | the mark alone — derived for wordmark brands, simplified for emblems/mascots | favicon, app icon, avatar, notification badge |
-| **Favicon / app icon set** | rasterised brand icon at platform sizes and safe zones | browser tab, home screen, install surfaces |
+| Artifact                   | Contains                                                                     | Used for                                      |
+| -------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------- |
+| **Primary logo**           | whichever of the seven types the brand is                                    | site header, README, press, decks             |
+| **Lockup variants**        | combination brands: horizontal and, if needed, stacked                       | wide headers vs. square-ish placements        |
+| **Brand icon**             | the mark alone — derived for wordmark brands, simplified for emblems/mascots | favicon, app icon, avatar, notification badge |
+| **Favicon / app icon set** | rasterised brand icon at platform sizes and safe zones                       | browser tab, home screen, install surfaces    |
 
 The most common mistake is building the lockup as live HTML text next to an SVG. That is a **header composition**, not a logo: it inherits the site font, so a font change silently changes the brand, and it can't be exported at all.
 
@@ -69,7 +69,7 @@ The most common mistake is building the lockup as live HTML text next to an SVG.
 
 The wordmark must ship as `<path>` data, never `<text font-family="…">`.
 
-- `<text>` renders with whatever font the *viewer* has. Outside your site that is the wrong font or a fallback.
+- `<text>` renders with whatever font the _viewer_ has. Outside your site that is the wrong font or a fallback.
 - Outlined paths render identically everywhere, with no font to install and no `@font-face` to embed.
 - The trade: the text is no longer editable or selectable, and it won't be found by search or screen readers — so give the root an accessible name (below) and keep the source font noted for future edits.
 
@@ -141,11 +141,11 @@ A circle inscribed in a box fills only π/4 ≈ **78.5%** of it; a square fills 
 
 Material's icon keylines codify the amount — on a 24dp grid the square keyline is 18×18 while the circle is **Ø20**, an ~11% overshoot. Apply the same idea:
 
-| Sibling shapes | Overshoot |
-| --- | --- |
-| circle beside a hard-edged square | ~10–11% |
+| Sibling shapes                     | Overshoot                                 |
+| ---------------------------------- | ----------------------------------------- |
+| circle beside a hard-edged square  | ~10–11%                                   |
 | circle beside a **rounded** square | ~6–8% (the rounding already removes area) |
-| pointed shapes (triangle, diamond) | more again — they fill least |
+| pointed shapes (triangle, diamond) | more again — they fill least              |
 
 A mark whose round and square elements share identical bounding boxes has this bug. Check it by rendering large with keyline rectangles drawn over both shapes.
 
@@ -187,7 +187,7 @@ A mark lives at 16px in a browser tab far more often than at 512px. Detail that 
 - A "by <Creator>" line is set smaller, in a muted tone, and aligned to one edge of the wordmark — usually right-aligned under it, so the lockup stays a tidy rectangle.
 - Keep the mark's own geometry identical between the lockup and the standalone icon. Two slightly different marks is the drift this skill exists to prevent.
 
-If the header renders the logo as live text for responsive reasons, accept it as a *second* implementation of the same design and keep it visually identical — or point the header at the asset and let CSS swap the dark variant.
+If the header renders the logo as live text for responsive reasons, accept it as a _second_ implementation of the same design and keep it visually identical — or point the header at the asset and let CSS swap the dark variant.
 
 ## Icon geometry: square canvas, circular safe zone
 
@@ -197,14 +197,14 @@ Every icon slot takes a **square file**, but the artwork must never fill it: pla
 
 The exact safe zones, from the platform specs:
 
-| Slot | Canvas | Guaranteed safe zone | Rules |
-| --- | --- | --- | --- |
-| **PWA maskable** (W3C) | square, 512px recommended | circle, radius **40%** of the edge (the inner 80%; ~51px padding per side at 512) | padding **opaque** brand background, never transparent — the OS fills transparency with white or black |
-| **Android adaptive** | 108×108dp per layer | Ø**66dp** circle guaranteed; **72dp** max ever visible; 18dp margin per side is mask/parallax bleed | three layers: background (fully opaque), foreground, **monochrome** (required for Android 13+ themed icons) |
-| **apple-touch-icon** | 180×180px | iOS masks the corners with its own superellipse | full-bleed opaque artwork, **no alpha channel, no pre-rounded corners** — pre-rounding double-rounds and transparent corners render as black |
-| **App Store master** (native apps) | 1024×1024px | same corner mask | flattened, fully opaque; App Store Connect rejects any alpha channel even on an opaque image |
-| **watchOS** | square | circle | circular mask, full stop |
-| **macOS** | 1024×1024px | none — **the one exception** | macOS keeps the shape you ship: transparency allowed, and you bake in your own corner radius |
+| Slot                               | Canvas                    | Guaranteed safe zone                                                                                | Rules                                                                                                                                        |
+| ---------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **PWA maskable** (W3C)             | square, 512px recommended | circle, radius **40%** of the edge (the inner 80%; ~51px padding per side at 512)                   | padding **opaque** brand background, never transparent — the OS fills transparency with white or black                                       |
+| **Android adaptive**               | 108×108dp per layer       | Ø**66dp** circle guaranteed; **72dp** max ever visible; 18dp margin per side is mask/parallax bleed | three layers: background (fully opaque), foreground, **monochrome** (required for Android 13+ themed icons)                                  |
+| **apple-touch-icon**               | 180×180px                 | iOS masks the corners with its own superellipse                                                     | full-bleed opaque artwork, **no alpha channel, no pre-rounded corners** — pre-rounding double-rounds and transparent corners render as black |
+| **App Store master** (native apps) | 1024×1024px               | same corner mask                                                                                    | flattened, fully opaque; App Store Connect rejects any alpha channel even on an opaque image                                                 |
+| **watchOS**                        | square                    | circle                                                                                              | circular mask, full stop                                                                                                                     |
+| **macOS**                          | 1024×1024px               | none — **the one exception**                                                                        | macOS keeps the shape you ship: transparency allowed, and you bake in your own corner radius                                                 |
 
 Manifest discipline that follows from this — **report these as notes for the owner; do not edit their manifest**:
 
@@ -220,22 +220,22 @@ Everything lands in **`media/`**. The modern set is small — a handful of files
 
 **Default set — every brand, website or not:**
 
-| File | Size | Notes |
-| --- | --- | --- |
-| `logo.svg` / `logo-dark.svg` | vector | primary logo, per background |
-| `brand-icon.svg` | vector | the mark alone — single source for every raster below |
-| `favicon.ico` | 32×32 | multi-size only if the 16px downscale is poor. Belongs at the **site root** once the owner places it — crawlers probe `/favicon.ico` without reading HTML |
-| `icon-512.png` | 512 | general-purpose square raster: avatars, social profiles, structured data |
+| File                         | Size   | Notes                                                                                                                                                     |
+| ---------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `logo.svg` / `logo-dark.svg` | vector | primary logo, per background                                                                                                                              |
+| `brand-icon.svg`             | vector | the mark alone — single source for every raster below                                                                                                     |
+| `favicon.ico`                | 32×32  | multi-size only if the 16px downscale is poor. Belongs at the **site root** once the owner places it — crawlers probe `/favicon.ico` without reading HTML |
+| `icon-512.png`               | 512    | general-purpose square raster: avatars, social profiles, structured data                                                                                  |
 
 **Only if the owner confirms they need them:**
 
-| File | Size | Needed when |
-| --- | --- | --- |
-| `icon.svg` | vector | they want a self-theming favicon (below) |
-| `apple-icon.png` | 180×180 | iOS home-screen bookmarks — full-bleed, opaque, un-rounded |
-| `icon-192.png` | 192 | a web app manifest exists |
+| File                                             | Size      | Needed when                                                 |
+| ------------------------------------------------ | --------- | ----------------------------------------------------------- |
+| `icon.svg`                                       | vector    | they want a self-theming favicon (below)                    |
+| `apple-icon.png`                                 | 180×180   | iOS home-screen bookmarks — full-bleed, opaque, un-rounded  |
+| `icon-192.png`                                   | 192       | a web app manifest exists                                   |
 | `icon-maskable-192.png`, `icon-maskable-512.png` | 192 / 512 | **the app is installable** — padded for the platform's crop |
-| `icon-mono.svg` | vector | Android themed icons, embroidery, single-colour print |
+| `icon-mono.svg`                                  | vector    | Android themed icons, embroidery, single-colour print       |
 
 A brand with an ordinary website needs the default set and nothing else. Generating maskable icons for a site nobody installs just hands the owner files to delete.
 
@@ -266,7 +266,7 @@ In a Next App Router project, `src/app/icon.png`, `apple-icon.png` and `favicon.
 - A logo inside a link takes its accessible name **from the link, describing the destination** — `aria-label="<Brand> — home"`, with the SVG `aria-hidden="true"`. "Acme logo" tells a screen-reader user nothing about where the link goes.
 - Purely decorative repetitions of the mark get `aria-hidden="true"` and no role.
 - `focusable="false"` was an IE/legacy-Edge fix; current browsers don't need it.
-- **The WCAG logotype exemption, stated precisely** (SC 1.4.3): *"Text that is part of a logo or brand name has no minimum contrast requirement."* Its limits matter more than the exemption — it does **not** cover brand colours used for body text, buttons, or headings, and a logo serving as the home link is still a UI component that must be identifiable under SC 1.4.11 (3:1 non-text contrast). Verification → `accessibility`.
+- **The WCAG logotype exemption, stated precisely** (SC 1.4.3): _"Text that is part of a logo or brand name has no minimum contrast requirement."_ Its limits matter more than the exemption — it does **not** cover brand colours used for body text, buttons, or headings, and a logo serving as the home link is still a UI component that must be identifiable under SC 1.4.11 (3:1 non-text contrast). Verification → `accessibility`.
 
 ## Checklist
 
