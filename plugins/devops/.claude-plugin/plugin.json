@@ -1,7 +1,7 @@
 {
   "name": "devops",
   "description": "Use for a repo's build/ship automation — CI/CD pipelines (GitHub Actions job graph, a composite setup action, affected checks, auxiliary workflows), CI hardeni…",
-  "version": "1.0.0",
+  "version": "1.0.0+4971ec309a",
   "author": {
     "name": "Timonwa"
   },

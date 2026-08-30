@@ -1,7 +1,7 @@
 {
   "name": "pr-review",
   "description": "Self-contained, project-aware review of a pull request or branch diff.",
-  "version": "1.0.0",
+  "version": "1.0.0+aadf6f8347",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
-  "version": "1.1.0",
+  "version": "1.0.0+dca68df257",
   "author": {
     "name": "Timonwa"
   },

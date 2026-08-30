@@ -1,7 +1,7 @@
 {
   "name": "upstash-redis-js",
   "description": "Work with the Upstash Redis TypeScript/JavaScript SDK for serverless Redis operations.",
-  "version": "1.0.0",
+  "version": "1.0.0+5ac38a7d4c",
   "author": {
     "name": "Upstash"
   },

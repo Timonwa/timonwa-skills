@@ -1,7 +1,7 @@
 {
   "name": "backend-security",
   "description": "Use for server-side / API application security when building or reviewing server-side code — endpoints (route handlers, Server Actions, controllers), services,…",
-  "version": "1.0.0",
+  "version": "1.0.0+0b6864a38d",
   "author": {
     "name": "Timonwa"
   },

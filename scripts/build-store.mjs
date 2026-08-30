@@ -19,6 +19,7 @@ import {
 } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createHash } from 'node:crypto'
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
 const SKILLS_DIR = join(ROOT, '.claude', 'skills')
@@ -226,6 +227,40 @@ mkdirSync(PLUGINS_DIR, { recursive: true })
 
 const entries = []
 
+/** Hash every file under a skill/command's source, in a stable path order, so identical
+ *  content always produces the identical hash and any content change produces a different one. */
+function hashDir(dir, hash, prefix = '') {
+  for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )) {
+    if (entry.name === '.DS_Store') continue
+    const full = join(dir, entry.name)
+    const rel = prefix + entry.name
+    if (entry.isDirectory()) hashDir(full, hash, rel + '/')
+    else {
+      hash.update(rel + '\n')
+      hash.update(readFileSync(full))
+    }
+  }
+}
+
+/** Content hash across a plugin's exact member files — appended to its version as a build
+ *  suffix (`1.0.0+<hash>`) so the version string (the plugin cache's directory key) always
+ *  changes when content changes, even if nobody remembered to bump `metadata.version`. This
+ *  closes the gap where a bundle's version is `max()` of its members: a lower-version member's
+ *  edit could otherwise be silently absorbed and never surface as an update. */
+function hashMembers(memberNames) {
+  const hash = createHash('sha256')
+  for (const member of [...memberNames].sort()) {
+    const skill = skills.get(member)
+    if (!skill) continue
+    hash.update(member + '\n')
+    if (skill.isCommand) hash.update(readFileSync(skill.file))
+    else hashDir(skill.dir, hash)
+  }
+  return hash.digest('hex').slice(0, 10)
+}
+
 /** Write one plugin folder: its manifest + copies of the given skill dirs.
  *  `license`/`repository` are only claimed for own/adapted content (author === OWNER.name) —
  *  a vendored skill's real license belongs to its upstream, not to this repo's MIT grant. */
@@ -233,7 +268,7 @@ function writePlugin(pluginName, description, memberNames, version, source, auth
   const pluginDir = join(PLUGINS_DIR, pluginName)
   mkdirSync(join(pluginDir, '.claude-plugin'), { recursive: true })
   const manifest = { name: pluginName, description }
-  if (version) manifest.version = version
+  if (version) manifest.version = `${version}+${hashMembers(memberNames)}`
   // Claude Code's schema requires an object here — a plain string fails installation
   // with "Invalid input: expected object, received string".
   if (author) manifest.author = { name: author }

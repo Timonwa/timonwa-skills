@@ -1,7 +1,7 @@
 {
   "name": "writing-standards",
   "description": "Use when writing or structuring developer documentation — guides, API references, explanations, tutorials, or deciding what kind of doc a topic needs.",
-  "version": "1.0.0",
+  "version": "1.0.0+42a2afbbf0",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "seo-code-audit",
   "description": "Self-contained SEO audit of a public-facing app (or a diff/PR) — metadata (title/description/OpenGraph/Twitter/canonical), robots + sitemap + noindex hygiene,…",
-  "version": "1.0.0",
+  "version": "1.0.0+8034199be6",
   "author": {
     "name": "Timonwa"
   },

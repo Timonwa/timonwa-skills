@@ -1,7 +1,7 @@
 {
   "name": "audit-all",
   "description": "Orchestrates the full house audit suite — detects what the repo has, runs every applicable domain audit (accessibility, seo, storybook, conventions, dependenci…",
-  "version": "1.0.0",
+  "version": "1.0.0+6b21f8b156",
   "author": {
     "name": "Timonwa"
   },

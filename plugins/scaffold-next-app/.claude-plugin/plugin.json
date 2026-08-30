@@ -1,7 +1,7 @@
 {
   "name": "scaffold-next-app",
   "description": "Adapt an already-created `create-next-app` starter into the house structure for ONE Next.js app — the route groups and their shells, `components/` mirroring th…",
-  "version": "1.0.0",
+  "version": "1.0.0+6cb646d42b",
   "author": {
     "name": "Timonwa"
   },

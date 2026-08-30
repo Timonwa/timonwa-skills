@@ -1,7 +1,7 @@
 {
   "name": "frontend-security",
   "description": "Use for client-side / browser application security when building or reviewing frontend code (React / Next.js) — XSS and safe rendering (JSX escaping, DOMPurify…",
-  "version": "1.0.0",
+  "version": "1.0.0+5968261f58",
   "author": {
     "name": "Timonwa"
   },

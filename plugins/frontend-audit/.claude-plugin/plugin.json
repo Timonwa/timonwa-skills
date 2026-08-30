@@ -1,7 +1,7 @@
 {
   "name": "frontend-audit",
   "description": "Self-contained Next.js App Router frontend audit — Pages Router residue, thin route/entry files and feature-grouped sections, the server/client boundary, serve…",
-  "version": "1.0.0",
+  "version": "1.0.0+ffaef672d8",
   "author": {
     "name": "Timonwa"
   },

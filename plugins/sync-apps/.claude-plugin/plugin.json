@@ -1,7 +1,7 @@
 {
   "name": "sync-apps",
   "description": "Detect drift in files that should stay identical — or share sections — across sibling apps, packages, or starter templates, report every difference against the…",
-  "version": "1.0.0",
+  "version": "1.0.0+9a9306d737",
   "author": {
     "name": "Timonwa"
   },

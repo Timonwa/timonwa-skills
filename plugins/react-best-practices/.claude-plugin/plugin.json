@@ -1,7 +1,7 @@
 {
   "name": "react-best-practices",
   "description": "Use when writing or reviewing React components, hooks, or state (React 19).",
-  "version": "1.0.0",
+  "version": "1.0.0+91e8c91b4e",
   "author": {
     "name": "Timonwa"
   },

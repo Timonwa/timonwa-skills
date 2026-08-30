@@ -1,7 +1,7 @@
 {
   "name": "codebase-audit",
   "description": "Broad repo-health triage that routes to the deep audits and covers the code-quality hygiene no other audit owns — tech debt (TODO/FIXME), dead/unused code, Typ…",
-  "version": "1.0.0",
+  "version": "1.0.0+5bcbd1d361",
   "author": {
     "name": "Timonwa"
   },

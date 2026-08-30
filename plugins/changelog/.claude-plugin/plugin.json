@@ -1,7 +1,7 @@
 {
   "name": "changelog",
   "description": "Generate a changelog entry and community release notes from git history and changesets — detects whether the repo uses changesets or plain conventional-commit…",
-  "version": "1.0.0",
+  "version": "1.0.0+b1d5d15d7a",
   "author": {
     "name": "Timonwa"
   },

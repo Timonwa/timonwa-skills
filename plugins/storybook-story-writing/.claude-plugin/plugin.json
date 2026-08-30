@@ -1,7 +1,7 @@
 {
   "name": "storybook-story-writing",
   "description": "Use when creating or modifying Storybook stories, in any project that has Storybook (monorepo or single app).",
-  "version": "1.1.0",
+  "version": "1.0.0+1a46fc3688",
   "author": {
     "name": "Timonwa"
   },

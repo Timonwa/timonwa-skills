@@ -1,7 +1,7 @@
 {
   "name": "api-architecture",
   "description": "Use for the house backend / API-layer architecture in Next.js apps (data-store-agnostic) — how to structure server endpoints as thin route handlers over a serv…",
-  "version": "1.0.0",
+  "version": "1.0.0+832882e83e",
   "author": {
     "name": "Timonwa"
   },

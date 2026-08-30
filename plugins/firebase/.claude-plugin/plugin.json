@@ -1,7 +1,7 @@
 {
   "name": "firebase",
   "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited.",
-  "version": "1.0.0",
+  "version": "1.0.0+ba72e62055",
   "author": {
     "name": "Timonwa"
   },

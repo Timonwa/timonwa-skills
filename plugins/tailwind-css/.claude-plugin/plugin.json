@@ -1,7 +1,7 @@
 {
   "name": "tailwind-css",
   "description": "Use when setting up Tailwind, organizing CSS into files, defining design tokens/theming, or styling components. Tailwind CSS v4 (CSS-first).",
-  "version": "1.0.0",
+  "version": "1.0.0+4fd271e727",
   "author": {
     "name": "Timonwa"
   },

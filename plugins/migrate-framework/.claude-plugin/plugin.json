@@ -1,7 +1,7 @@
 {
   "name": "migrate-framework",
   "description": "Guided framework/library migration and major-version upgrades — analyze the current setup, produce a step-by-step migration plan with checkpoints, then apply c…",
-  "version": "1.0.0",
+  "version": "1.0.0+09b55c6289",
   "author": {
     "name": "Timonwa"
   },

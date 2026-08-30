@@ -1,6 +1,7 @@
 {
   "frontend": {
     "displayName": "Frontend Suite",
+    "version": "1.0.0",
     "description": "Everything for frontend work in one install — semantic markup, accessibility, React/Next/TypeScript, Tailwind tokens + design system, design quality, SEO, Storybook, SVGs, cookie consent, branding/copy, structure, naming, and the repo's CI/CD.",
     "skills": [
       "accessibility",
@@ -29,6 +30,7 @@
   },
   "frontend-audits": {
     "displayName": "Frontend Audits",
+    "version": "1.0.0",
     "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them.",
     "skills": [
       "accessibility-audit",
@@ -46,6 +48,7 @@
   },
   "backend": {
     "displayName": "Backend Suite",
+    "version": "1.0.0",
     "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on.",
     "skills": [
       "api-docs",
@@ -65,6 +68,7 @@
   },
   "backend-audits": {
     "displayName": "Backend Audits",
+    "version": "1.0.0",
     "description": "The review mirror of the backend suite — API architecture, authorization coverage, application security, environment and secrets, and documentation. `audit-all` detects what applies and aggregates them.",
     "skills": [
       "api-audit",
@@ -80,6 +84,7 @@
   },
   "firebase": {
     "displayName": "Firebase Suite",
+    "version": "1.0.0",
     "description": "The official Firebase agent-skills we use — auth, Firestore, security rules, hosting, App Hosting, Data Connect, AI Logic, Remote Config, and the rules auditor. Vendored from Google, unedited.",
     "skills": [
       "extension-to-functions-codebase",
@@ -97,6 +102,7 @@
   },
   "cloudinary": {
     "displayName": "Cloudinary Suite",
+    "version": "1.0.0",
     "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited.",
     "skills": [
       "cloudinary-docs",
@@ -108,6 +114,7 @@
   },
   "workflow": {
     "displayName": "Workflow Suite",
+    "version": "1.0.0",
     "description": "Cross-project workflow actions — staged Conventional Commits, self-contained PR review, AGENTS.md scaffolding, Next.js app and monorepo scaffolding, feature scaffolding, framework migration, changelog generation, cross-app drift sync, community-issue triage, and daily standups.",
     "skills": [
       "changelog",
@@ -125,6 +132,7 @@
   },
   "content": {
     "displayName": "Content Suite",
+    "version": "1.0.0",
     "description": "The writing standards we apply every time — the shared discipline and house voice, docs-site pages, help-centre guides for non-technical readers, project READMEs, line-level copy editing, and hand-authored diagrams.",
     "skills": [
       "prose-editing",
@@ -137,6 +145,7 @@
   },
   "timonwa": {
     "displayName": "Everything",
+    "version": "1.0.0",
     "description": "The whole library in one install — every skill and command, across every domain: frontend, backend, Firebase, Cloudinary, audits, workflow, and writing. Install this INSTEAD of the individual plugins or the per-domain suites; installing it alongside them lists each shared item twice, once bare and once namespaced.",
     "skills": "*"
   }

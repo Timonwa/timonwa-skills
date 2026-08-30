@@ -1,7 +1,7 @@
 {
   "name": "html-best-practices",
   "description": "Use when writing or reviewing any HTML/JSX markup — building a component, page, form, table, or list, or fixing \"div soup\".",
-  "version": "1.0.0",
+  "version": "1.0.0+9694ffc55e",
   "author": {
     "name": "Timonwa"
   },

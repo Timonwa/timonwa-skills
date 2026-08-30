@@ -1,7 +1,7 @@
 {
   "name": "firebase-hosting-basics",
   "description": "Deploys and configures classic Firebase Hosting for static websites, single-page apps (SPAs), and microservices.",
-  "version": "1.0.0",
+  "version": "1.0.0+1670cce850",
   "author": {
     "name": "Firebase"
   },

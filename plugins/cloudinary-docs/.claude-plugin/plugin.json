@@ -1,7 +1,7 @@
 {
   "name": "cloudinary-docs",
   "description": "Looks up implementation details in the latest Cloudinary docs via the relevant llms.txt file.",
-  "version": "1.1.0",
+  "version": "1.1.0+149b0a3d23",
   "author": {
     "name": "cloudinary"
   },

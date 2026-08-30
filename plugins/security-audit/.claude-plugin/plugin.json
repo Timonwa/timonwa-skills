@@ -1,7 +1,7 @@
 {
   "name": "security-audit",
   "description": "Red-team application-security review of a web/full-stack app (or a diff/PR), scoped to whatever the app has — frontend, backend, or both — covering broken acce…",
-  "version": "1.0.0",
+  "version": "1.0.0+f14b91e4d2",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "cloudinary",
   "description": "The official Cloudinary agent-skills we use — the Next.js and React SDKs, transformation URLs, and docs lookup. Vendored from Cloudinary, unedited.",
-  "version": "1.1.0",
+  "version": "1.0.0+6decf6bfe6",
   "author": {
     "name": "Timonwa"
   },

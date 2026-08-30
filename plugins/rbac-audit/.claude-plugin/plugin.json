@@ -1,7 +1,7 @@
 {
   "name": "rbac-audit",
   "description": "RBAC / authorization-coverage audit — unprotected API routes and Server Actions, function-level (BFLA) and object-level (BOLA) coverage, property-level / mass-…",
-  "version": "1.0.0",
+  "version": "1.0.0+88dced742e",
   "author": {
     "name": "Timonwa"
   },

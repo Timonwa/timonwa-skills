@@ -1,7 +1,7 @@
 {
   "name": "daily-standup",
   "description": "Prepares your daily standup update from your GitHub activity across the orgs you work in.",
-  "version": "1.0.0",
+  "version": "1.0.0+123f631cc5",
   "author": {
     "name": "Timonwa"
   },

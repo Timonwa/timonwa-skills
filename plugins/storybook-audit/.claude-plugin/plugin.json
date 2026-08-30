@@ -1,7 +1,7 @@
 {
   "name": "storybook-audit",
   "description": "Storybook coverage and story-quality audit — cross-references shared UI components against existing stories to find gaps, and checks stories against the house…",
-  "version": "1.0.0",
+  "version": "1.0.0+cc4ed1786b",
   "author": {
     "name": "Timonwa"
   },

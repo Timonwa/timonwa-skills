@@ -1,7 +1,7 @@
 {
   "name": "environment-audit",
   "description": "Environment + secrets audit — Zod-validated env at boot (no direct `process.env` reads), env-file presence, `.env.example` completeness, nothing in env that is…",
-  "version": "1.0.0",
+  "version": "1.0.0+c7f9adf145",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "api-docs",
   "description": "Use when adding or documenting API routes, updating OpenAPI/Swagger docs, or auditing the API reference for drift against the actual route handlers.",
-  "version": "1.0.0",
+  "version": "1.0.0+93a18949ff",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "cloudinary-react",
   "description": "Provides opinionated React SDK patterns for configuration, common integration scenarios, and troubleshooting for frequent errors and TypeScript pitfalls.",
-  "version": "1.0.2",
+  "version": "1.0.2+3cac730e25",
   "author": {
     "name": "cloudinary"
   },

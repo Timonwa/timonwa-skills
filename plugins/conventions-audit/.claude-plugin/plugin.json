@@ -1,7 +1,7 @@
 {
   "name": "conventions-audit",
   "description": "House-conventions audit of an app or monorepo against the `naming` and `code-structure` standards — hardcoded URLs vs route constants, schema/type/const placem…",
-  "version": "1.0.0",
+  "version": "1.0.0+a63f503dd9",
   "author": {
     "name": "Timonwa"
   },

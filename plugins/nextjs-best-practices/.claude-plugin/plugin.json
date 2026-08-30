@@ -1,7 +1,7 @@
 {
   "name": "nextjs-best-practices",
   "description": "Use when writing or reviewing Next.js App Router code (Next 16) — Server vs Client Components and the `use client` boundary, data fetching, caching (Cache Comp…",
-  "version": "1.0.0",
+  "version": "1.0.0+3edd5fc4a6",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "frontend-audits",
   "description": "The review mirror of the frontend suite — one manually-invoked audit per domain, each self-contained, each writing a scored and prioritised report. `audit-all` detects what applies, runs every applicable one, and aggregates them.",
-  "version": "1.0.0",
+  "version": "1.0.0+6a5f901f24",
   "author": {
     "name": "Timonwa"
   },

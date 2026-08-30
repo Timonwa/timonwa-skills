@@ -1,7 +1,7 @@
 {
   "name": "content-performance",
   "description": "Reads exported analytics from any platform — search consoles, rank trackers, product analytics, CMS reports, a spreadsheet someone assembled by hand — and turn…",
-  "version": "1.0.0",
+  "version": "1.0.0+098ade5f7d",
   "author": {
     "name": "Timonwa"
   },

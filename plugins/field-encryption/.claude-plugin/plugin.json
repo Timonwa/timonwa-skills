@@ -1,7 +1,7 @@
 {
   "name": "field-encryption",
   "description": "Use when encrypting individual sensitive fields at the application level before they reach the data store, or reviewing code that does — symmetric field encryp…",
-  "version": "1.0.0",
+  "version": "1.0.0+b13850ab96",
   "author": {
     "name": "Timonwa"
   },

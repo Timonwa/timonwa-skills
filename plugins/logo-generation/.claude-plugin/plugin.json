@@ -1,7 +1,7 @@
 {
   "name": "logo-generation",
   "description": "Use when creating or regenerating a brand's logo and icon assets — any of the seven logo types (wordmark, lettermark, pictorial, abstract, mascot, combination,…",
-  "version": "1.1.0",
+  "version": "1.0.0+060ad2bb0d",
   "author": {
     "name": "Timonwa"
   },

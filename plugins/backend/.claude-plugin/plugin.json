@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "description": "Everything for API and server work in one install — the route→service architecture, server-side security mapped to OWASP, field-level encryption, the OpenAPI registry, plus the shared structure, naming, TypeScript, monorepo, and CI standards the backend leans on.",
-  "version": "1.0.1",
+  "version": "1.0.0+313aeefb53",
   "author": {
     "name": "Timonwa"
   },

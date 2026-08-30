@@ -1,7 +1,7 @@
 {
   "name": "branding",
   "description": "Use for an app's brand identity and its copy — brand foundations (palette/type/logo/voice, with the specifics in AGENTS.md), brand voice & tone, and how to wri…",
-  "version": "1.0.0",
+  "version": "1.0.0+91ee7e4215",
   "author": {
     "name": "Timonwa"
   },

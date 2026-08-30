@@ -2,7 +2,7 @@
 name: turborepo-monorepo
 description: Use when setting up or working in a monorepo — pnpm workspaces + Turborepo (v2). Covers workspace layout, turbo.json tasks/caching/dependsOn graph, shared config packages, the pnpm catalog, dev/build orchestration, remote caching, and CI with --affected. What goes INSIDE packages (code layout) → `code-structure`; the tsconfig/tailwind config packages → `typescript-best-practices` / `tailwind-css`.
 metadata:
-  version: 1.0.1
+  version: 1.0.0
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---

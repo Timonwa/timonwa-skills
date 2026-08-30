@@ -1,7 +1,7 @@
 {
   "name": "help-center-standards",
   "description": "Use when writing or reviewing help-centre / support-centre guides for a product's end users — FAQ answers, how-tos, concept explainers, policy pages, troublesh…",
-  "version": "1.0.0",
+  "version": "1.0.0+952006c33e",
   "author": {
     "name": "Timonwa"
   },

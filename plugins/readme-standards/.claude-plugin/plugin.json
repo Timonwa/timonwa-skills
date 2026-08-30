@@ -1,7 +1,7 @@
 {
   "name": "readme-standards",
   "description": "Use when creating or updating a README for a project, package, or app — writing a new README.md, refreshing a stale one, or deciding what a README should conta…",
-  "version": "1.0.0",
+  "version": "1.0.0+c79f619121",
   "author": {
     "name": "Timonwa"
   },

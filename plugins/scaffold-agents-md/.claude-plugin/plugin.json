@@ -1,7 +1,7 @@
 {
   "name": "scaffold-agents-md",
   "description": "Create or update a project's AGENTS.md — the single file that documents a codebase's conventions for AI agents (tech stack, structure, commands, naming, routin…",
-  "version": "1.0.0",
+  "version": "1.0.0+dca2d78ad2",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "scaffold-feature",
   "description": "Scaffold a new feature end-to-end following the house standards — schema, service, route handler or Server Action, page + components, and stories, each generat…",
-  "version": "1.0.0",
+  "version": "1.0.0+bb03d24511",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "performance-audit",
   "description": "Frontend performance audit of a Next.js App Router app (or a diff/PR) — image optimization, server/client boundary + bundle weight, dynamic imports for heavy l…",
-  "version": "1.0.0",
+  "version": "1.0.0+b0b33826be",
   "author": {
     "name": "Timonwa"
   },

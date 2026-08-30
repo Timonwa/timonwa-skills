@@ -1,7 +1,7 @@
 {
   "name": "docs-standards",
   "description": "Use when writing or restructuring documentation-site pages — MDX/Markdown pages in any docs framework (Fumadocs, Docusaurus, Starlight, Mintlify, VitePress), a…",
-  "version": "1.0.0",
+  "version": "1.0.0+792b674026",
   "author": {
     "name": "Timonwa"
   },

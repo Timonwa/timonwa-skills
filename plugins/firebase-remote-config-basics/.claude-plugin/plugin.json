@@ -1,7 +1,7 @@
 {
   "name": "firebase-remote-config-basics",
   "description": "Manages Firebase Remote Config templates, feature flags, loading strategies, and SDKs (Android, iOS).",
-  "version": "1.0.0",
+  "version": "1.0.0+35d21f2eeb",
   "author": {
     "name": "Firebase"
   },

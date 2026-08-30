@@ -1,7 +1,7 @@
 {
   "name": "reusables",
   "description": "Use when creating, editing, or refactoring any reusable UI component (e.g. components/ui/*, shared widgets in components/_shared/*), a custom hook, or a utilit…",
-  "version": "1.0.0",
+  "version": "1.0.0+2bc3dbd3b5",
   "author": {
     "name": "Timonwa"
   },

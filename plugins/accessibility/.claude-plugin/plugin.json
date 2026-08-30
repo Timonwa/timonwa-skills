@@ -1,7 +1,7 @@
 {
   "name": "accessibility",
   "description": "When the user wants to audit, review, test, or fix accessibility (a11y) — WCAG compliance, screen-reader support, keyboard navigation, color contrast, focus ma…",
-  "version": "1.0.0",
+  "version": "1.0.0+bcde8f0251",
   "author": {
     "name": "Timonwa"
   },

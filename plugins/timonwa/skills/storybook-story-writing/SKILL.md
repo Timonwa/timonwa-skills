@@ -2,7 +2,7 @@
 name: storybook-story-writing
 description: Use when creating or modifying Storybook stories, in any project that has Storybook (monorepo or single app). Enforces the house story conventions on top of the current CSF3 + TypeScript standard — satisfies Meta, tier-based titles with the closed Blocks/Patterns subcategory set, argTypes for every prop, fn() spies + play functions from storybook/test, a fixed story taxonomy — and the rule that a component's story ships in the same change.
 metadata:
-  version: 1.1.0
+  version: 1.0.0
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---

@@ -2,7 +2,7 @@
 name: storybook-setup
 description: Use when adding or configuring Storybook in a project — monorepo or single app. Covers init with the right framework package, the Storybook 9/10 addon landscape (controls/actions/interactions are core; add a11y, vitest, docs), a minimal main.ts, colocated story files tiered by title + a _Template story, preview wiring (storySort, styles, provider decorator, class-toggled dark mode, a11y ladder), and optional visual regression + deploy. Follows the current Storybook standard.
 metadata:
-  version: 1.1.0
+  version: 1.0.0
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---

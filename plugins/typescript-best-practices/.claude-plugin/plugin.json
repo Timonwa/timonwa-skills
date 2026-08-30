@@ -1,7 +1,7 @@
 {
   "name": "typescript-best-practices",
   "description": "Use when writing or reviewing TypeScript — typing code, designing types, configuring tsconfig, or fixing type errors.",
-  "version": "1.0.0",
+  "version": "1.0.0+b460d1d6c2",
   "author": {
     "name": "Timonwa"
   },

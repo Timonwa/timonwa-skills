@@ -1,7 +1,7 @@
 {
   "name": "docs-audit",
   "description": "Documentation audit of a repo's docs site, doc pages, and READMEs — stale claims vs code, broken links and anchors, navigation integrity (orphaned pages, ghost…",
-  "version": "1.0.0",
+  "version": "1.0.0+a8b3cc93b1",
   "author": {
     "name": "Timonwa"
   },

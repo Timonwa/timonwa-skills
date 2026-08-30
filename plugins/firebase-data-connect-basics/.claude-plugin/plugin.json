@@ -1,7 +1,7 @@
 {
   "name": "firebase-data-connect-basics",
   "description": "Builds and deploys Firebase SQL Connect (aka Firebase Data Connect) backends with PostgreSQL securely.",
-  "version": "1.0.0",
+  "version": "1.0.0+e3165e4aeb",
   "author": {
     "name": "Firebase"
   },

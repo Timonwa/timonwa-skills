@@ -1,7 +1,7 @@
 {
   "name": "naming",
   "description": "Use whenever naming or renaming anything — code (functions, hooks, components, variables, booleans, types, Zod schemas, constants, files), CSS classes, design…",
-  "version": "1.0.0",
+  "version": "1.0.0+edf6da3349",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "firebase-basics",
   "description": "Provides foundational Firebase CLI setup, CLI installation, version checks (`firebase-tools@latest --version`), CLI login (including --no-localhost), project c…",
-  "version": "1.0.0",
+  "version": "1.0.0+b79b7e3591",
   "author": {
     "name": "Firebase"
   },

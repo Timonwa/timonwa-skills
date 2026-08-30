@@ -1,7 +1,7 @@
 {
   "name": "seo",
   "description": "Use when building SEO into a site — writing page metadata (title/description/OpenGraph/Twitter/canonical/robots), sitemaps, robots rules; structured data / sch…",
-  "version": "1.0.0",
+  "version": "1.0.0+9588a0cf90",
   "author": {
     "name": "Timonwa"
   },

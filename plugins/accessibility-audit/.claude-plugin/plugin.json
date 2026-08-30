@@ -1,7 +1,7 @@
 {
   "name": "accessibility-audit",
   "description": "Red-team accessibility audit of an app (or a diff/PR) against WCAG 2.2 AA organized around POUR — semantic landmarks/headings, keyboard nav and focus managemen…",
-  "version": "1.0.0",
+  "version": "1.0.0+20219f9a09",
   "author": {
     "name": "Timonwa"
   },

@@ -1,7 +1,7 @@
 {
   "name": "svg-generation",
   "description": "Use when creating SVGs by hand — icons, technical diagrams, flowcharts, pipeline/architecture visualizations, illustrations, or any vector graphic.",
-  "version": "1.0.0",
+  "version": "1.0.0+04c3b96da9",
   "author": {
     "name": "Timonwa"
   },

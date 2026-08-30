@@ -1,7 +1,7 @@
 {
   "name": "dependency-audit",
   "description": "Dependency-health audit of a monorepo — version consistency across workspace members, unused/duplicate/misplaced dependencies, workspace-protocol usage (`works…",
-  "version": "1.0.0",
+  "version": "1.0.0+0cca4e2d41",
   "author": {
     "name": "Timonwa"
   },

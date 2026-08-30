@@ -1,7 +1,7 @@
 {
   "name": "code-structure",
   "description": "Use when creating, editing, or refactoring pages/screens, route entries, components, or lib/ modules — in any framework (Next.js, React, Astro).",
-  "version": "1.0.0",
+  "version": "1.0.0+0d4d910dcc",
   "author": {
     "name": "Timonwa"
   },

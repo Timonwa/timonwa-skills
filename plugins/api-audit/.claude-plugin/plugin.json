@@ -1,7 +1,7 @@
 {
   "name": "api-audit",
   "description": "API-layer architecture audit — thin route handlers over a service layer, Zod validation at every boundary (body/query/params), shared response builders + typed…",
-  "version": "1.0.0",
+  "version": "1.0.0+eea8e95f11",
   "author": {
     "name": "Timonwa"
   },
