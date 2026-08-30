@@ -1,7 +1,7 @@
 {
   "name": "workflow",
   "description": "Cross-project workflow actions — staged Conventional Commits, self-contained PR review, AGENTS.md scaffolding, Next.js app and monorepo scaffolding, feature scaffolding, framework migration, changelog generation, cross-app drift sync, community-issue triage, and daily standups.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Timonwa"
   },

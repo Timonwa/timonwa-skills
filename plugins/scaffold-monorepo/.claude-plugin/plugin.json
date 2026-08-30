@@ -1,7 +1,7 @@
 {
   "name": "scaffold-monorepo",
   "description": "Converts what an official scaffolder already produced — a single app from `pnpm create next-app`, or a `create-turbo` starter workspace — into the house pnpm +…",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Timonwa"
   },

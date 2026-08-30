@@ -477,11 +477,11 @@ Four consequences worth stating, because they are where a monorepo actually diff
 
 Every app under `apps/` that renders pages — `web`, `admin`, `help-center` — is this tree, rooted at `apps/<name>/`.
 
-> **The kinds are the same; what changes is how much of each stays here.** Only two rows below are structural — everything else is the same folder holding less, because a package now covers the shared part. **A kind is never deleted from an app for being "a package's job".** Sparse in this tree means "this holds what only this app uses"; it does not mean the folder is forbidden or capped, and an app that genuinely owns a lot legitimately has a lot here.
+> **The kinds are the same; what changes is how much of each stays here.** Only one row below is structural — everything else is the same folder holding less, because a package now covers the shared part. **A kind is never deleted from an app for being "a package's job".** Sparse in this tree means "this holds what only this app uses"; it does not mean the folder is forbidden or capped, and an app that genuinely owns a lot legitimately has a lot here.
 >
 > | In a standalone app                    | In a workspace app                                                                                                                                                                                                                                                                                           |
 > | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-> | `src/app/`                             | **structural:** `app/` at the app root — `src/` holds only what the `@/*` alias covers, and routes are not imported                                                                                                                                                                                          |
+> | `src/app/`                             | the same `src/app/` — one rule everywhere: all source lives under `src/`, the app root holds only config. Same as standalone                                                                                                                                                                                 |
 > | `src/styles/` (six layers + entry)     | **structural:** the same file names, but only the ones this app authors — its `globals.css` entry and its own `components.css`. The six shared layers move whole into `packages/tailwind-config`, keeping their names, order, and jobs; duplicating one per app is how two apps end up with different tokens |
 > | `src/components/ui/` (the tiers)       | the same tiers, holding **this app's own** reusables — the ones no sibling app wants yet. Anything a second app needs is promoted to `packages/ui`; until then it belongs right here                                                                                                                         |
 > | `lib/hooks/`                           | this app's own hooks. The cross-app ones are `packages/hooks`, grouped by concern                                                                                                                                                                                                                            |
@@ -498,9 +498,9 @@ apps/web/
 |    |___ README.md                      # the folder map, and what is at the root instead
 |___ .claude/                            # app-scoped Claude config; the root's still apply
 |    |___ settings.json                  # only what differs from the workspace settings
-|___ app/                                # ROUTES ONLY, at the app root - not under src/.
-|                                        # Nothing imports a route file, so it does not
-|                                        # belong behind the `@/*` alias that src/ owns
+|___ src/app/                            # ROUTES ONLY - thin files, same as standalone.
+|                                        # (drawn at this indent for diff brevity; it sits
+|                                        # inside src/ with the rest of the source)
 |    |___ (public)/                      # the routes any visitor can reach, sharing a layout
 |    |    |___ about/                    # route segment
 |    |    |    |___ page.tsx             # thin entry, imports the composed page
@@ -699,8 +699,9 @@ apps/web/
 |                                        # plus cacheComponents, typedRoutes, and the headers
 |___ package.json                        # this app's deps, catalog versions
 |___ postcss.config.mjs                  # re-exports packages/tailwind-config/postcss.config
-|___ proxy.ts                            # the kill-switch gate and header rewrites; at the
-|                                        # app root beside app/, never inside src/
+|___ src/proxy.ts                        # the kill-switch gate and header rewrites; inside
+|                                        # src/, at the same level as src/app/ (the framework
+|                                        # requires proxy beside the app directory)
 |___ README.md                           # what this app is and how to run it
 |___ site.metadata.ts                    # the static facts the OG route and manifest read,
 |                                        # outside src/ because next.config.ts imports it too

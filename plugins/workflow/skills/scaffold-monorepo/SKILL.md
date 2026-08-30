@@ -5,7 +5,7 @@ description: >-
 argument-hint: "[scope] [--apps web,admin] — e.g. `@app`, `--apps web,admin,api`"
 allowed-tools: Read, Grep, Glob, Write, Edit, AskUserQuestion, Bash(ls:*), Bash(mkdir:*), Bash(cat:*), Bash(git status:*), Bash(git rev-parse:*), Bash(git ls-files:*), Bash(git mv:*), Bash(npm view:*), Bash(pnpm:*), Bash(corepack enable), Bash(pnpm dlx syncpack:*)
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: Timonwa
   source: https://github.com/Timonwa/timonwa-skills
 ---
@@ -207,7 +207,7 @@ The shell is the whole job here. Finish by delegating, explicitly and by name:
 
 - **Each frontend app** → **`scaffold-next-app`**, one at a time, passing the app name, its port, its shared-package deps, and whether it has an API layer. It owns the app's folder tree, kind-first `lib/`, styles entry, and env validation.
 
-  **Hand it the frontend tree from [references/target-tree.md](references/target-tree.md), not its own.** Two differences are structural: `app/` sits at the app root rather than under `src/`, and `styles/` is two files because the layers are `packages/tailwind-config`. It also drops the workspace-level root config (`biome.json`, `.husky/`, `.github/`, lockfile, `renovate.json`) — those govern every app and live at the root where `turbo` and the hooks can see them.
+  **Hand it the frontend tree from [references/target-tree.md](references/target-tree.md), not its own.** One difference is structural: `styles/` is two files because the layers are `packages/tailwind-config`. `src/app/` stays under `src/` exactly as standalone — one rule everywhere. It also drops the workspace-level root config (`biome.json`, `.husky/`, `.github/`, lockfile, `renovate.json`) — those govern every app and live at the root where `turbo` and the hooks can see them.
 
   **Everything else is the same folder holding less, and "less" is not "none".** `components/ui/`, `lib/hooks/`, `lib/utils/`, `lib/constants/` and the rest all stay, holding whatever only that app uses — a reusable starts app-scoped and gets promoted on its second consumer, not before. Say this explicitly when delegating, in both directions: left to its standalone default the app rebuilds what the packages already own, and over-corrected it hoists app-local code into packages that then rebuild every sibling for a change none of them care about.
 
